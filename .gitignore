@@ -1,0 +1,11 @@
+*.o
+*.obj
+*.exe
+build/
+bin/
+*.swp
+.DS_Store
+/.vscode/
+__pycache__/
+*.pyc
+*.class
