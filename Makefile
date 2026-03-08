@@ -1,11 +1,15 @@
 #Makefile
 
-all: test
+all: main
 
-test.o: test.cc
-	g++ -c test.cc -o test.o
+CC = g++
+CFLAGS = -Wall -std=c++11
+OFILES = main.o
 
-test: test.o
-	g++ test.o -o test
+main.o: main.cc
+	$(CC) $(CFLAGS) -c $< -o $@
+
+main: $(OFILES)
+	$(CC) $(CFLAGS) $(OFILES) -o $@
 
  
