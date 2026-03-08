@@ -9,3 +9,9 @@ bin/
 __pycache__/
 *.pyc
 *.class
+# Executable outputs
+a.out
+*.out
+# common build/test executables
+test
+*/test
