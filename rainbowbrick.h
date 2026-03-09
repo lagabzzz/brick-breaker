@@ -10,7 +10,7 @@ public:
     double get_taille() const { return taille; }
     int get_hit_points() const { return hit_points; }
    
-/*
+/* test 
     void hit() {
         if (hit_points > 0) {
             hit_points--;
