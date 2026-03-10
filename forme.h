@@ -1,28 +1,29 @@
-struct Point {
+class Point {
+    public:
 
     Point (double x, double y)
     :x(x),y(y)
+
+    protected:
 
     double x;
     double y;
 };
 
-struct Cercle {
+class Cercle: public Point {
 
     Cercle (Point centre,double rayon)
     :centre(centre),rayon(rayon)
     {}
 
-    Point centre;
     double rayon;
 };
 
-struct Carre {
+struct Carre : public Point {
 
     Cercle (Point centre,double taille)
     :centre(centre),taille(taille)
     {}
-    
-    Point centre;
+
     double taille;
 };
