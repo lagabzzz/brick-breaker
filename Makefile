@@ -1,15 +1,15 @@
 #Makefile
 
-all: main
+all: lecture
 
 CC = g++
 CFLAGS = -Wall -std=c++11
-OFILES = main.o
+OFILES = lecture.o
 
-main.o: main.cc
+lecture.o: lecture.cc
 	$(CC) $(CFLAGS) -c $< -o $@
 
-main: $(OFILES)
+lecture: $(OFILES)
 	$(CC) $(CFLAGS) $(OFILES) -o $@
 
  

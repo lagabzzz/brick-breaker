@@ -5,9 +5,9 @@ class Point {
     :x(x),y(y)
 
     double get_x() const { return x; }
-    double get_y() const { return y; }  
-    protected:
+    double get_y() const { return y; } 
 
+    protected:
     double x;
     double y;
 };
