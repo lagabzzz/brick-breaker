@@ -1,15 +1,15 @@
-#include "tools.h"
+#include "brick.h"
 
 class Brick {
     public:
         
-    Brick(double taille, double x, double y) 
-    :x(x), y(y), taille(taille)
+    Brick(Carre brick)
+    :brick(brick)
     {}
     
-    double get_x() const { return brick.centre.x; }
-    double get_y() const { return brick.centre.y; }
-    double get_taille() const { return brick.taille; }
+    double get_x() const { return brick.get_x(); }
+    double get_y() const { return brick.get_y(); }
+    double get_taille() const { return brick.get_taille(); }
 
 
     protected:
