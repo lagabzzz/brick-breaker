@@ -2,48 +2,57 @@
 #include <iostream>
 using namespace std;
  
-enum Type_lecture
-{
-    SCORE,
-    LIVES,
-    BRICK,
-    BALL,
-    PADDLE
-};
 
-void section_de_lecture(Type_lecture type){
 
-    switch(type){
-    case SCORE:
-        cout << "Section de lecture : SCORE" << endl;
-        break;
+void section_de_lecture(){
 
-    case LIVES:
-        cout << "Section de lecture : LIVES" << endl;
-        break;
+    ifstream  fichier("test.txt")
+    if(fichier.fail()) exit(); //sort si le fichier s'ouvre pas
+    string line;
 
-    case BRICK:
-        cout << "Section de lecture : BRICK" << endl;
-        break;
+    Type_lecture etat = SCORE
 
-    case BALL:
-        cout << "Section de lecture : BALL" << endl;
-        break;
+    while (getline(fichier,line)){
 
-    case PADDLE:
-        cout << "Section de lecture : PADDLE" << endl;
-        break;
+        switch(etat){
 
-    default:
-        cout << "Section de lecture : UNKNOWN" << endl;
-        break;
-    }
+        case SCORE:
+            lecture_score(line);
+            etat = LIVES;
+            break;
 
+        case LIVES:
+            lecture_lives(line);
+            etat = PADDLE;
+            break;
+        
+        case PADDLE:
+            lecture_paddle(line);
+            etat = BRICK;
+            break;
+
+        case BRICK:
+            lecture_brick(line);
+            etat = BALL
+            break;
+
+        case BALL:
+            lecture_ball(line);
+            etat = FIN
+            break;
+
+        case FIN;
+            break;
+            
+        default:
+            break;
+        }
+    }    
 }
 
 int main()// Test de la fonction section_de_lecture
 {
-    Type_lecture test = SCORE;
-    section_de_lecture(test);
+
+    section_de_lecture();
     return 0;
 }
