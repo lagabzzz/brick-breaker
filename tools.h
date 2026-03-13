@@ -1,3 +1,6 @@
+#ifndef TOOLS_H
+#define TOOLS_H
+
 class Point {
     public:
 
@@ -27,11 +30,21 @@ class Cercle: public Point {
 struct Carre : public Point {
 
     public:
-    Carre (Point centre,double taille)
-    :centre(centre),taille(taille)
+    Carre (Point centre,double size)
+    :centre(centre),size(size)
     {}
-    double get_taille() const{return taille;}
+    double get_taille() const{return size;}
     
     private:
-    double taille;
+    double size;
 };
+
+constexpr double epsil_zero = 0.125
+
+namespace Tools {
+    bool test_range(double size,double lim_min,double lim_max,bool with_epsil);
+
+
+}
+
+#endif // TOOLS_H

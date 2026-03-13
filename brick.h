@@ -1,3 +1,6 @@
+#ifndef BRICK_H
+#define BRICK_H
+
 #include "message.h"
 
 class Brick {
@@ -40,3 +43,5 @@ class Split_brick : public Brick{
 
     private:
 };
+
+#endif // BRICK_H
