@@ -19,8 +19,8 @@ struct Point {
 
 struct Cercle : Point{
 
-    Cercle (Point centre,double rayon)
-    :centre(centre),rayon(rayon)
+    Cercle (double x,double y,double rayon)
+    :Point(x,y),rayon(rayon)
     {}
 
     double rayon;
@@ -29,8 +29,8 @@ struct Cercle : Point{
 struct Carre : Point {
 
 
-    Carre (Point centre,double size)
-    :centre(centre),size(size)
+    Carre (double x,double y,double size)
+    :Point(x,y),size(size)
     {}
 
     double size;
@@ -43,6 +43,9 @@ namespace Tools {
     void error_message(string message);
     double norme(double x, double y);
     double distance(Point p1, Point p2);
+    bool intersection(Carre c1,)
 }
+
+
 
 #endif // TOOLS_H
