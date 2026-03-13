@@ -4,16 +4,19 @@ using namespace std;
  
 
 
-void section_de_lecture(){
+void section_de_lecture(*char test){
 
-    ifstream  fichier("test.txt")
+    ifstream  fichier(test);
     if(fichier.fail()) exit(); //sort si le fichier s'ouvre pas
     string line;
 
     Type_lecture etat = SCORE
 
     while (getline(fichier,line)){
-
+        if (line.empty() or line[0] == '#'){
+            continue;
+        }
+    
         switch(etat){
 
         case SCORE:
@@ -50,9 +53,6 @@ void section_de_lecture(){
     }    
 }
 
-int main()// Test de la fonction section_de_lecture
-{
-
-    section_de_lecture();
-    return 0;
+void lecture_score(const string&){
+    
 }
