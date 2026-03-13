@@ -17,20 +17,20 @@ struct Point {
     double y;
 };
 
-struct Cercle : Point{
+struct Cicle : Point{
 
-    Cercle (Point centre,double rayon)
-    :centre(centre),rayon(rayon)
+    Cercle (double x,double y,double rayon)
+    :Point(x,y),rayon(rayon)
     {}
 
     double rayon;
 };
 
-struct Carre : Point {
+struct Square : Point {
 
 
-    Carre (Point centre,double size)
-    :centre(centre),size(size)
+    Square (double x,double y,double size)
+    :Point(x,y),size(size)
     {}
 
     double size;
@@ -39,10 +39,17 @@ struct Carre : Point {
 constexpr double epsil_zero = 0.125
 
 namespace Tools {
-    bool test_range(double size,double lim_min,double lim_max,bool with_epsil);
+    bool test_range(double& size,double& lim_min,double& lim_max,bool with_epsil);
     void error_message(string message);
     double norme(double x, double y);
-    double distance(Point p1, Point p2);
+
+    double distance(double& p1x, double& p2x, double& p1y, double& p2y);
+    bool intersects(Square& s1,Square& s2);
+    bool intersects(Circle& c1,Circle& c2);
+    bool intersects(Circle& c1,Square& s2);
+
 }
+
+
 
 #endif // TOOLS_H
