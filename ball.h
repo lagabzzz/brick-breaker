@@ -4,8 +4,8 @@
 
 class Ball {
 public:
-    Ball(double x, double y, double dx, double dy, double rayon)
-    : x(x), y(y), dx(dx), dy(dy), rayon(rayon)
+    Ball(double x, double y, double rayon, double dx, double dy)
+    : x(x), y(y), rayon(rayon), dx(dx), dy(dy)
     {}
 
 private:

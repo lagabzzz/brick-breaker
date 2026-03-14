@@ -1,14 +1,14 @@
 #include <game.h>
 
-void lecture_score(const string&);
+void lecture_score(const string& line);
 
-void lecture_lives(const string&);
+void lecture_lives(const string& line);
 
-void lecture_paddle(const string&);
+void lecture_paddle(const string& line);
 
-void lecture_brick(const string&);
+void lecture_brick(const string& line, const int& nb_bricks);
 
-void lecture_ball(const string&);
+void lecture_ball(const string& line, const int& nb_balls);
 
 void section_de_lecture(*char test){
 
@@ -26,7 +26,8 @@ void section_de_lecture(*char test){
 
     ifstream  fichier(test);
     if(fichier.fail()) exit(); //sort si le fichier s'ouvre pas
-    const string&;
+    string line;
+    
 
     Type_lecture etat = SCORE
 
@@ -49,16 +50,26 @@ void section_de_lecture(*char test){
         
         case PADDLE:
             lecture_paddle(line);
+            etat = NB_BRICK;
+            break;
+
+        case NB_BRICK:
+            nb_bricks = stoi(line);
             etat = BRICK;
             break;
-
+             
         case BRICK:
-            lecture_brick(line);
-            etat = BALL
+            lecture_brick(line, nb_bricks);
+            etat = NB_BALL;
             break;
 
+        case NB_BALL:
+           nb_balls = stoi(line);
+           etat = BALL;
+           break;
+
         case BALL:
-            lecture_ball(line);
+            lecture_ball(line, nb_balls);
             etat = FIN
             break;
 
@@ -72,22 +83,56 @@ void section_de_lecture(*char test){
 }
 
 
-void lecture_score(const string&){
-    
+void lecture_score(const string& line){
+    score = stoi(line); 
+    if (score < 0){
+        cout << invalid_score(score) << endl;
+        exit(0);
+    }  
 }
 
-void lecture_lives(const string&){
-    
+void lecture_lives(const string& line){
+    lives = stoi(line);
+    if (lives < 0){
+        cout << invalid_lives(lives) << endl;
+        exit(0);
+    }  
 }
 
-void lecture_paddle(const string&){
-    
+void lecture_paddle(const string& line){
+    istringstream iss(line);
+    double x;
+    double y;
+    double rayon;
+    iss >> x >> y >> rayon;
+    paddle = Paddle(x, y, rayon)
 }
 
-void lecture_brick(const string&){
-    
+void lecture_brick(const string& line, const int& nb_bricks){
+    istringstream iss(line);
+    for(int i(0); i < nb_bricks; ++i){
+        int type_brick;
+        double x, y, c;
+        iss >> type_brick >> x >> y >> c;
+        if (type_brick == 0){
+            int hit_points;
+            iss >> hit_points
+           //voir plus tard polymorphisme ou alors 3 vecteurs
+
+        }
+        if (type_brick == 1){}
+        if (type_brick == 2){}
+
+    }
 }
 
-void lecture_ball(const string&){
+void lecture_ball(const string& line, const int& nb_balls){
+
+    istringstream iss(line);
+    for(int i(0); i < nb_balls; ++i){
+        double x, y, r, dx, dy;
+        iss >> x >> y >> r >> dx >> dy;
+        balls.push_back(Ball(x, y, r, dx, dy))
+    }
     
 }

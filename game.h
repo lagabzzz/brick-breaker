@@ -1,28 +1,32 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <vector>
 #include "ball.h"
-#include "lecture.h"
 #include "brick.h"
+#include "paddle.h"
+#include "message.h"
+#include "constants.h"
+#include "tools.h"
 using namespace std;
 
+typedef vector<Brick> LesBriques;
+typedef vector<Ball> LesBalles;
 
-class game {
+class Game {
 
   public:
     
     void section_de_lecture(*char test);
-  
-
-
-
 
   private:
     
-    Brick bricks;
-    Ball balls;
-    
-
-
+    LesBriques bricks;
+    LesBalles balls;
+    Paddle paddle;
+    int score;
+    int lives;
+    int nb_bricks;
+    int nb_balls;
 }
 
