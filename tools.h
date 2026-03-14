@@ -44,6 +44,7 @@ namespace Tools {
     double norme(double x, double y);
 
     double distance(double& p1x, double& p2x, double& p1y, double& p2y);
+    double pt_proche_1d(double& pt_ci,double& pt_sq,double& sq_size);
     bool intersects(Square& s1,Square& s2);
     bool intersects(Circle& c1,Circle& c2);
     bool intersects(Circle& c1,Square& s2);
