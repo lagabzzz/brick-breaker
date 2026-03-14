@@ -36,14 +36,14 @@ struct Square : Point {
     double size;
 };
 
-constexpr double epsil_zero = 0.125
+constexpr double epsil_zero = 0.125;
 
 namespace Tools {
     bool test_range(double& val,double& lim_min,double& lim_max,bool with_epsil);
     bool test_range(int& val,int& lim_min,int& lim_max);
 
     void error_message(string message);
-    double norme(double x, double y);
+    double norme(double& x, double& y);
 
     double distance(double& p1x, double& p2x, double& p1y, double& p2y);
     double pt_proche_1d(double& pt_ci,double& pt_sq,double& sq_size);

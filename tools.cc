@@ -29,7 +29,7 @@ double Tools::pt_proche_1d(double& pt_ci,double& pt_sq,double& sq_size){
     double pt_proche; //point du carre le plus proche du cercle
 
     if(test_range(pt_ci ,pt_sq-sq_size/2 ,pt_sq+sq_size/2 ,false)){
-        pt_proche = pt_ci
+        pt_proche = pt_ci;
     }
     else{
         pt_proche = ((pt_ci - pt_sq)>0): pt_sq+sq_size/2 ? pt_sq-sq_size/2;
@@ -49,7 +49,7 @@ bool Tools::intersects(Circle& c1,Circle& c2){
 
     double min_dist = Tools::distance(c1.x, c2.x, c1.y, c2.y);
 
-    return (min_dist <=(c1.rayon+c2.rayon)/2)
+    return (min_dist <=(c1.rayon+c2.rayon)/2);
 }
 
 bool Tools::intersects(Circle& ci,Square& sq){
@@ -59,7 +59,7 @@ bool Tools::intersects(Circle& ci,Square& sq){
    double pt_prochey pt_proche_1d(ci.y,sq.y,sq.size);
 
 
-   return ( distance(pt_prochex,pt_prochey,ci.x,ci.y) <= ci.rayon;)
+   return ( distance(pt_prochex,pt_prochey,ci.x,ci.y) <= ci.rayon);
 }
 
 

@@ -10,7 +10,7 @@ class Brick {
         
     Brick(Carre brick)
     :brick(brick)
-    {test_val();}
+    {test_val(); test_arene();}
     
     double get_x() const { return brick.x; }
     double get_y() const { return brick.x; }
@@ -18,8 +18,9 @@ class Brick {
     
 
     protected:
-    Carre brick:
+    Carre brick;
     void test_val();
+    void test_arene();
 };
 
 class Rainbowbrick : public Brick{
