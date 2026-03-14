@@ -47,10 +47,4 @@ bool Tools::intersects(Circle& c1,Circle& c2){
     return (min_dist <=(c1.rayon+c2.rayon)/2)
 }
 
-bool Tools::intersects(Circle& ci,Square& sq){
 
-    double pt_prochex pt_proche_1d(ci.x,sq.x,sq.size);
-    double pt_prochey pt_proche_1d(ci.y,sq.y,sq.size);
-
-    return ( distance(pt_prochex,pt_prochey,ci.x,ci.y) <= ci.rayon;)
-}
