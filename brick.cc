@@ -8,3 +8,11 @@ void Brick :: test(){
     }
 
 }
+
+void Rainbowbrick::test_hit_pt(){
+
+    if(!(Tools::test_range(hit_points,0,7))){
+
+        Tools::error_message(message::invalid_hit_points(hit_points));
+    }
+}

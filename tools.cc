@@ -1,9 +1,14 @@
 #include "tools.h"
 
-bool Tools:: test_range(double& size, double& lim_min,double& lim_max, bool with_epsil){
+bool Tools:: test_range(double& val, double& lim_min,double& lim_max, bool with_epsil){
     double epsil = (with_epsil)? epsil_zero:0;
 
-    return ( (lim_min+epsil <= size) and (size <= lim_max-epsil) );
+    return ( (lim_min+epsil <= val) and (val <= lim_max-epsil) );
+}
+
+bool Tools::test_range(int& val,int& lim_min,int& lim_max){
+
+    return ( (lim_min <= val) and (val <= lim_max) );
 }
 
 void Tools:: error_message(string message){
@@ -19,7 +24,7 @@ double Tools::distance(double& p1x, double& p2x, double& p1y, double& p2y){
     return sqrt((p1x-p2x)*(p1x-p2x)+(p1y-p2y)*(p1y-p2y));
 }
 
-double pt_proche_1d(double& pt_ci,double& pt_sq,double& sq_size){
+double Tools::pt_proche_1d(double& pt_ci,double& pt_sq,double& sq_size){
 
     double pt_proche; //point du carre le plus proche du cercle
 
