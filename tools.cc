@@ -42,7 +42,7 @@ bool Tools::intersects(Square& s1,Square& s2){
 
     double min_dist = (s1.size+s2.size)/2;
 
-    return ((abs(s1.x -s2.x) <= min_dist) and (abs(s1.y -s2.y) <= min_dist));
+    return ((abs(s1.centre.x -s2.centre.x) <= min_dist) and (abs(s1.centre.y -s2.centre.y) <= min_dist));
 }
 
 bool Tools::intersects(Circle& c1,Circle& c2){

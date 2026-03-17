@@ -114,11 +114,12 @@ void lecture_brick(const string& line, const int& nb_bricks){
         int type_brick;
         double x, y, c;
         iss >> type_brick >> x >> y >> c;
+        Square s(x, y, c);
         if (type_brick == 0){
             int hit_points;
             iss >> hit_points
            //voir plus tard polymorphisme ou alors 3 vecteurs
-
+            bricks.push_back(//construc rnwbbrick)
         }
         if (type_brick == 1){}
         if (type_brick == 2){}
