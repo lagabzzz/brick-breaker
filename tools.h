@@ -20,9 +20,10 @@ struct Point {
 struct Cicle : Point{
 
     Cercle (double x,double y,double rayon)
-    :Point(x,y),rayon(rayon)
+    :centre(x,y),rayon(rayon)
     {}
 
+    Point centre;
     double rayon;
 };
 
@@ -30,9 +31,10 @@ struct Square : Point {
 
 
     Square (double x,double y,double size)
-    :Point(x,y),size(size)
+    :centre(x,y),size(size)
     {}
 
+    Point centre;
     double size;
 };
 

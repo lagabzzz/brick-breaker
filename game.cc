@@ -85,7 +85,7 @@ void section_de_lecture(*char test){
 
 void lecture_score(const string& line){
     score = stoi(line); 
-    if (score < 0){
+    if (score <= 0){
         cout << invalid_score(score) << endl;
         exit(0);
     }  
@@ -93,7 +93,7 @@ void lecture_score(const string& line){
 
 void lecture_lives(const string& line){
     lives = stoi(line);
-    if (lives < 0){
+    if (lives <= 0){
         cout << invalid_lives(lives) << endl;
         exit(0);
     }  
