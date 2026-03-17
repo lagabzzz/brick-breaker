@@ -1,19 +1,18 @@
 #ifndef PADDLE_H
 #define PADDLE_H
 
+#include "tools.h"
 
 class Paddle{
 
     public:
       Paddle(double x, double y, double rayon)
-      : x(x), y(y), rayon(rayon)
+      :paddle(x,y,rayon)
       {}
 
     private:
-      double x;
-      double y;
-      double rayon;  
+      Circle paddle;  
 
-}
+};
 
 #endif
