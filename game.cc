@@ -105,7 +105,8 @@ void lecture_paddle(const string& line){
     double y;
     double rayon;
     iss >> x >> y >> rayon;
-    paddle = Paddle(x, y, rayon)
+    //methodes d'inclusion
+    paddle = Paddle(x, y, rayon);
 }
 
 void lecture_brick(const string& line, const int& nb_bricks){
@@ -117,7 +118,7 @@ void lecture_brick(const string& line, const int& nb_bricks){
         Square s(x, y, c);
         if (type_brick == 0){
             int hit_points;
-            iss >> hit_points
+            iss >> hit_points;
            //voir plus tard polymorphisme ou alors 3 vecteurs
             bricks.push_back(//construc rnwbbrick)
         }
@@ -136,4 +137,55 @@ void lecture_ball(const string& line, const int& nb_balls){
         balls.push_back(Ball(x, y, r, dx, dy))
     }
     
+}
+
+
+void test_collisions(//vector<Brick*> bricks, vector<Ball> balls, Paddle paddle, int nb_bricks, int nb_balls){
+    
+  for(int i(0); i < nb_bricks; ++i){
+
+    for(int j(i+1); j < nb_bricks; ++j){
+
+       if( //methode collsions bricks(bricks[i],brick[j]......))
+          //return sur true
+    }
+  }
+
+
+  for(int i(0); i < nb_bricks; ++i){
+
+     for(int j(i+1); j < nb_balls; ++j){
+
+        //methode collsions bricks&balls(bricks[i],balls[j]......)
+     }
+   }
+
+    for(int i(0); i < nb_balls; ++i){
+
+      for(int j(i+1); j < nb_balls; ++j){
+
+        //methode collsions balls(balls[i],balls[j]......)
+      }
+    }
+
+   for(int i(0); i < nb_bricks; ++i){
+        //methode collisions paddle&bricks(paddle, bricks[i].....)
+   }
+   for(int j(0); j < nb_balls; ++j){
+
+        //methode collsions paddle&balls(paddle,balls[j]......)
+   }
+  
+
+
+
+
+
+
+
+
+
+
+
+
 }
