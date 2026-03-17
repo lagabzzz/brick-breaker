@@ -17,7 +17,7 @@ struct Point {
     double y;
 };
 
-struct Cicle : Point{
+struct Cicle {
 
     Cercle (double x,double y,double rayon)
     :centre(x,y),rayon(rayon)
@@ -27,7 +27,7 @@ struct Cicle : Point{
     double rayon;
 };
 
-struct Square : Point {
+struct Square {
 
 
     Square (double x,double y,double size)
