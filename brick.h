@@ -12,9 +12,9 @@ class Brick {
     :brick(brick)
     {test_val(); test_arene();}
     
-    double get_x() const { return brick.x; }
-    double get_y() const { return brick.x; }
-    double get_taille() const { return brick.x; }
+    double get_x() const { return brick.centre.x; }
+    double get_y() const { return brick.centre.x; }
+    double get_taille() const { return brick.centre.x; }
     
 
     protected:
