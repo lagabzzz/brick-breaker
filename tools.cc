@@ -20,20 +20,29 @@ double Tools::norme(double& x, double& y){
     return sqrt(x*x+y*y);
 }
 
-double Tools::distance(double& p1x, double& p2x, double& p1y, double& p2y){
-    return sqrt((p1x-p2x)*(p1x-p2x)+(p1y-p2y)*(p1y-p2y));
+double Tools::distance(Point& p1,Point p2){
+    return sqrt((p1.x-p2.x)*(p1.x-p2.x)+(p1.y-p2.y)*(p1.y-p2.y));
 }
 
-double Tools::pt_proche_1d(double& pt_ci,double& pt_sq,double& sq_size){
 
-    double pt_proche; //point du carre le plus proche du cercle
+Point Tools::point_proche(Point& ci,Point& sq,double& sq_size){
 
-    if(test_range(pt_ci ,pt_sq-sq_size/2 ,pt_sq+sq_size/2 ,false)){
-        pt_proche = pt_ci;
+    Point pt_proche(0,0); //point du carre le plus proche du centre du cercle
+
+    if(test_range(ci.x, sq.x-sq_size/2 ,sq.x+sq_size/2 ,false)){
+        pt_proche.x = ci.x;
     }
     else{
-        pt_proche = ((pt_ci - pt_sq)>0): pt_sq+sq_size/2 ? pt_sq-sq_size/2;
+        pt_proche.x = ((ci.x - sq.x)>0)? sq.x+sq_size/2 : sq.x-sq_size/2;
     }
+
+    if(test_range(ci.y ,sq.y-sq_size/2 ,sq.y+sq_size/2 ,false)){
+        pt_proche.y = ci.y;
+    }
+    else{
+        pt_proche.y = ((ci.y - sq.y)>0)? sq.y+sq_size/2 : sq.y-sq_size/2;
+    }
+
     return pt_proche;
 }
 
@@ -47,7 +56,7 @@ bool Tools::intersects(Square& s1,Square& s2){
 
 bool Tools::intersects(Circle& c1,Circle& c2){
 
-    double min_dist = Tools::distance(c1.x, c2.x, c1.y, c2.y);
+    double min_dist = Tools::distance(c1.centre, c2.centre);
 
     return (min_dist <=(c1.rayon+c2.rayon)/2);
 }
@@ -55,11 +64,12 @@ bool Tools::intersects(Circle& c1,Circle& c2){
 bool Tools::intersects(Circle& ci,Square& sq){
 
 
-   double pt_prochex pt_proche_1d(ci.x,sq.x,sq.size);
-   double pt_prochey pt_proche_1d(ci.y,sq.y,sq.size);
+   Point pt_proche = point_proche(ci.centre,sq.centre,sq.size);
 
 
-   return ( distance(pt_prochex,pt_prochey,ci.x,ci.y) <= ci.rayon);
+   return ( distance(pt_proche,ci.centre) <= ci.rayon);
 }
 
-
+bool Tools::intersects(Square& s2,Circle& c1,){
+    return Tools::intersects(c1,s2);
+}
