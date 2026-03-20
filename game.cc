@@ -131,7 +131,7 @@ void lecture_brick(const string& line, const int& nb_bricks){
                 break;
             
             case 2:
-                unique_ptr<Brick> s_brick_ptr(new Split_brick(s))
+                unique_ptr<Brick> s_brick_ptr(new Split_brick(s));
                 bricks.push_back(s_brick_ptr);
                 break;
         } 
@@ -144,7 +144,8 @@ void lecture_ball(const string& line, const int& nb_balls){
     for(int i(0); i < nb_balls; ++i){
         double x, y, r, dx, dy;
         iss >> x >> y >> r >> dx >> dy;
-        balls.push_back(Ball(x, y, r, dx, dy))
+        unique_ptr<Ball> ball_ptr(new Ball(x,y,r,dx,dy));
+        balls.push_back(ball_ptr);
     }
     
 }
@@ -152,14 +153,16 @@ void lecture_ball(const string& line, const int& nb_balls){
 
 void test_collisions(//vector<Brick*> bricks, vector<Ball> balls, Paddle paddle, int nb_bricks, int nb_balls){
     
-  for(int i(0); i < nb_bricks; ++i){
+    for(int i(0); i < nb_bricks; ++i){
+    
+        for(int j(i+1); j < nb_bricks; ++j){
 
-    for(int j(i+1); j < nb_bricks; ++j){
-
-       if( //methode collsions bricks(bricks[i],brick[j]......))
-          //return sur true
+            if(intersects(*bricks[i],*bricks[j])){   //methode collsions bricks(bricks[i],brick[j]......))
+                
+                Tools::error_message(message::collision_bricks(i,j));
+            }
+        }
     }
-  }
 
 
   for(int i(0); i < nb_bricks; ++i){
