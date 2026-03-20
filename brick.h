@@ -13,8 +13,8 @@ class Brick {
     {test_val(); test_arene();}
     
     double get_x() const { return brick.centre.x; }
-    double get_y() const { return brick.centre.x; }
-    double get_taille() const { return brick.centre.x; }
+    double get_y() const { return brick.centre.y; }
+    double get_taille() const { return brick.size; }
     
 
     protected:
