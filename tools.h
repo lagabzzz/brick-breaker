@@ -17,9 +17,9 @@ struct Point {
     double y;
 };
 
-struct Cicle {
+struct Circle {
 
-    Cercle (double x,double y,double rayon)
+    Circle (double x,double y,double rayon)
     :centre(x,y),rayon(rayon)
     {}
 
