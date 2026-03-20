@@ -13,9 +13,12 @@ class Brick {
     {test_val(); test_arene();}
     
     double get_x() const { return brick.centre.x; }
-    double get_y() const { return brick.centre.x; }
-    double get_taille() const { return brick.centre.x; }
-    
+    double get_y() const { return brick.centre.y; }
+    double get_taille() const { return brick.taille; }
+
+    virtual ~Brick() = default;
+
+    virtual void hit() = 0;
 
     protected:
     Carre brick;
@@ -26,7 +29,7 @@ class Brick {
 class Rainbowbrick : public Brick{
 
     public:
-    Rainbowbrick(Carre brick,int hit_points)
+    Rainbowbrick(Const Carre& brick,int hit_points)
     :Brick(brick),hit_points(hit_points)
     {test_hit_pt();}
 

@@ -115,14 +115,28 @@ void lecture_brick(const string& line, const int& nb_bricks){
         int type_brick;
         double x, y, c;
         iss >> type_brick >> x >> y >> c;
+        if (type_brick < 0 or type_brick > 2){
+            cout << invalid_type_brick(type_brick) << endl;
+            exit(0);
+        }
+        if (c <= brick_size_min){
+            cout << invalid_brick_size(c) << endl;
+            exit(0);
+        }
         Square s(x, y, c);
         if (type_brick == 0){
             int hit_points;
             iss >> hit_points;
-           //voir plus tard polymorphisme ou alors 3 vecteurs
-            bricks.push_back(//construc rnwbbrick)
+            if (hit_points<0 or hit_points>7){
+                cout << invalid_hit_points(hit_points) << endl;
+                exit(0);
+            }
+            briks.push_back(make_unique<Rainbowbrick>(s, hit_points)); //construc rainbowbrick
+            
         }
-        if (type_brick == 1){}
+        if (type_brick == 1){
+            bricks.push_back(make_unique<Ball_brick>(s)); //construc ballbrick
+        }
         if (type_brick == 2){}
 
     }

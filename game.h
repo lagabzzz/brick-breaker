@@ -1,5 +1,6 @@
 #include <iostream>
 #include <fstream>
+#include <memory>
 #include <string>
 #include <vector>
 #include "ball.h"
@@ -10,7 +11,7 @@
 #include "tools.h"
 using namespace std;
 
-typedef vector<Brick> LesBriques;
+typedef vector<unique_ptr<Brick>> LesBriques;
 typedef vector<Ball> LesBalles;
 
 class Game {
