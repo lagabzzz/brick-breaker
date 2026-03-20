@@ -116,15 +116,25 @@ void lecture_brick(const string& line, const int& nb_bricks){
         double x, y, c;
         iss >> type_brick >> x >> y >> c;
         Square s(x, y, c);
-        if (type_brick == 0){
-            int hit_points;
-            iss >> hit_points;
-           //voir plus tard polymorphisme ou alors 3 vecteurs
-            bricks.push_back(//construc rnwbbrick)
-        }
-        if (type_brick == 1){}
-        if (type_brick == 2){}
+        
+        switch(type_brick){
+            case 0:
+                int hit_points;
+                iss >> hit_points;
+                unique_ptr<Brick> rnb_brique_ptr(new Rainbowbrick(s,hit_points));
+                bricks.push_back(&rnb_brique);
+                break;
 
+            case 1:
+                unique_ptr<Brick> b_brique_ptr(new Ball_brick(s));
+                bricks.push_back(b_brique_ptr);
+                break;
+            
+            case 2:
+                unique_ptr<Brick> s_brick_ptr(new Split_brick(s))
+                bricks.push_back(s_brick_ptr);
+                break;
+        } 
     }
 }
 

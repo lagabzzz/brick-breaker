@@ -2,6 +2,7 @@
 #include <fstream>
 #include <string>
 #include <vector>
+#include <memory>
 #include "ball.h"
 #include "brick.h"
 #include "paddle.h"
@@ -10,8 +11,8 @@
 #include "tools.h"
 using namespace std;
 
-typedef vector<Brick> LesBriques;
-typedef vector<Ball> LesBalles;
+typedef vector<unique_ptr<Brick>> LesBriques;
+typedef vector<unique_ptr<Ball>> LesBalles;
 
 class Game {
 
