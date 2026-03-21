@@ -1,6 +1,10 @@
 #include "tools.h"
 
+bool Tools:: test_range(double& val, double& lim_min,double& lim_max, bool with_epsil){
+    double epsil = (with_epsil)? epsil_zero:0;
 
+    return ( (lim_min+epsil <= val) and (val <= lim_max-epsil) );
+}
 
 bool Tools::test_range(int& val,int& lim_min,int& lim_max){
 
