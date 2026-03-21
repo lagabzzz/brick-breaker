@@ -160,7 +160,7 @@ void lecture_ball(const string& line, const int& nb_balls){
 }
 
 
-void test_collisions(
+void test_collisions(){
     
     for(size_t i(0); i < nb_bricks; ++i){
         Tools::intersects(bricks[i]->get_brick(),paddle.get_paddle()) //test brick paddle
@@ -197,17 +197,4 @@ void test_collisions(
             }
         }
     }
-  
-
-
-
-
-
-
-
-
-
-
-
-
 }
