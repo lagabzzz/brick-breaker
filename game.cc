@@ -151,13 +151,14 @@ void lecture_ball(const string& line, const int& nb_balls){
 }
 
 
-void test_collisions(//vector<Brick*> bricks, vector<Ball> balls, Paddle paddle, int nb_bricks, int nb_balls){
+void test_collisions(
     
-    for(int i(0); i < nb_bricks; ++i){
-    
-        for(int j(i+1); j < nb_bricks; ++j){
+    for(size_t i(0); i < nb_bricks; ++i){
+        Tools::intersects(*bricks[i],paddle) //test brick paddle
 
-            if(intersects(*bricks[i],*bricks[j])){   //methode collsions bricks(bricks[i],brick[j]......))
+        for(size_t j(i+1); j < nb_bricks; ++j){ //test brick brick
+
+            if(Tools::intersects(*bricks[i],*bricks[j])){
                 
                 Tools::error_message(message::collision_bricks(i,j));
             }
@@ -165,29 +166,28 @@ void test_collisions(//vector<Brick*> bricks, vector<Ball> balls, Paddle paddle,
     }
 
 
-  for(int i(0); i < nb_bricks; ++i){
+    for(size_t i(0); i < nb_balls; ++i){
+        Tools::intersects(*balls[i],paddle) //test ball paddle
 
-     for(int j(i+1); j < nb_balls; ++j){
+        for(size_t j(i+1); j < nb_balls; ++j){
 
-        //methode collsions bricks&balls(bricks[i],balls[j]......)
-     }
-   }
-
-    for(int i(0); i < nb_balls; ++i){
-
-      for(int j(i+1); j < nb_balls; ++j){
-
-        //methode collsions balls(balls[i],balls[j]......)
-      }
+            if(Tools::intersects(*balls[i],*balls[j])){
+                
+                Tools::error_message(message::collision_balls(i,j));
+            }
+        }
     }
 
-   for(int i(0); i < nb_bricks; ++i){
-        //methode collisions paddle&bricks(paddle, bricks[i].....)
-   }
-   for(int j(0); j < nb_balls; ++j){
+    for(size_t i(0); i < nb_bricks; ++i){
 
-        //methode collsions paddle&balls(paddle,balls[j]......)
-   }
+        for(size_t j(0); j < nb_balls; ++j){ //test brick ball
+
+            if(Tools::intersects(*bricks[i],*balls[j])){
+                
+                Tools::error_message(message::collision_ball_brick(j,i));
+            }
+        }
+    }
   
 
 

@@ -16,7 +16,10 @@ class Brick {
     double get_y() const { return brick.centre.y; }
     double get_taille() const { return brick.size; }
     
+    virtual ~Brick() = default;
 
+    virtual void hit() = 0;
+    
     protected:
     Carre brick;
     void test_val();
