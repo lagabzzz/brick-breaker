@@ -134,6 +134,10 @@ void lecture_brick(const string& line, const int& nb_bricks){
                 unique_ptr<Brick> s_brick_ptr(new Split_brick(s));
                 bricks.push_back(s_brick_ptr);
                 break;
+
+            default:
+                Tools::error_message(message::invalid_brick_type(type_brick));
+                break;
         } 
     }
 }
