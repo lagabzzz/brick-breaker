@@ -115,6 +115,14 @@ void lecture_brick(const string& line, const int& nb_bricks){
         int type_brick;
         double x, y, c;
         iss >> type_brick >> x >> y >> c;
+        if (type_brick < 0 or type_brick > 2){
+            cout << invalid_type_brick(type_brick) << endl;
+            exit(0);
+        }
+        if (c <= brick_size_min){
+            cout << invalid_brick_size(c) << endl;
+            exit(0);
+        }
         Square s(x, y, c);
         
         switch(type_brick){
