@@ -129,18 +129,15 @@ void lecture_brick(const string& line, const int& nb_bricks){
             case 0:
                 int hit_points;
                 iss >> hit_points;
-                unique_ptr<Brick> rnb_brique_ptr(new Rainbowbrick(s,hit_points));
-                bricks.push_back(rnb_brique);
+                bricks.push_back(new Rainbowbrick(s,hit_points));
                 break;
 
             case 1:
-                unique_ptr<Brick> b_brique_ptr(new Ball_brick(s));
-                bricks.push_back(b_brique_ptr);
+                bricks.push_back(new Ball_brick(s));
                 break;
             
             case 2:
-                unique_ptr<Brick> s_brick_ptr(new Split_brick(s));
-                bricks.push_back(s_brick_ptr);
+                bricks.push_back(new Split_brick(s));
                 break;
 
             default:
@@ -166,11 +163,11 @@ void lecture_ball(const string& line, const int& nb_balls){
 void test_collisions(
     
     for(size_t i(0); i < nb_bricks; ++i){
-        Tools::intersects(*bricks[i],paddle) //test brick paddle
+        Tools::intersects(bricks[i]->get_brick(),paddle.get_paddle()) //test brick paddle
 
         for(size_t j(i+1); j < nb_bricks; ++j){ //test brick brick
 
-            if(Tools::intersects(*bricks[i],*bricks[j])){
+            if(Tools::intersects(bricks[i]->get_brick(),bricks[j]->get_brick())){
                 
                 Tools::error_message(message::collision_bricks(i,j));
             }
@@ -179,11 +176,11 @@ void test_collisions(
 
 
     for(size_t i(0); i < nb_balls; ++i){
-        Tools::intersects(*balls[i],paddle) //test ball paddle
+        Tools::intersects(balls[i]->get_ball(),paddle.get_paddle()) //test ball paddle
 
         for(size_t j(i+1); j < nb_balls; ++j){
 
-            if(Tools::intersects(*balls[i],*balls[j])){
+            if(Tools::intersects(balls[i]->get_ball(),balls[j]->get_ball())){
                 
                 Tools::error_message(message::collision_balls(i,j));
             }
@@ -194,7 +191,7 @@ void test_collisions(
 
         for(size_t j(0); j < nb_balls; ++j){ //test brick ball
 
-            if(Tools::intersects(*bricks[i],*balls[j])){
+            if(Tools::intersects(bricks[i]->get_brick(),balls[j]->get_ball())){
                 
                 Tools::error_message(message::collision_ball_brick(j,i));
             }

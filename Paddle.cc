@@ -22,6 +22,6 @@ void inclusion_arene(Const Circle& paddle){
     }
 }
 
-Const Circle& paddle_getter() const{
+Const Circle& get_paddle() const{
     return paddle;
 }

@@ -24,9 +24,9 @@ void include_arene(Const Circle& ball){
     
 }
 
-Const Circle& getter_ball() const{
+Const Circle& get_ball() const{
 
-    return ball.circle;
+    return ball;
 }
 
 void normes_delta(double dx,double dy){
