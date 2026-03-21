@@ -19,7 +19,12 @@ class Brick {
     virtual ~Brick() = default;
 
     virtual void hit() = 0;
+    double get_taille() const { return brick.size; }
+    
+    virtual ~Brick() = default;
 
+    virtual void hit() = 0;
+    
     protected:
     Carre brick;
     void test_val();

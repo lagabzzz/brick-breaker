@@ -3,6 +3,7 @@
 #include <memory>
 #include <string>
 #include <vector>
+#include <memory>
 #include "ball.h"
 #include "brick.h"
 #include "paddle.h"
@@ -12,12 +13,12 @@
 using namespace std;
 
 typedef vector<unique_ptr<Brick>> LesBriques;
-typedef vector<Ball> LesBalles;
+typedef vector<unique_ptr<Ball>> LesBalles;
 
 class Game {
 
   public:
-    
+
     void section_de_lecture(*char test);
 
   private:

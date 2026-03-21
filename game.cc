@@ -124,21 +124,29 @@ void lecture_brick(const string& line, const int& nb_bricks){
             exit(0);
         }
         Square s(x, y, c);
-        if (type_brick == 0){
-            int hit_points;
-            iss >> hit_points;
-            if (hit_points<0 or hit_points>7){
-                cout << invalid_hit_points(hit_points) << endl;
-                exit(0);
-            }
-            briks.push_back(make_unique<Rainbowbrick>(s, hit_points)); //construc rainbowbrick
-            
-        }
-        if (type_brick == 1){
-            bricks.push_back(make_unique<Ball_brick>(s)); //construc ballbrick
-        }
-        if (type_brick == 2){}
+        
+        switch(type_brick){
+            case 0:
+                int hit_points;
+                iss >> hit_points;
+                unique_ptr<Brick> rnb_brique_ptr(new Rainbowbrick(s,hit_points));
+                bricks.push_back(rnb_brique);
+                break;
 
+            case 1:
+                unique_ptr<Brick> b_brique_ptr(new Ball_brick(s));
+                bricks.push_back(b_brique_ptr);
+                break;
+            
+            case 2:
+                unique_ptr<Brick> s_brick_ptr(new Split_brick(s));
+                bricks.push_back(s_brick_ptr);
+                break;
+
+            default:
+                Tools::error_message(message::invalid_brick_type(type_brick));
+                break;
+        } 
     }
 }
 
@@ -148,47 +156,50 @@ void lecture_ball(const string& line, const int& nb_balls){
     for(int i(0); i < nb_balls; ++i){
         double x, y, r, dx, dy;
         iss >> x >> y >> r >> dx >> dy;
-        balls.push_back(Ball(x, y, r, dx, dy))
+        unique_ptr<Ball> ball_ptr(new Ball(x,y,r,dx,dy));
+        balls.push_back(ball_ptr);
     }
     
 }
 
 
-void test_collisions(//vector<Brick*> bricks, vector<Ball> balls, Paddle paddle, int nb_bricks, int nb_balls){
+void test_collisions(
     
-  for(int i(0); i < nb_bricks; ++i){
+    for(size_t i(0); i < nb_bricks; ++i){
+        Tools::intersects(*bricks[i],paddle) //test brick paddle
 
-    for(int j(i+1); j < nb_bricks; ++j){
+        for(size_t j(i+1); j < nb_bricks; ++j){ //test brick brick
 
-       if( //methode collsions bricks(bricks[i],brick[j]......))
-          //return sur true
-    }
-  }
-
-
-  for(int i(0); i < nb_bricks; ++i){
-
-     for(int j(i+1); j < nb_balls; ++j){
-
-        //methode collsions bricks&balls(bricks[i],balls[j]......)
-     }
-   }
-
-    for(int i(0); i < nb_balls; ++i){
-
-      for(int j(i+1); j < nb_balls; ++j){
-
-        //methode collsions balls(balls[i],balls[j]......)
-      }
+            if(Tools::intersects(*bricks[i],*bricks[j])){
+                
+                Tools::error_message(message::collision_bricks(i,j));
+            }
+        }
     }
 
-   for(int i(0); i < nb_bricks; ++i){
-        //methode collisions paddle&bricks(paddle, bricks[i].....)
-   }
-   for(int j(0); j < nb_balls; ++j){
 
-        //methode collsions paddle&balls(paddle,balls[j]......)
-   }
+    for(size_t i(0); i < nb_balls; ++i){
+        Tools::intersects(*balls[i],paddle) //test ball paddle
+
+        for(size_t j(i+1); j < nb_balls; ++j){
+
+            if(Tools::intersects(*balls[i],*balls[j])){
+                
+                Tools::error_message(message::collision_balls(i,j));
+            }
+        }
+    }
+
+    for(size_t i(0); i < nb_bricks; ++i){
+
+        for(size_t j(0); j < nb_balls; ++j){ //test brick ball
+
+            if(Tools::intersects(*bricks[i],*balls[j])){
+                
+                Tools::error_message(message::collision_ball_brick(j,i));
+            }
+        }
+    }
   
 
 
