@@ -47,12 +47,12 @@ namespace Tools {
     void error_message(string message);
     double norme(double& x, double& y);
 
-    double distance(Point& p1,Point p2);
-    Point point_proche(Point& ci,Point& sq,double& sq_size);
-    bool intersects(Square& s1,Square& s2);
-    bool intersects(Circle& c1,Circle& c2);
-    bool intersects(Circle& c1,Square& s2);
-    bool intersects(Square& s2,Circle& c1,); //surcharge pour la commutativité
+    double distance(const Point& p1,const Point p2);
+    Point point_proche(const Point& ci,const Point& sq,double& sq_size);
+    bool intersects(const Square& s1,const Square& s2);
+    bool intersects(const Circle& c1,const Circle& c2);
+    bool intersects(const Circle& c1,const Square& s2);
+    bool intersects(const Square& s2,const Circle& c1,); //surcharge pour la commutativité
 }
 
 

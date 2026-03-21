@@ -20,12 +20,12 @@ double Tools::norme(double& x, double& y){
     return sqrt(x*x+y*y);
 }
 
-double Tools::distance(Point& p1,Point p2){
+double Tools::distance(const Point& p1,const Point p2){
     return sqrt((p1.x-p2.x)*(p1.x-p2.x)+(p1.y-p2.y)*(p1.y-p2.y));
 }
 
 
-Point Tools::point_proche(Point& ci,Point& sq,double& sq_size){
+Point Tools::point_proche(const Point& ci,const Point& sq,double& sq_size){
 
     Point pt_proche(0,0); //point du carre le plus proche du centre du cercle
 
@@ -47,21 +47,21 @@ Point Tools::point_proche(Point& ci,Point& sq,double& sq_size){
 }
 
 
-bool Tools::intersects(Square& s1,Square& s2){
+bool Tools::intersects(const Square& s1,const Square& s2){
 
     double min_dist = (s1.size+s2.size)/2;
 
     return ((abs(s1.centre.x -s2.centre.x) <= min_dist) and (abs(s1.centre.y -s2.centre.y) <= min_dist));
 }
 
-bool Tools::intersects(Circle& c1,Circle& c2){
+bool Tools::intersects(const Circle& c1,const Circle& c2){
 
     double min_dist = Tools::distance(c1.centre, c2.centre);
 
     return (min_dist <=(c1.rayon+c2.rayon)/2);
 }
 
-bool Tools::intersects(Circle& ci,Square& sq){
+bool Tools::intersects(const Circle& ci,const Square& sq){
 
 
    Point pt_proche = point_proche(ci.centre,sq.centre,sq.size);
@@ -70,6 +70,6 @@ bool Tools::intersects(Circle& ci,Square& sq){
    return ( distance(pt_proche,ci.centre) <= ci.rayon);
 }
 
-bool Tools::intersects(Square& s2,Circle& c1,){
+bool Tools::intersects(const Square& s2,const Circle& c1,){
     return Tools::intersects(c1,s2);
 }
