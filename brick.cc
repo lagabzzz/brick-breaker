@@ -11,12 +11,12 @@ void Brick :: test_val(){
 
 void Brick :: test_arene(){
 
-    bool testx (Tools::test_range(brick.centre.x,0,arena_size,false);
-    bool testy (Tools::test_range(brick.centre.y,0,arena_size,false);
+    bool testx (Tools::test_range(brick.centre.x,brick.size/2,arena_size-brick.size/2,false);
+    bool testy (Tools::test_range(brick.centre.y,brick.size/2,arena_size-brick.size/2,false);
 
     if((testx and testy)==false){
 
-        Tools::error_message(message::invalid_brick_size(brick.size));
+        Tools::error_message(message::brick_outside(brick.centre.x, brick.centre.y);
     }
 }
 
@@ -24,6 +24,6 @@ void Rainbowbrick::test_hit_pt(){
 
     if(!(Tools::test_range(hit_points,1,7))){
 
-        Tools::error_message(message::brick_outside(brick.centre.x, brick.centre.y));
+        Tools::error_message(message::invalid_hit_points(hit_points));
     }
 }

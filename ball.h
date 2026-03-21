@@ -13,7 +13,7 @@ public:
         void include_arene(ball);
         void normes_delta(dx,dy);
     }
-    Const Circle& getter_ball() const;
+    Const Circle& get_ball() const;
 
 private:
     Circle ball; // Position and radius of the ball

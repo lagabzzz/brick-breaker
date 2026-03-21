@@ -10,7 +10,7 @@ class Paddle{
       :paddle(x,y,rayon)
       {void inclusion_arene(paddle)}
 
-      Const Circle& paddle_getter() const;
+      Const Circle& get_paddle() const;
 
     private:
       Circle paddle;
