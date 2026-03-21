@@ -122,7 +122,7 @@ void lecture_brick(const string& line, const int& nb_bricks){
                 int hit_points;
                 iss >> hit_points;
                 unique_ptr<Brick> rnb_brique_ptr(new Rainbowbrick(s,hit_points));
-                bricks.push_back(&rnb_brique);
+                bricks.push_back(rnb_brique);
                 break;
 
             case 1:

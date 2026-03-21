@@ -17,7 +17,7 @@ typedef vector<unique_ptr<Ball>> LesBalles;
 class Game {
 
   public:
-    
+
     void section_de_lecture(*char test);
 
   private:
