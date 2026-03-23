@@ -28,7 +28,6 @@ void section_de_lecture(*char test){
     if(fichier.fail()) exit(); //sort si le fichier s'ouvre pas
     string line;
     
-
     Type_lecture etat = SCORE
 
     while (getline(fichier,line)){
@@ -79,7 +78,8 @@ void section_de_lecture(*char test){
         default:
             break;
         }
-    }    
+    }   
+    cout << message::succes() << endl; 
 }
 
 
