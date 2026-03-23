@@ -1,24 +1,16 @@
 #include "paddle.h"
 using namespace std;
 
-void inclusion_arene(Const Circle& paddle){
+void inclusion_arene(){
 
-    if (!test_range(paddle.centre.x + paddle.rayon, 0.0, 100.0, false) 
-        and !test_range(paddle.centre.x - paddle.rayon, 0.0, 100.0, false)){
+    if (!Tools::test_range(paddle.centre.x,paddle.rayon, 100.0-paddle.rayon,false)){
 
-        cout <<  paddle_outside(paddle.centre.x, paddle.centre.y) << endl;
-        exit(0);
+        Tools::error_message(message::paddle_outside(paddle.centre.x, paddle.centre.y))   
     }
 
-    if (paddle.centre.y > 0.0){
+    if ((paddle.centre.y > 0.0) or (paddle.centre.y + paddle.rayon < 0.0)){
 
-        cout <<  paddle_outside(paddle.centre.x, paddle.centre.y) << endl;
-        exit(0);
-    }
-
-    if (paddle.centre.y + paddle.rayon < 0.0){
-        cout <<  paddle_outside(paddle.centre.x, paddle.centre.y) << endl;
-        exit(0);
+       Tools::error_message(message::paddle_outside(paddle.centre.x, paddle.centre.y))     
     }
 }
 

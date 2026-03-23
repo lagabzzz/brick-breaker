@@ -17,18 +17,18 @@ typedef vector<unique_ptr<Ball>> LesBalles;
 
 class Game {
 
-  public:
+    public:
 
-    void section_de_lecture(*char test);
+        void section_de_lecture(*char test);
 
-  private:
+    private:
     
-    LesBriques bricks;
-    LesBalles balls;
-    Paddle paddle;
-    int score;
-    int lives;
-    int nb_bricks;
-    int nb_balls;
-}
+        LesBriques bricks;
+        LesBalles balls;
+        Paddle paddle;
+        int score;
+        int lives;
+        int nb_bricks;
+        int nb_balls;
+};
 

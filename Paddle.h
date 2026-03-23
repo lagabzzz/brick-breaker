@@ -4,19 +4,16 @@
 #include "tools.h"
 
 class Paddle{
-
     public:
-      Paddle(double x, double y, double rayon)
-      :paddle(x,y,rayon)
-      {void inclusion_arene(paddle)}
+        Paddle(double x, double y, double rayon)
+        :paddle(x,y,rayon)
+        {void inclusion_arene()}
 
-      Const Circle& get_paddle() const;
+        Const Circle& get_paddle() const;
 
     private:
-      Circle paddle;
-      void inclusion_arene(Const Circle& paddle)  
-
-    
+        Circle paddle;
+        void inclusion_arene();
 };
 
 #endif

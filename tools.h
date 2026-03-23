@@ -38,7 +38,7 @@ struct Square {
     double size;
 };
 
-constexpr double epsil_zero = 0.125;
+
 
 namespace Tools {
     bool test_range(double& val,double& lim_min,double& lim_max,bool with_epsil);
@@ -53,6 +53,8 @@ namespace Tools {
     bool intersects(const Circle& c1,const Circle& c2);
     bool intersects(const Circle& c1,const Square& s2);
     bool intersects(const Square& s2,const Circle& c1,); //surcharge pour la commutativité
+
+    constexpr double epsil_zero = 0.125;
 }
 
 

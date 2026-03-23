@@ -14,14 +14,14 @@ void section_de_lecture(*char test){
 
     enum Type_lecture{
 
-      SCORE,
-      LIVES,
-      PADDLE,
-      NB_BRICK,
-      BRICK,
-      NB_BALL,
-      BALL,
-      FIN
+        SCORE,
+        LIVES,
+        PADDLE,
+        NB_BRICK,
+        BRICK,
+        NB_BALL,
+        BALL,
+        FIN
     };
 
     ifstream  fichier(test);

@@ -3,15 +3,15 @@
 bool Tools:: test_range(double& val, double& lim_min,double& lim_max, bool with_epsil){
     double epsil = (with_epsil)? epsil_zero:0;
 
-    return ( (lim_min+epsil <= val) and (val <= lim_max-epsil) );
+    return ((lim_min+epsil <= val) and (val <= lim_max-epsil));
 }
 
 bool Tools::test_range(int& val,int& lim_min,int& lim_max){
 
-    return ( (lim_min <= val) and (val <= lim_max) );
+    return ((lim_min <= val) and (val <= lim_max));
 }
 
-void Tools:: error_message(string message){
+void Tools::error_message(string message){
     cout << message << endl;
     exit(0);
 }  
@@ -67,7 +67,7 @@ bool Tools::intersects(const Circle& ci,const Square& sq){
    Point pt_proche = point_proche(ci.centre,sq.centre,sq.size);
 
 
-   return ( distance(pt_proche,ci.centre) <= ci.rayon);
+   return (distance(pt_proche,ci.centre) <= ci.rayon);
 }
 
 bool Tools::intersects(const Square& s2,const Circle& c1,){
