@@ -77,16 +77,14 @@ void Game::section_de_lecture(char* test){
 void Game::lecture_score(const string& line){
     score = stoi(line); 
     if (score <= 0){
-        cout << message::invalid_score(score) << endl;
-        exit(0);
+        Tools::error_message(message::invalid_score(score));
     }  
 }
 
 void Game::lecture_lives(const string& line){
     lives = stoi(line);
     if (lives <= 0){
-        cout << message::invalid_lives(lives) << endl;
-        exit(0);
+        Tools::error_message(message::invalid_lives(lives));
     }  
 }
 
