@@ -20,11 +20,12 @@ void Game::section_de_lecture(char* test){
     
     Type_lecture etat = SCORE;
 
+    count_lecture = 0;
     while (getline(fichier,line)){
         if (line.empty() or line[0] == '#'){
             continue;
         }
-    
+
         switch(etat){
 
         case SCORE:
@@ -49,41 +50,53 @@ void Game::section_de_lecture(char* test){
              
         case BRICK:
             lecture_brick(line);
-            etat = NB_BALL;
+            count_lecture++;
+            if (count_lecture == nb_bricks){
+                etat = NB_BALL;
+                count_lecture = 0;
+            }
             break;
 
         case NB_BALL:
-           nb_balls = stoi(line);
-           etat = BALL;
-           break;
+            
+            nb_balls = stoi(line);
+            etat = BALL;
+            
+            break;
 
         case BALL:
             lecture_ball(line);
-            etat = FIN;
+            count_lecture++;
+            if (count_lecture == nb_balls){
+                etat = FIN;
+                count_lecture = 0;
+            }
             break;
 
         case FIN:
-            return;
+            break;
             
         default:
             break;
         }
     }  
     test_collisions(); 
+
+        
     cout << message::success() << endl; 
 }
 
 
 void Game::lecture_score(const string& line){
     score = stoi(line); 
-    if (score <= 0){
+    if (score < 0){
         Tools::error_message(message::invalid_score(score));
     }  
 }
 
 void Game::lecture_lives(const string& line){
     lives = stoi(line);
-    if (lives <= 0){
+    if (lives < 0){
         Tools::error_message(message::invalid_lives(lives));
     }  
 }
@@ -100,32 +113,34 @@ void Game::lecture_paddle(const string& line){
 
 void Game::lecture_brick(const string& line){
     istringstream iss(line);
-    for(int i(0); i < nb_bricks; ++i){
-        int type_brick;
-        double x, y, c;
-        iss >> type_brick >> x >> y >> c;
+    
+    int type_brick;
+    double x, y, c;
+    iss >> type_brick >> x >> y >> c;
 
-        Square s(x, y, c);
-        int hit_points(0);
-        iss >> hit_points;
-        switch(type_brick){
-            case 0:   
-                bricks.push_back(unique_ptr<Brick> (new Rainbowbrick(s,hit_points)));
-                break;
+    Square s(x, y, c);
 
-            case 1:
-                bricks.push_back(unique_ptr<Brick> (new Ball_brick(s)));
-                break;
-            
-            case 2:
-                bricks.push_back(unique_ptr<Brick> (new Split_brick(s)));
-                break;
+    int hit_points;
+    
+    switch(type_brick){
+        case 0:   
+            iss >> hit_points;
+            bricks.push_back(unique_ptr<Brick> (new Rainbowbrick(s,hit_points)));
+            break;
 
-            default:
-                Tools::error_message(message::invalid_brick_type(type_brick));
-                break;
-        } 
-    }
+        case 1:
+            bricks.push_back(unique_ptr<Brick> (new Ball_brick(s)));
+            break;
+        
+        case 2:
+            bricks.push_back(unique_ptr<Brick> (new Split_brick(s)));
+            break;
+
+        default:
+            Tools::error_message(message::invalid_brick_type(type_brick));
+            break;
+    } 
+    
 }
 
 void Game::lecture_ball(const string& line){
@@ -144,11 +159,12 @@ void Game::test_collisions(){
     
     for(int i(0); i < nb_bricks; ++i){
         Tools::intersects(bricks[i]->get_brick(),paddle.get_paddle()); //test brick paddle
-
+        cout<<bricks[i]->get_x()<<" "<<bricks[i]->get_y()<<" "<<bricks[i]->get_size()<<endl;
+    
         for(int j(i+1); j < nb_bricks; ++j){ //test brick brick
 
             if(Tools::intersects(bricks[i]->get_brick(),bricks[j]->get_brick())){
-                
+
                 Tools::error_message(message::collision_bricks(i,j));
             }
         }

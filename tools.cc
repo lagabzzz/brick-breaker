@@ -8,7 +8,7 @@ bool Tools:: test_range(double val, double lim_min,double lim_max, bool with_eps
 
 bool Tools::test_range(int val,int lim_min,int lim_max){
 
-    return ((lim_min <= val) and (val <= lim_max));
+    return ((lim_min <= val) && (val <= lim_max));
 }
 
 void Tools::error_message(string message){

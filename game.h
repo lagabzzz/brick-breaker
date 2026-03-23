@@ -32,7 +32,7 @@ class Game {
         int lives;
         int nb_bricks;
         int nb_balls;
-
+        int count_lecture;
         void test_collisions();
 
         void lecture_score(const string& line);
