@@ -14,10 +14,10 @@ void Ball::include_arene(){
     }    
 }
 
-const Circle& Ball::get_ball() const{
+//const Circle& Ball::get_ball() const{
 
-    return ball;
-}
+  //  return ball;
+//}
 
 void Ball::test_norme(){
     if (Tools::norme(dx,dy) > delta_norm_max){

@@ -14,7 +14,10 @@ public:
         void test_norme();
     }
 
-    const Circle& get_ball() const;
+    const Circle& get_ball() const{return ball;};
+    double get_x() const { return ball.centre.x; }
+    double get_y() const { return ball.centre.y; }
+    double get_rayon() const { return ball.rayon; }
 
 private:
     Circle ball; 

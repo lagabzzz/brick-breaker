@@ -56,9 +56,9 @@ bool Tools::intersects(const Square& s1,const Square& s2){
 
 bool Tools::intersects(const Circle& c1,const Circle& c2){
 
-    double min_dist = Tools::distance(c1.centre, c2.centre);
-
-    return (min_dist <=(c1.rayon+c2.rayon)/2);
+    double dist = Tools::distance(c1.centre, c2.centre);
+    cout<<dist<<endl;
+    return (dist <=(c1.rayon+c2.rayon));
 }
 
 bool Tools::intersects(const Circle& ci,const Square& sq){

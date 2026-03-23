@@ -69,7 +69,7 @@ void Game::section_de_lecture(char* test){
             count_lecture++;
             if (count_lecture == nb_balls){
                 etat = FIN;
-                count_lecture = 0;
+                //count_lecture = 0;
             }
             break;
 
@@ -146,11 +146,9 @@ void Game::lecture_brick(const string& line){
 void Game::lecture_ball(const string& line){
 
     istringstream iss(line);
-    for(int i(0); i < nb_balls; ++i){
-        double x, y, r, dx, dy;
-        iss >> x >> y >> r >> dx >> dy;
-        balls.push_back(unique_ptr<Ball> (new Ball(x,y,r,dx,dy)));
-    }
+    double x, y, r, dx, dy;
+    iss >> x >> y >> r >> dx >> dy;
+    balls.push_back(unique_ptr<Ball> (new Ball(x,y,r,dx,dy)));
     
 }
 
@@ -160,30 +158,34 @@ void Game::test_collisions(){
     for(int i(0); i < nb_bricks; ++i){
 
         if(Tools::intersects(bricks[i]->get_brick(),paddle.get_paddle())){
-            Tools::error_message(message::collision_paddle_brick(i+1));
+            Tools::error_message(message::collision_paddle_brick(i));
         }
     
         for(int j(i+1); j < nb_bricks; ++j){ //test brick brick
 
             if(Tools::intersects(bricks[i]->get_brick(),bricks[j]->get_brick())){
 
-                Tools::error_message(message::collision_bricks(i+1,j+1));
+                Tools::error_message(message::collision_bricks(i,j));
             }
         }
     }
 
+   
+        
 
     for(int i(0); i < nb_balls; ++i){
 
+        //cout<<balls[i+1]->get_x()<<" "<<balls[i+1]->get_y()<<" "<<balls[i+1]->get_rayon()<<endl;
+
         if(Tools::intersects(balls[i]->get_ball(),paddle.get_paddle())){
-            Tools::error_message(message::collision_paddle_ball(i+1));
+            Tools::error_message(message::collision_paddle_ball(i));
         }
 
         for(int j(i+1); j < nb_balls; ++j){
 
             if(Tools::intersects(balls[i]->get_ball(),balls[j]->get_ball())){
                 
-                Tools::error_message(message::collision_balls(i+1,j+1));
+                Tools::error_message(message::collision_balls(i,j));
             }
         }
     }
@@ -194,7 +196,7 @@ void Game::test_collisions(){
 
             if(Tools::intersects(bricks[i]->get_brick(),balls[j]->get_ball())){
                 
-                Tools::error_message(message::collision_ball_brick(j+1,i+1));
+                Tools::error_message(message::collision_ball_brick(j,i));
             }
         }
     }
