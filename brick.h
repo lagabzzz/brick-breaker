@@ -15,7 +15,7 @@ class Brick {
         double get_x() const { return brick.centre.x; }
         double get_y() const { return brick.centre.y; }
         double get_size() const { return brick.size; }
-        
+        Const Brick& get_brick() const {return brick;}
         //virtual ~Brick() = default;
 
         //virtual void hit() = 0;
