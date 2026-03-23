@@ -1,15 +1,13 @@
 #Makefile
 
-all: lecture
 
 CC = g++
 CFLAGS = -Wall -std=c++11
-OFILES = lecture.o
 
-all:main
+all: main
 
 message.o: message.cc message.h
-    $(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@
 
 tools.o: tools.cc tools.h message.h
 	$(CC) $(CFLAGS) -c $< -o $@
@@ -30,4 +28,4 @@ main.o: main.cc game.h paddle.h brick.h ball.h tools.h constants.h message.h
 	$(CC) $(CFLAGS) -c $< -o $@ 
 
 main : game.o paddle.o brick.o ball.o message.o tools.o	main.o
-    $(CC) main.o game.o paddle.o brick.o ball.o message.o tools.o -o main
+	$(CC) main.o game.o paddle.o brick.o ball.o message.o tools.o -o main

@@ -41,18 +41,18 @@ struct Square {
 
 
 namespace Tools {
-    bool test_range(double& val,double& lim_min,double& lim_max,bool with_epsil);
-    bool test_range(int& val,int& lim_min,int& lim_max);
+    bool test_range(double val,double lim_min,double lim_max,bool with_epsil);
+    bool test_range(int val,int lim_min,int lim_max);
 
     void error_message(string message);
-    double norme(double& x, double& y);
+    double norme(double x, double y);
 
     double distance(const Point& p1,const Point p2);
-    Point point_proche(const Point& ci,const Point& sq,double& sq_size);
+    Point point_proche(const Point& ci,const Point& sq,double sq_size);
     bool intersects(const Square& s1,const Square& s2);
     bool intersects(const Circle& c1,const Circle& c2);
     bool intersects(const Circle& c1,const Square& s2);
-    bool intersects(const Square& s2,const Circle& c1,); //surcharge pour la commutativité
+    bool intersects(const Square& s2,const Circle& c1); //surcharge pour la commutativité
 
     constexpr double epsil_zero = 0.125;
 }

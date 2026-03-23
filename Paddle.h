@@ -5,11 +5,11 @@
 
 class Paddle{
     public:
-        Paddle(double x, double y, double rayon)
+        Paddle(double x=0, double y=0, double rayon=0)
         :paddle(x,y,rayon)
-        {void inclusion_arene()}
+        {inclusion_arene();}
 
-        Const Circle& get_paddle() const;
+        const Circle& get_paddle() const;
 
     private:
         Circle paddle;

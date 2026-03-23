@@ -8,20 +8,23 @@
 class Brick {
     public:
         
-        Brick(Carre brick)
+        Brick(Square brick)
         :brick(brick)
-        {test_val(); test_arene();}
+        {
+            test_val(); 
+            test_arene();
+        }
         
         double get_x() const { return brick.centre.x; }
         double get_y() const { return brick.centre.y; }
         double get_size() const { return brick.size; }
-        Const Brick& get_brick() const {return brick;}
-        //virtual ~Brick() = default;
+        const Square& get_brick() const {return brick;}
+        virtual ~Brick() = default;
 
         //virtual void hit() = 0;
     
     protected:
-        Carre brick;
+        Square brick;
         void test_val();
         void test_arene();
 };
@@ -29,7 +32,7 @@ class Brick {
 class Rainbowbrick : public Brick{
 
     public:
-        Rainbowbrick(Const Carre& brick,int hit_points)
+        Rainbowbrick(Square brick,int hit_points)
         :Brick(brick),hit_points(hit_points)
         {test_hit_pt();}
 
@@ -42,14 +45,17 @@ class Rainbowbrick : public Brick{
 class Ball_brick : public Brick{
 
     public:
+        Ball_brick(Square brick)
+        :Brick(brick){}
 
     private:
-
 };
 
 class Split_brick : public Brick{
 
     public:
+        Split_brick(Square brick)
+        :Brick(brick){}
 
     private:
 };

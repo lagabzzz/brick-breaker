@@ -1,5 +1,6 @@
 #include <iostream>
 #include <fstream>
+#include <sstream>
 #include <memory>
 #include <string>
 #include <vector>
@@ -19,7 +20,8 @@ class Game {
 
     public:
 
-        void section_de_lecture(*char test);
+        void section_de_lecture(char* test);
+        
 
     private:
     
@@ -30,5 +32,17 @@ class Game {
         int lives;
         int nb_bricks;
         int nb_balls;
+
+        void test_collisions();
+
+        void lecture_score(const string& line);
+
+        void lecture_lives(const string& line);
+
+        void lecture_paddle(const string& line);
+
+        void lecture_brick(const string& line);
+
+        void lecture_ball(const string& line);
 };
 

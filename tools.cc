@@ -1,12 +1,12 @@
 #include "tools.h"
 
-bool Tools:: test_range(double& val, double& lim_min,double& lim_max, bool with_epsil){
+bool Tools:: test_range(double val, double lim_min,double lim_max, bool with_epsil){
     double epsil = (with_epsil)? epsil_zero:0;
 
     return ((lim_min+epsil <= val) and (val <= lim_max-epsil));
 }
 
-bool Tools::test_range(int& val,int& lim_min,int& lim_max){
+bool Tools::test_range(int val,int lim_min,int lim_max){
 
     return ((lim_min <= val) and (val <= lim_max));
 }
@@ -16,7 +16,7 @@ void Tools::error_message(string message){
     exit(0);
 }  
 
-double Tools::norme(double& x, double& y){
+double Tools::norme(double x,double y){
     return sqrt(x*x+y*y);
 }
 
@@ -25,7 +25,7 @@ double Tools::distance(const Point& p1,const Point p2){
 }
 
 
-Point Tools::point_proche(const Point& ci,const Point& sq,double& sq_size){
+Point Tools::point_proche(const Point& ci,const Point& sq,double sq_size){
 
     Point pt_proche(0,0); //point du carre le plus proche du centre du cercle
 
@@ -70,6 +70,6 @@ bool Tools::intersects(const Circle& ci,const Square& sq){
    return (distance(pt_proche,ci.centre) <= ci.rayon);
 }
 
-bool Tools::intersects(const Square& s2,const Circle& c1,){
+bool Tools::intersects(const Square& s2,const Circle& c1){
     return Tools::intersects(c1,s2);
 }
