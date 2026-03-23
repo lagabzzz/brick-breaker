@@ -20,6 +20,7 @@ void Ball::include_arene(){
 //}
 
 void Ball::test_norme(){
+    
     if (Tools::norme(dx,dy) > delta_norm_max){
         Tools::error_message(message::invalid_delta(dx, dy));
     }
