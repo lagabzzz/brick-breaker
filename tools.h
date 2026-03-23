@@ -8,7 +8,7 @@ using namespace std;
 
 struct Point {
   
-
+    Point()=default;
     Point (double x, double y)
     :x(x),y(y)
     {}
@@ -18,7 +18,7 @@ struct Point {
 };
 
 struct Circle {
-
+    Circle()=default;
     Circle (double x,double y,double rayon)
     :centre(x,y),rayon(rayon)
     {}
@@ -47,7 +47,7 @@ namespace Tools {
     void error_message(string message);
     double norme(double x, double y);
 
-    double distance(const Point& p1,const Point p2);
+    double distance(const Point& p1,const Point& p2);
     Point point_proche(const Point& ci,const Point& sq,double sq_size);
     bool intersects(const Square& s1,const Square& s2);
     bool intersects(const Circle& c1,const Circle& c2);

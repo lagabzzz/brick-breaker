@@ -8,9 +8,8 @@ void Paddle::inclusion_arene(){
         Tools::error_message(message::paddle_outside(paddle.centre.x, paddle.centre.y));
     }
 
-    if ((paddle.centre.y > 0.0) or (paddle.centre.y + paddle.rayon < 0.0)){
-
-       Tools::error_message(message::paddle_outside(paddle.centre.x, paddle.centre.y)); 
+    if ((paddle.centre.y >= 0.0) or (paddle.centre.y + paddle.rayon <= 0.0)){
+        Tools::error_message(message::paddle_outside(paddle.centre.x, paddle.centre.y)); 
     }
 }
 

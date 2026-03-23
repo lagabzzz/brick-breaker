@@ -107,7 +107,7 @@ void Game::lecture_paddle(const string& line){
     double y;
     double rayon;
     iss >> x >> y >> rayon;
-    //methodes d'inclusion
+
     paddle = Paddle(x, y, rayon);
 }
 
@@ -158,27 +158,32 @@ void Game::lecture_ball(const string& line){
 void Game::test_collisions(){
     
     for(int i(0); i < nb_bricks; ++i){
-        Tools::intersects(bricks[i]->get_brick(),paddle.get_paddle()); //test brick paddle
-        cout<<bricks[i]->get_x()<<" "<<bricks[i]->get_y()<<" "<<bricks[i]->get_size()<<endl;
+
+        if(Tools::intersects(bricks[i]->get_brick(),paddle.get_paddle())){
+            Tools::error_message(message::collision_paddle_brick(i+1));
+        }
     
         for(int j(i+1); j < nb_bricks; ++j){ //test brick brick
 
             if(Tools::intersects(bricks[i]->get_brick(),bricks[j]->get_brick())){
 
-                Tools::error_message(message::collision_bricks(i,j));
+                Tools::error_message(message::collision_bricks(i+1,j+1));
             }
         }
     }
 
 
     for(int i(0); i < nb_balls; ++i){
-        Tools::intersects(balls[i]->get_ball(),paddle.get_paddle()); //test ball paddle
+
+        if(Tools::intersects(balls[i]->get_ball(),paddle.get_paddle())){
+            Tools::error_message(message::collision_paddle_ball(i+1));
+        }
 
         for(int j(i+1); j < nb_balls; ++j){
 
             if(Tools::intersects(balls[i]->get_ball(),balls[j]->get_ball())){
                 
-                Tools::error_message(message::collision_balls(i,j));
+                Tools::error_message(message::collision_balls(i+1,j+1));
             }
         }
     }
@@ -189,7 +194,7 @@ void Game::test_collisions(){
 
             if(Tools::intersects(bricks[i]->get_brick(),balls[j]->get_ball())){
                 
-                Tools::error_message(message::collision_ball_brick(j,i));
+                Tools::error_message(message::collision_ball_brick(j+1,i+1));
             }
         }
     }

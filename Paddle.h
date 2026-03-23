@@ -5,7 +5,8 @@
 
 class Paddle{
     public:
-        Paddle(double x=0, double y=0, double rayon=0)
+        Paddle()=default;
+        Paddle(double x, double y, double rayon)
         :paddle(x,y,rayon)
         {inclusion_arene();}
 
