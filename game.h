@@ -1,3 +1,4 @@
+#pragma
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -18,31 +19,31 @@ typedef vector<unique_ptr<Ball>> LesBalles;
 
 class Game {
 
-    public:
+public:
 
-        void section_de_lecture(char* test);
-        
-
-    private:
+    void section_de_lecture(char* test);
     
-        LesBriques bricks;
-        LesBalles balls;
-        Paddle paddle;
-        int score;
-        int lives;
-        int nb_bricks;
-        int nb_balls;
-        int count_lecture;
-        void test_collisions();
 
-        void lecture_score(const string& line);
+private:
 
-        void lecture_lives(const string& line);
+    LesBriques bricks;
+    LesBalles balls;
+    Paddle paddle;
+    int score;
+    int lives;
+    int nb_bricks;
+    int nb_balls;
+    int count_lecture;
+    void test_collisions();
 
-        void lecture_paddle(const string& line);
+    void lecture_score(const string& line);
 
-        void lecture_brick(const string& line);
+    void lecture_lives(const string& line);
 
-        void lecture_ball(const string& line);
+    void lecture_paddle(const string& line);
+
+    void lecture_brick(const string& line);
+
+    void lecture_ball(const string& line);
 };
 

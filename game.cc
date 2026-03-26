@@ -175,7 +175,6 @@ void Game::test_collisions(){
 
     for(int i(0); i < nb_balls; ++i){
 
-        //cout<<balls[i+1]->get_x()<<" "<<balls[i+1]->get_y()<<" "<<balls[i+1]->get_rayon()<<endl;
 
         if(Tools::intersects(balls[i]->get_ball(),paddle.get_paddle())){
             Tools::error_message(message::collision_paddle_ball(i));
