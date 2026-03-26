@@ -14,10 +14,7 @@ void Ball::include_arene(){
     }    
 }
 
-//const Circle& Ball::get_ball() const{
 
-  //  return ball;
-//}
 
 void Ball::test_norme(){
     

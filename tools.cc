@@ -1,4 +1,5 @@
 #include "tools.h"
+using namespace std;
 
 bool Tools:: test_range(double val, double lim_min,double lim_max, bool with_epsil){
     double epsil = (with_epsil)? epsil_zero:0;
@@ -51,7 +52,8 @@ bool Tools::intersects(const Square& s1,const Square& s2){
 
     double min_dist = (s1.size+s2.size)/2;
 
-    return ((abs(s1.centre.x -s2.centre.x) < min_dist) and (abs(s1.centre.y -s2.centre.y) < min_dist));
+    return ((abs(s1.centre.x -s2.centre.x) < min_dist) and 
+            (abs(s1.centre.y -s2.centre.y) < min_dist));
 }
 
 bool Tools::intersects(const Circle& c1,const Circle& c2){

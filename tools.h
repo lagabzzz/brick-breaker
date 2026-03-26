@@ -4,7 +4,7 @@
 #include "message.h"
 #include <iostream>
 #include <cmath>
-using namespace std;
+
 
 struct Point {
   
@@ -41,6 +41,7 @@ struct Square {
 
 
 namespace Tools {
+
     bool test_range(double val,double lim_min,double lim_max,bool with_epsil);
     bool test_range(int val,int lim_min,int lim_max);
 

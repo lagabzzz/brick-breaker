@@ -1,6 +1,10 @@
 #include "paddle.h"
 using namespace std;
 
+const Circle& Paddle::get_paddle() const{
+    return paddle;
+}
+
 void Paddle::inclusion_arene(){
 
     if (!Tools::test_range(paddle.centre.x,paddle.rayon, 100.0-paddle.rayon,false)){
@@ -13,6 +17,4 @@ void Paddle::inclusion_arene(){
     }
 }
 
-const Circle& Paddle::get_paddle() const{
-    return paddle;
-}
+
