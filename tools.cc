@@ -1,5 +1,5 @@
 #include "tools.h"
-
+using namespace std;
 
 bool Tools:: test_range(double val, double lim_min,double lim_max, bool with_epsil){
     double epsil = (with_epsil)? epsil_zero:0;

@@ -4,7 +4,8 @@
 #include "message.h"
 #include <iostream>
 #include <cmath>
-using namespace std;
+
+constexpr double epsil_zero = 0.125;
 
 struct Point {
   
@@ -45,7 +46,7 @@ namespace Tools {
     bool test_range(double val,double lim_min,double lim_max,bool with_epsil);
     bool test_range(int val,int lim_min,int lim_max);
 
-    void error_message(string message);
+    void error_message(std::string message);
     double norme(double x, double y);
 
     double distance(const Point& p1,const Point& p2);
@@ -53,9 +54,8 @@ namespace Tools {
     bool intersects(const Square& s1,const Square& s2);
     bool intersects(const Circle& c1,const Circle& c2);
     bool intersects(const Circle& c1,const Square& s2);
-    bool intersects(const Square& s2,const Circle& c1); //surcharge pour la commutativité
+    bool intersects(const Square& s2,const Circle& c1); //surcharge commutativité
 
-    constexpr double epsil_zero = 0.125;
 }
 
 

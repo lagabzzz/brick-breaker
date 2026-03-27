@@ -1,18 +1,7 @@
 #include "game.h"
+using namespace std;
 
 void Game::section_de_lecture(char* test){
-
-    enum Type_lecture{
-
-        SCORE,
-        LIVES,
-        PADDLE,
-        NB_BRICK,
-        BRICK,
-        NB_BALL,
-        BALL,
-        FIN
-    };
 
     ifstream fichier(test);
     if(fichier.fail()) exit(0); //sort si le fichier s'ouvre pas
@@ -81,8 +70,7 @@ void Game::section_de_lecture(char* test){
         }
     }  
     test_collisions(); 
-
-        
+ 
     cout << message::success() << endl; 
 }
 
@@ -123,16 +111,16 @@ void Game::lecture_brick(const string& line){
     int hit_points;
     
     switch(type_brick){
-        case 0:   
+        case B_RAINBOW:   
             iss >> hit_points;
             bricks.push_back(unique_ptr<Brick> (new Rainbowbrick(s,hit_points)));
             break;
 
-        case 1:
+        case B_BALL:
             bricks.push_back(unique_ptr<Brick> (new Ball_brick(s)));
             break;
         
-        case 2:
+        case B_SPLIT:
             bricks.push_back(unique_ptr<Brick> (new Split_brick(s)));
             break;
 
