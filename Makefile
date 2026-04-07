@@ -5,8 +5,8 @@ CC = g++
 CFLAGS = -Wall -std=c++17
 LINKING = `pkg-config --cflags gtkmm-4.0`
 LDLIBS = `pkg-config --libs gtkmm-4.0`
-OFILES = project.o game.o paddle.o brick.o ball.o message.o tools.o graphic.o myarea.o
-HFILES = game.h paddle.h brick.h ball.h tools.h constants.h message.h graphic.h graphic_gui.h myarea.h
+OFILES = project.o game.o paddle.o brick.o ball.o message.o tools.o graphic.o myevent.o
+HFILES = game.h paddle.h brick.h ball.h tools.h constants.h message.h graphic.h graphic_gui.h myevent.h
 
 all: $(OUT)
 
@@ -31,7 +31,7 @@ game.o: game.cc paddle.h brick.h ball.h tools.h constants.h message.h
 graphic.o: graphic.cc graphic.h graphic_gui.h
 	$(CC) $(CFLAGS) $(LINKING) -c $< -o $@
 
-myarea.o: myarea.cc myarea.h graphic_gui.h
+myevent.o: myevent.cc myevent.h graphic_gui.h
 	$(CC) $(CFLAGS) $(LINKING) -c $< -o $@
 
 project.o: project.cc $(HFILES)
