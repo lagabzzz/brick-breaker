@@ -1,10 +1,14 @@
 #Makefile
 
-
+OUT = project
 CC = g++
 CFLAGS = -Wall -std=c++17
+LINKING = `pkg-config --cflags gtkmm-4.0`
+LDLIBS = `pkg-config --libs gtkmm-4.0`
+OFILES = project.o game.o paddle.o brick.o ball.o message.o tools.o graphic.o myevent.o
+HFILES = game.h paddle.h brick.h ball.h tools.h constants.h message.h graphic.h graphic_gui.h myevent.h
 
-all: project
+all: $(OUT)
 
 message.o: message.cc message.h
 	$(CC) $(CFLAGS) -c $< -o $@
@@ -24,11 +28,18 @@ paddle.o: paddle.cc paddle.h tools.h constants.h message.h
 game.o: game.cc paddle.h brick.h ball.h tools.h constants.h message.h
 	$(CC) $(CFLAGS) -c $< -o $@ 	
 
-project.o: project.cc game.h paddle.h brick.h ball.h tools.h constants.h message.h
-	$(CC) $(CFLAGS) -c $< -o $@ 
+graphic.o: graphic.cc graphic.h graphic_gui.h
+	$(CC) $(CFLAGS) $(LINKING) -c $< -o $@
 
-project: game.o paddle.o brick.o ball.o message.o tools.o	project.o
-	$(CC) project.o game.o paddle.o brick.o ball.o message.o tools.o -o project
+myevent.o: myevent.cc myevent.h graphic_gui.h
+	$(CC) $(CFLAGS) $(LINKING) -c $< -o $@
+
+project.o: project.cc $(HFILES)
+	$(CC) $(CFLAGS) $(LINKING) -c $< -o $@ 
+
+$(OUT): $(OFILES)
+	$(CC) $(OFILES) $(LINKING) -o $@ $(LDLIBS)
+
 clean:
 	@echo " *** EFFACE MODULES OBJET ET EXECUTABLE ***"
-	@/bin/rm -f *.o *.x *.cc~ *.h~ project
+	@/bin/rm -f *.o *.x *.cc~ *.h~ $(OUT)
