@@ -4,7 +4,7 @@
 #include <gtkmm/label.h>
 #include <iostream>
 
-constexpr int area_side(500);
+constexpr int area_side(100);
 
 MyEvent::MyEvent():
 	m_Main_Box(Gtk::Orientation::HORIZONTAL, 0),
@@ -21,11 +21,11 @@ MyEvent::MyEvent():
 
 	m_Main_Box.append(m_Panel_Box);
 	m_Main_Box.append(m_Area);
-	
-	m_Panel_Box.append(m_Panel_Frame);
 	m_Panel_Frame.set_child(m_Buttons_Box);
+	m_Panel_Box.append(m_Panel_Frame);
 	m_Buttons_Box.append(m_Button_Draw);
 	m_Buttons_Box.append(m_Button_Clear);
+
 	
 	// init buttons signal handlers
 	m_Button_Clear.signal_clicked().connect(
@@ -42,22 +42,22 @@ MyEvent::MyEvent():
 
 }
 
-void MyEvent::on_button_clicked_clear()
-{
+void MyEvent::on_button_clicked_clear(){
+
 	std::cout << "Drawing cancelled" << std::endl;
 	draw = false;
 	m_Area.queue_draw();
 }
 
-void MyEvent::on_button_clicked_draw()
-{
+void MyEvent::on_button_clicked_draw(){
+
 	std::cout << "Drawing activated" << std::endl;
 	draw = true;
 	m_Area.queue_draw();
 }
 
-void MyEvent::on_draw(const Cairo::RefPtr<Cairo::Context>& cr, int width, int height)
-{
+void MyEvent::on_draw(const Cairo::RefPtr<Cairo::Context>& cr, int width, int height){
+	
 	if(draw)
 	{
 		graphic_set_context(cr);
