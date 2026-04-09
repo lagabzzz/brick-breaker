@@ -49,6 +49,7 @@ void Graphic::draw_rnb(const crptr& cr, const int width, const int height
 
    //draw_square(cr,widht,height,brick->get_brick());
    cr->rectangle(brick->get_x(),100-brick->get_y(),brick->get_size(),brick->get_size());
+   cr->fill();
 }
 
 
@@ -60,18 +61,18 @@ void Graphic::set_color(const crptr& cr,int color){
       case NOIR:
          cr->set_source_rgb(0.0, 0.0, 0.0); break;
       case ROUGE:
-         cr->set_source_rgb(1.0, 0.0, 0.0) break;
+         cr->set_source_rgb(1.0, 0.0, 0.0); break;
       case ORANGE:
-         cr->set_source_rgb(1.0, 0.65, 0.0) break;
+         cr->set_source_rgb(1.0, 0.65, 0.0); break;
       case JAUNE:
-         cr->set_source_rgb(1.0, 1.0, 0.0) break;
+         cr->set_source_rgb(1.0, 1.0, 0.0); break;
       case VERT:
-         cr->set_source_rgb(0.0, 1.0, 0.0) break;
+         cr->set_source_rgb(0.0, 1.0, 0.0); break;
       case CYAN:
-         cr->set_source_rgb(0.0, 1.0, 1.0) break;
+         cr->set_source_rgb(0.0, 1.0, 1.0); break;
       case BLEU:
-         cr->set_source_rgb(0.0, 0.0, 1.0) break;
+         cr->set_source_rgb(0.0, 0.0, 1.0); break;
       case VIOLET:
-         cr->set_source_rgb(0.5, 0.0, 0.5) break;
+         cr->set_source_rgb(0.5, 0.0, 0.5); break;
    }
 }

@@ -16,21 +16,22 @@ class Brick {
 
 public:
     
-    Brick(Square brick)
-    :brick(brick)
+    Brick(Square brick,int hit_points = 1)
+    :brick(brick),hit_points(hit_points)
     {
         test_val(); 
         test_arene();
+        test_hit_pt();
     }
     
     double get_x() const { return brick.centre.x; }
     double get_y() const { return brick.centre.y; }
     double get_size() const { return brick.size; }
     const Square& get_brick() const {return brick;}
+    int get_hit_pts() const {return hit_points;}
     virtual ~Brick() = default;
     virtual int brick_type() = 0;
-    virtual int get_hit_pts() = 0;
-
+    void test_hit_pt();
 
 protected:
     Square brick;
@@ -43,15 +44,14 @@ class Rainbowbrick : public Brick{
 
 public:
     Rainbowbrick(Square brick,int hit_points)
-    :Brick(brick),hit_points(hit_points)
-    {test_hit_pt();}
+    :Brick(brick,hit_points)
+    {}
 
     int get_hit_pts() const {return hit_points;}
     int brick_type() override {return B_RAINBOW;} 
 
 private:
     
-    void test_hit_pt();
 };
 
 class Ball_brick : public Brick{

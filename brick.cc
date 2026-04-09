@@ -22,7 +22,7 @@ void Brick :: test_arene(){
     }
 }
 
-void Rainbowbrick::test_hit_pt(){
+void Brick::test_hit_pt(){
 
     if((Tools::test_range(hit_points,1,7))==false){
 

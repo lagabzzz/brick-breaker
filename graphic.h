@@ -54,7 +54,7 @@ private:
     //void draw_square(const crptr& cr, const int width, const int height
     //                                                        ,const Square& sq);   
     
-    void set_color(int color);                                                            
+    void set_color(const crptr& cr,int color);                                                            
 };
 
 #endif // GTKMM_EXAMPLE_GRAPHIC_H
