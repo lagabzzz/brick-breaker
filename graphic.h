@@ -42,14 +42,15 @@ private:
     void draw_paddle(const crptr& cr, const int side);
     void draw_ball(const crptr& cr, const int side);
 
-    void draw_rnb(const crptr& cr, const int side
-,const Brick* brick);
+    void draw_rnb(const crptr& cr, const int side,const Brick* brick);
 
     void draw_brball(const crptr& cr, const int side,const Brick* brick);
 
     void draw_split(const crptr& cr, const int side,const Brick* brick);                                                        
 
     void draw_square(const crptr& cr, const int side,const Square& sq);   
+
+    void draw_disk(const crptr& cr, const int side,const Square& sq);
     
     void set_color(const crptr& cr,int color);                                                            
 };

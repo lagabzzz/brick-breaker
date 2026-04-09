@@ -35,7 +35,7 @@ void Graphic::draw_bricks(const crptr& cr,const int side){
             break;
 
          case B_BALL:
-            std::cout<<"bizarre"<<std::endl;
+            draw_brball(cr,side,gameptr->get_brick(i));
             break;
         
          case B_SPLIT:
@@ -52,17 +52,35 @@ void Graphic::draw_rnb(const crptr& cr, const int side, const Brick* brick)
    draw_square(cr,side,brick->get_brick());
 }
 
+void Graphic::draw_brball(const crptr& cr, const int side,const Brick* brick){
+
+   set_color(cr,ROUGE);
+   draw_square(cr,side,brick->get_brick());
+   set_color(cr,NOIR);
+   draw_disk(cr,side,brick->get_brick());
+
+}
+
 void Graphic::draw_square(const crptr& cr, const int side, const Square& sq)
 {
-   //std::cout<<side<<std::endl;
-   //double px = side*sq.centre.x/100.0;
-   //double py = side*sq.centre.x/100.0;
-   //double new_size = side*sq.size/100.0;
-   //cr->rectangle(px,py,new_size,new_size);
 
-   cr->rectangle(side*sq.centre.x/100,side*(1-sq.centre.y/100),side*sq.size/100,side*sq.size/100);
+   double new_size(side*sq.size/100);
+   double new_x(side*sq.centre.x/100-new_size/2);
+   double new_y(side*(1-sq.centre.y/100)-new_size/2);
+   
+   cr->rectangle(new_x,new_y,new_size,new_size);
    cr->fill();
-}                                                      
+}
+
+void Graphic::draw_disk(const crptr& cr, const int side,const Square& sq){
+   
+   double new_size(side*sq.size*20/(100*100));
+   double new_x(side*sq.centre.x/100);
+   double new_y(side*(1-sq.centre.y/100));
+
+   cr->arc(new_x,new_y,new_size,0.0,2*M_PI);
+   cr->fill();
+}
 
 
 void Graphic::set_color(const crptr& cr,int color){
