@@ -24,20 +24,22 @@ void Graphic::draw_contour(const crptr& cr, const int side){
 
 void Graphic::draw_bricks(const crptr& cr,const int side){
 
-   for(int i(0);i< gameptr->get_nb_bricks();i++){
-      
-      switch(gameptr->get_brick(i)->brick_type()){
+   for(int i(0);i < gameptr->get_nb_bricks();i++){
+      //std::cout<<gameptr->get_brick(i)->brick_type()<<std::endl;
+      std::cout<<gameptr->get_nb_bricks()<<std::endl;
 
-         case B_RAINBOW:   
+      switch(gameptr->get_brick(i)->brick_type()){
+         
+         case B_RAINBOW:  
             draw_rnb(cr,side,gameptr->get_brick(i));
             break;
 
          case B_BALL:
-            
+            std::cout<<"bizarre"<<std::endl;
             break;
         
          case B_SPLIT:
-            
+            std::cout<<"tres bizarre"<<std::endl;
             break;
       }      
 	}
