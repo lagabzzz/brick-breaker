@@ -35,8 +35,10 @@ class Game {
 public:
 
     void section_de_lecture(char* test);
-    Brick* get_brick(int i) const;
+    Brick* get_brick(int i) const {return bricks[i].get();}
+    Ball* get_ball(int i) const {return balls[i].get();}
     int get_nb_bricks() const {return nb_bricks;}
+    int get_nb_balls() const {return nb_balls;}
 
 private:
 

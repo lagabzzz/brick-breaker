@@ -50,7 +50,7 @@ private:
 
     void draw_square(const crptr& cr, const int side,const Square& sq);   
 
-    void draw_disk(const crptr& cr, const int side,const Square& sq);
+    void draw_disk(const crptr& cr, const int side,const Circle& sq);
     
     void set_color(const crptr& cr,int color);                                                            
 };
