@@ -7,6 +7,7 @@ void Graphic::on_draw(const crptr& cr, int width, int height){
 
 		draw_contour(cr,side);
       draw_bricks(cr,side);
+      draw_ball(cr,side);
 	}
 }
 
@@ -20,6 +21,13 @@ void Graphic::draw_contour(const crptr& cr, const int side){
    cr->line_to(0, side);
    cr->line_to(0, 0);
    cr->stroke();
+}
+
+void Graphic::draw_ball(const crptr& cr, const int side){
+   set_color(cr,NOIR);
+   for(int i(0);i < gameptr->get_nb_balls();i++){
+      draw_disk(cr,side,gameptr->get_ball(i)->get_ball());
+   }
 }
 
 void Graphic::draw_bricks(const crptr& cr,const int side){
@@ -57,8 +65,13 @@ void Graphic::draw_brball(const crptr& cr, const int side,const Brick* brick){
    set_color(cr,ROUGE);
    draw_square(cr,side,brick->get_brick());
    set_color(cr,NOIR);
-   draw_disk(cr,side,brick->get_brick());
+   
+   double new_size(side*brick->get_size()*20/(100*100));
+   double new_x(side*brick->get_x()/100);
+   double new_y(side*(1-brick->get_y()/100));
 
+   cr->arc(new_x,new_y,new_size,0.0,2*M_PI);
+   cr->fill();
 }
 
 void Graphic::draw_square(const crptr& cr, const int side, const Square& sq)
@@ -72,11 +85,11 @@ void Graphic::draw_square(const crptr& cr, const int side, const Square& sq)
    cr->fill();
 }
 
-void Graphic::draw_disk(const crptr& cr, const int side,const Square& sq){
+void Graphic::draw_disk(const crptr& cr, const int side,const Circle& ci){
    
-   double new_size(side*sq.size*20/(100*100));
-   double new_x(side*sq.centre.x/100);
-   double new_y(side*(1-sq.centre.y/100));
+   double new_size(side*ci.rayon/100);
+   double new_x(side*ci.centre.x/100);
+   double new_y(side*(1-ci.centre.y/100));
 
    cr->arc(new_x,new_y,new_size,0.0,2*M_PI);
    cr->fill();
