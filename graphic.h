@@ -37,22 +37,18 @@ private:
 
     // DrawingArea signal handler:
 
-    void draw_contour(const crptr& cr, const int width, const int height);
-    void draw_bricks(const crptr& cr, const int width, const int height);
-    void draw_paddle(const crptr& cr, const int width, const int height);
-    void draw_ball(const crptr& cr, const int width, const int height);
+    void draw_contour(const crptr& cr, const int side);
+    void draw_bricks(const crptr& cr, const int side);
+    void draw_paddle(const crptr& cr, const int side);
+    void draw_ball(const crptr& cr, const int side);
 
-    void draw_rnb(const crptr& cr, const int width, const int height
-                                                        ,const Brick* brick);
+    void draw_rnb(const crptr& cr, const int side,const Brick* brick);
 
-    void draw_brball(const crptr& cr, const int width, const int height
-                                                        ,const Brick* brick);
+    void draw_brball(const crptr& cr, const int side,const Brick* brick);
 
-    void draw_split(const crptr& cr, const int width, const int height
-                                                        ,const Brick* brick);                                                        
+    void draw_split(const crptr& cr, const int side,const Brick* brick);                                                        
 
-    //void draw_square(const crptr& cr, const int width, const int height
-    //                                                        ,const Square& sq);   
+    void draw_square(const crptr& cr, const int side,const Square& sq);   
     
     void set_color(const crptr& cr,int color);                                                            
 };
