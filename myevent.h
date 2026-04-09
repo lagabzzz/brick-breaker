@@ -13,7 +13,7 @@
 class MyEvent : public Gtk::ApplicationWindow
 {
 public:
-	MyEvent();
+	MyEvent(Game* game_ptr = nullptr);
 
 private:
 	// GUI layout

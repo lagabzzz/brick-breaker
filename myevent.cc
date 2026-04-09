@@ -2,7 +2,7 @@
 
 constexpr int area_side(500);
 
-MyEvent::MyEvent():
+MyEvent::MyEvent(Game* game_ptr):
 	m_Main_Box(Gtk::Orientation::HORIZONTAL, 0),
 	m_Panel_Box(Gtk::Orientation::VERTICAL, 2),
 	m_Buttons_Box(Gtk::Orientation::VERTICAL, 2),
@@ -10,7 +10,7 @@ MyEvent::MyEvent():
 	m_Button_Exit("Exit"),
 	m_Button_Open("Open"),
 	m_Button_Save("Save"),
-	game_graph(nullptr)
+	game_graph(game_ptr)
 {
 	// init layout
 	set_title("Brick Breaker");
