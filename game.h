@@ -41,8 +41,9 @@ class Game {
 public:
 
     void section_de_lecture(char* test);
+    Brick* get_brick(int i) const;
+    int get_nb_bricks() const {return nb_bricks;}
     
-
 private:
 
     LesBriques bricks;

@@ -1,16 +1,16 @@
 #include "myevent.h"
 
-constexpr int area_side(500);
+constexpr int area_side(750);
 
 MyEvent::MyEvent(Game* game_ptr):
-	m_Main_Box(Gtk::Orientation::HORIZONTAL, 0),
-	m_Panel_Box(Gtk::Orientation::VERTICAL, 2),
-	m_Buttons_Box(Gtk::Orientation::VERTICAL, 2),
-	m_Panel_Frame(),
-	m_Button_Exit("Exit"),
-	m_Button_Open("Open"),
-	m_Button_Save("Save"),
-	game_graph(game_ptr)
+    m_Main_Box(Gtk::Orientation::HORIZONTAL, 0),
+    m_Panel_Box(Gtk::Orientation::VERTICAL, 2),
+    m_Buttons_Box(Gtk::Orientation::VERTICAL, 2),
+    m_Panel_Frame(),
+    m_Button_Exit("Exit"),
+    m_Button_Open("Open"),
+    m_Button_Save("Save"),
+    game_graph(game_ptr)
 {
 	// init layout
 	set_title("Brick Breaker");
@@ -24,12 +24,12 @@ MyEvent::MyEvent(Game* game_ptr):
 	m_Buttons_Box.append(m_Button_Open);
 	m_Buttons_Box.append(m_Button_Save);
 	
-	
+
 	// init buttons signal handlers
 	m_Button_Exit.signal_clicked().connect(
 		sigc::mem_fun(*this, &MyEvent::on_button_clicked_exit));
 		
-   m_Button_Open.signal_clicked().connect(
+    m_Button_Open.signal_clicked().connect(
 		sigc::mem_fun(*this, &MyEvent::on_button_clicked_open));
 		
 	m_Button_Save.signal_clicked().connect(

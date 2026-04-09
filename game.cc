@@ -188,3 +188,15 @@ void Game::test_collisions(){
         }
     }
 }
+
+Brick* Game::get_brick(int i) const{
+
+    if(Tools::test_range(i,0,nb_bricks-1)){
+        return bricks[i].get(); //.get renvoie l'addresse de bricks[i]
+    }
+    else{
+        std::cout<<"out of range"<<std::endl;
+        exit(0);
+        return nullptr;
+    }
+}
