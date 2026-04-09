@@ -128,7 +128,6 @@ void Game::lecture_brick(const string& line){
             Tools::error_message(message::invalid_brick_type(type_brick));
             break;
     } 
-    
 }
 
 void Game::lecture_ball(const string& line){
@@ -186,5 +185,17 @@ void Game::test_collisions(){
                 Tools::error_message(message::collision_ball_brick(j,i));
             }
         }
+    }
+}
+
+Brick* Game::get_brick(int i) const{
+
+    if(Tools::test_range(i,0,nb_bricks-1)){
+        return bricks[i].get(); //.get renvoie l'addresse de bricks[i]
+    }
+    else{
+        std::cout<<"out of range"<<std::endl;
+        exit(0);
+        return nullptr;
     }
 }

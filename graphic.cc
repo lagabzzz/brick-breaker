@@ -1,28 +1,89 @@
 #include "graphic.h"
 
-void Graphic::on_draw(const Cairo::RefPtr<Cairo::Context>& cr
-                                                            , int width, int height){
+void Graphic::on_draw(const crptr& cr, int width, int height){
 
-	if(draw)
-	{      
-      graphic_draw_shape(cr,width, height);
+	if(draw){
+		int side = std::min(width, height);
+
+		draw_contour(cr,side);
+      draw_bricks(cr,side);
 	}
 }
 
-
-void Graphic::graphic_draw_shape(const Cairo::RefPtr<Cairo::Context>& cr,
-                                                   const int width, const int height){
-   int xc, yc;
-   xc = width / 2;
-   yc = height / 2;
-
-   cr->set_line_width(10.0);
-   // draw red lines out from the center of the window
-   cr->set_source_rgb(0.8, 0.0, 0.0);
+void Graphic::draw_contour(const crptr& cr, const int side){
+  
+   cr->set_line_width(3.0);
+   cr->set_source_rgb(0.5, 0.5, 0.5);
    cr->move_to(0, 0);
-   cr->line_to(xc, yc);
-   cr->line_to(0, height);
-   cr->move_to(xc, yc);
-   cr->line_to(width, yc);
+   cr->line_to(side, 0);
+   cr->line_to(side,side);
+   cr->line_to(0, side);
+   cr->line_to(0, 0);
    cr->stroke();
+}
+
+void Graphic::draw_bricks(const crptr& cr,const int side){
+
+   for(int i(0);i < gameptr->get_nb_bricks();i++){
+      //std::cout<<gameptr->get_brick(i)->brick_type()<<std::endl;
+      //std::cout<<gameptr->get_nb_bricks()<<std::endl;
+
+      switch(gameptr->get_brick(i)->brick_type()){
+         
+         case B_RAINBOW:  
+            draw_rnb(cr,side,gameptr->get_brick(i));
+            break;
+
+         case B_BALL:
+            std::cout<<"bizarre"<<std::endl;
+            break;
+        
+         case B_SPLIT:
+            std::cout<<"tres bizarre"<<std::endl;
+            break;
+      }      
+	}
+}
+
+void Graphic::draw_rnb(const crptr& cr, const int side, const Brick* brick)
+{
+   set_color(cr,brick->get_hit_pts());
+
+   draw_square(cr,side,brick->get_brick());
+}
+
+void Graphic::draw_square(const crptr& cr, const int side, const Square& sq)
+{
+   //std::cout<<side<<std::endl;
+   //double px = side*sq.centre.x/100.0;
+   //double py = side*sq.centre.x/100.0;
+   //double new_size = side*sq.size/100.0;
+   //cr->rectangle(px,py,new_size,new_size);
+
+   cr->rectangle(side*sq.centre.x/100,side*(1-sq.centre.y/100),side*sq.size/100,side*sq.size/100);
+   cr->fill();
+}                                                      
+
+
+void Graphic::set_color(const crptr& cr,int color){
+
+   switch(color){
+      
+      case NOIR:
+         cr->set_source_rgb(0.0, 0.0, 0.0); break;
+      case ROUGE:
+         cr->set_source_rgb(1.0, 0.0, 0.0); break;
+      case ORANGE:
+         cr->set_source_rgb(1.0, 0.65, 0.0); break;
+      case JAUNE:
+         cr->set_source_rgb(1.0, 1.0, 0.0); break;
+      case VERT:
+         cr->set_source_rgb(0.0, 1.0, 0.0); break;
+      case CYAN:
+         cr->set_source_rgb(0.0, 1.0, 1.0); break;
+      case BLEU:
+         cr->set_source_rgb(0.0, 0.0, 1.0); break;
+      case VIOLET:
+         cr->set_source_rgb(0.5, 0.0, 0.5); break;
+   }
 }
