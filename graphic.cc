@@ -26,7 +26,7 @@ void Graphic::draw_bricks(const crptr& cr,const int side){
 
    for(int i(0);i < gameptr->get_nb_bricks();i++){
       //std::cout<<gameptr->get_brick(i)->brick_type()<<std::endl;
-      std::cout<<gameptr->get_nb_bricks()<<std::endl;
+      //std::cout<<gameptr->get_nb_bricks()<<std::endl;
 
       switch(gameptr->get_brick(i)->brick_type()){
          
@@ -54,10 +54,13 @@ void Graphic::draw_rnb(const crptr& cr, const int side, const Brick* brick)
 
 void Graphic::draw_square(const crptr& cr, const int side, const Square& sq)
 {
-   double px (side*sq.centre.x/100);
-   double py (side*(1-sq.centre.x/100));
-   double new_size(side*sq.size/100);
-   cr->rectangle(px,py,new_size,new_size);
+   //std::cout<<side<<std::endl;
+   //double px = side*sq.centre.x/100.0;
+   //double py = side*sq.centre.x/100.0;
+   //double new_size = side*sq.size/100.0;
+   //cr->rectangle(px,py,new_size,new_size);
+
+   cr->rectangle(side*sq.centre.x/100,side*(1-sq.centre.y/100),side*sq.size/100,side*sq.size/100);
    cr->fill();
 }                                                      
 
