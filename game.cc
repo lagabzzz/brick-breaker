@@ -128,7 +128,6 @@ void Game::lecture_brick(const string& line){
             Tools::error_message(message::invalid_brick_type(type_brick));
             break;
     } 
-    
 }
 
 void Game::lecture_ball(const string& line){

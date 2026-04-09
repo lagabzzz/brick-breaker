@@ -9,6 +9,17 @@
 
 using crptr = Cairo::RefPtr<Cairo::Context>;
 
+enum Color{
+
+    NOIR,
+    ROUGE,
+    ORANGE,
+    JAUNE,
+    VERT,
+    CYAN,
+    BLEU,
+    VIOLET
+};
 
 class Graphic : public Gtk::DrawingArea {
 
@@ -31,7 +42,19 @@ private:
     void draw_paddle(const crptr& cr, const int width, const int height);
     void draw_ball(const crptr& cr, const int width, const int height);
 
-    void draw_square(const crptr& cr, const int width, const int height,Square sq);   
+    void draw_rnb(const crptr& cr, const int width, const int height
+                                                        ,const Brick* brick);
+
+    void draw_brball(const crptr& cr, const int width, const int height
+                                                        ,const Brick* brick);
+
+    void draw_split(const crptr& cr, const int width, const int height
+                                                        ,const Brick* brick);                                                        
+
+    //void draw_square(const crptr& cr, const int width, const int height
+    //                                                        ,const Square& sq);   
+    
+    void set_color(int color);                                                            
 };
 
 #endif // GTKMM_EXAMPLE_GRAPHIC_H
