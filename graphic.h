@@ -16,14 +16,12 @@ public:
    Graphic(Game* game_ptr = nullptr)
    :draw(true),
    game_ptr(game_ptr){}
-   
+
    bool draw ; // current drawing state
    void on_draw(const Cairo::RefPtr<Cairo::Context>& cr, int width, int height);
    
 private:
    
-   
-
    Game* game_ptr;
 
    // DrawingArea signal handler:
