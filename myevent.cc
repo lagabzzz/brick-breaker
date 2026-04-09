@@ -1,8 +1,4 @@
 #include "myevent.h"
-#include "graphic_gui.h"
-#include <cairomm/context.h>
-#include <gtkmm/label.h>
-#include <iostream>
 
 constexpr int area_side(500);
 
@@ -14,7 +10,7 @@ MyEvent::MyEvent():
 	m_Button_Exit("Exit"),
 	m_Button_Open("Open"),
 	m_Button_Save("Save"),
-	draw(true)
+	game_graph(nullptr)
 {
 	// init layout
 	set_title("Brick Breaker");
@@ -43,13 +39,13 @@ MyEvent::MyEvent():
 	m_Area.set_content_width(area_side);
 	m_Area.set_content_height(area_side);
 	m_Area.set_expand();
-	m_Area.set_draw_func(sigc::mem_fun(*this, &MyEvent::on_draw));
+	m_Area.set_draw_func(sigc::mem_fun(game_graph, &Graphic::on_draw));
 
 }
 
 void MyEvent::clear(){
 
-	draw = false;
+	game_graph.draw = false;
 	m_Area.queue_draw();
 }
 
@@ -132,8 +128,8 @@ void MyEvent::on_button_clicked_save(){
 	dialog->show();
 }
 
-void MyEvent::on_file_dialog_response(int response_id, Gtk::FileChooserDialog* dialog)
-{
+void MyEvent::on_file_dialog_response(int response_id, Gtk::FileChooserDialog* dialog){
+
 	//Handle the response:
 	switch (response_id)
 	{
@@ -161,15 +157,3 @@ void MyEvent::on_file_dialog_response(int response_id, Gtk::FileChooserDialog* d
 }
 
 
-void MyEvent::on_draw(const Cairo::RefPtr<Cairo::Context>& cr, int width, int height){
-
-	if(draw)
-	{
-		graphic_set_context(cr);
-      // coordinates for the center of the GTKmm window
-      int xc, yc;
-      xc = width / 2;
-      yc = height / 2;
-      graphic_draw_shape(width, height,xc,yc);
-	}
-}

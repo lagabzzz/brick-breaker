@@ -7,7 +7,8 @@
 //#include <gtkmm/frame.h>
 //#include <gtkmm/drawingarea.h>
 
-#include <gtkmm.h>
+
+#include "graphic.h"
 
 class MyEvent : public Gtk::ApplicationWindow
 {
@@ -27,8 +28,8 @@ private:
 
 	std::string filename;
 
-	bool draw ; // current drawing state
-	
+	Graphic game_graph;
+
 	void clear();
 	//Button Signal handlers:
 	void on_button_clicked_exit();
@@ -38,7 +39,7 @@ private:
 	void on_file_dialog_response(int response_id, Gtk::FileChooserDialog* dialog);
 
 	// DrawingArea signal handler:
-	void on_draw(const Cairo::RefPtr<Cairo::Context>& cr, int width, int height);
+
 };
 
 #endif // GTKMM_MY_EVENT_H
