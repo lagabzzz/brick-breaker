@@ -46,7 +46,8 @@ private:
 
     void draw_brball(const crptr& cr, const int side,const Brick* brick);
 
-    void draw_split(const crptr& cr, const int side,const Brick* brick);                                                        
+    void draw_split(const crptr& cr, const int side,const Square& sq
+                                                ,const int hit_pts ,const int count);
 
     void draw_square(const crptr& cr, const int side,const Square& sq);   
 

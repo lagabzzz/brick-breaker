@@ -47,8 +47,7 @@ public:
     :Brick(brick,hit_points)
     {}
 
-    int get_hit_pts() const {return hit_points;}
-    int brick_type() override {return B_RAINBOW;} 
+    int brick_type() override {return B_RAINBOW;}
 
 private:
     
@@ -68,8 +67,11 @@ class Split_brick : public Brick{
 
 public:
     Split_brick(Square brick)
-    :Brick(brick){}
+    :Brick(brick)
+    {find_hit_pts();}
+
     int brick_type() override {return B_SPLIT;}
+    void find_hit_pts();
 
 private:
 };
