@@ -12,7 +12,8 @@ public:
     {inclusion_arene();}
 
     const Circle& get_paddle() const;
-
+    void set_paddle_x(double x);
+    
 private:
     Circle paddle;
     void inclusion_arene();

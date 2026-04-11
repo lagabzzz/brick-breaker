@@ -4,6 +4,10 @@ using namespace std;
 const Circle& Paddle::get_paddle() const{
     return paddle;
 }
+void set_paddle_x(double x)
+{
+    paddle.centre.x = x;
+}
 
 void Paddle::inclusion_arene(){
 

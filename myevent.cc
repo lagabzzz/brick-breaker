@@ -188,6 +188,9 @@ void MyEvent::on_file_dialog_response(int response_id, Gtk::FileChooserDialog* d
 		    //Notice that this is a std::string, not a Glib::ustring.
 		    filename = dialog->get_file()->get_path();
 		    std::cout << "File selected: " <<  filename << std::endl;
+			game->section_de_lecture(filename);
+			update_grid();
+    		m_Area.queue_draw();
 		    break;
 		}
 		case Gtk::ResponseType::CANCEL:

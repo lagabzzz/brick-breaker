@@ -4,7 +4,10 @@ using namespace std;
 void Game::section_de_lecture(char* test){
 
     ifstream fichier(test);
-    if(fichier.fail()) exit(0); //sort si le fichier s'ouvre pas
+    if(fichier.fail()){
+        has_error = true;
+        return;    
+    } 
     string line;
     
     Type_lecture etat = SCORE;

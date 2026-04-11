@@ -41,7 +41,8 @@ public:
     int get_lives() const {return lives;}
     int get_nb_bricks() const {return nb_bricks;}
     int get_nb_balls() const {return nb_balls;}
-    
+    bool error() const { return has_error; }
+
 
 private:
 
@@ -53,6 +54,7 @@ private:
     int nb_bricks;
     int nb_balls;
     int count_lecture;
+    bool has_error = false;
     void test_collisions();
 
     void lecture_score(const std::string& line);

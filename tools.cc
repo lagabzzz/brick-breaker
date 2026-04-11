@@ -14,6 +14,8 @@ bool Tools::test_range(int val,int lim_min,int lim_max){
 
 void Tools::error_message(string message){
     cout << message << endl;
+    has_error = true;
+    return;
 }  
 
 double Tools::norme(double x,double y){

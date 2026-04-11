@@ -1,6 +1,13 @@
 #include "graphic.h"
 
 void Graphic::on_draw(const crptr& cr, int width, int height){
+     
+    if(gameptr->error()) {
+
+        cr->set_source_rgb(1,1,1);
+        cr->paint();
+        return;
+    }
 
 	if(draw){
 
@@ -9,6 +16,7 @@ void Graphic::on_draw(const crptr& cr, int width, int height){
         draw_bricks(cr,side);
         draw_ball(cr,side);
 	}
+   
 }
 
 void Graphic::draw_contour(const crptr& cr, const int side){
@@ -27,8 +35,14 @@ void Graphic::draw_ball(const crptr& cr, const int side){
 
     set_color(cr,NOIR);
     for(int i(0);i < gameptr->get_nb_balls();i++){
-        draw_disk(cr,side,gameptr->get_ball(i)->get_ball());
+        draw_disk(cr,side,gameptr->get_ball(i)->get_ball(), true);
     }
+}
+
+void Graphic::draw_paddle(const crptr& cr, const int side){
+
+    set_color(cr,NOIR);
+    draw_disk(cr, side, gameptr->get_paddle(), false)
 }
 
 void Graphic::draw_bricks(const crptr& cr,const int side){
@@ -108,14 +122,20 @@ void Graphic::draw_square(const crptr& cr, const int side, const Square& sq)
     cr->fill();
 }
 
-void Graphic::draw_disk(const crptr& cr, const int side,const Circle& ci){
+void Graphic::draw_disk(const crptr& cr, const int side,const Circle& ci,bool is_ball){
    
     double new_size(side*ci.rayon/100);
     double new_x(side*ci.centre.x/100);
     double new_y(side*(1-ci.centre.y/100));
 
     cr->arc(new_x,new_y,new_size,0.0,2*M_PI);
-    cr->fill();
+    if(is_ball){
+        cr->fill();
+    } 
+    else{
+        cr->stroke();
+    } 
+    
 }
 
 
