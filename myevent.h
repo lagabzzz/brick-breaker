@@ -20,16 +20,30 @@ private:
 	Gtk::Box m_Main_Box;
 	Gtk::Box m_Panel_Box;
 	Gtk::Box m_Buttons_Box;
-	Gtk::Frame m_Panel_Frame;
+	Gtk::Frame m_Panel1_Frame;
+	Gtk::Frame m_Panel2_Frame;
+
 	Gtk::Button m_Button_Exit;
 	Gtk::Button m_Button_Open;
 	Gtk::Button m_Button_Save;
 	Gtk::DrawingArea m_Area;
 
+	Gtk::Grid m_Grid;
+	Gtk::Label m_lbl_sc_ti;
+	Gtk::Label m_lbl_sc_da;
+	Gtk::Label m_lbl_li_ti;
+	Gtk::Label m_lbl_li_da;
+	Gtk::Label m_lbl_br_ti;
+	Gtk::Label m_lbl_br_da;
+	Gtk::Label m_lbl_ba_ti;
+	Gtk::Label m_lbl_ba_da;
+
 	std::string filename;
 
 	Graphic game_graph;
 
+	void set_grid();
+	void update_grid();
 	void clear();
 	//Button Signal handlers:
 	void on_button_clicked_exit();
