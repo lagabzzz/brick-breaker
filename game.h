@@ -44,6 +44,7 @@ public:
     int get_nb_balls() const {return nb_balls;}
     bool get_error() const {return error;}
     void reset();
+    void save_game(const std::string& file_name);
     
 private:
 

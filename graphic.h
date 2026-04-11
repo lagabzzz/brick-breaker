@@ -5,6 +5,8 @@
 #include <gtkmm.h>
 #include <iostream>
 #include <cairomm/context.h>
+#include <string>
+#include <filesystem>
 #include "game.h"
 
 using crptr = Cairo::RefPtr<Cairo::Context>;
@@ -28,17 +30,20 @@ public:
     :draw(true),
     gameptr(gameptr){}
 
-    std::string get_score_str(){return std::to_string(gameptr->get_score());}
-    std::string get_lives_str(){return std::to_string(gameptr->get_lives());}
-    std::string get_nb_bricks_str(){return std::to_string(gameptr->get_nb_bricks());}
-    std::string get_nb_balls_str(){return std::to_string(gameptr->get_nb_balls());}
+ 
     bool draw ; // current drawing state
+    std::string get_score(){return std::to_string(gameptr->get_score());}
+    std::string get_lives(){return std::to_string(gameptr->get_lives());}
+    std::string get_nb_bricks(){return std::to_string(gameptr->get_nb_bricks());}
+    std::string get_nb_balls(){return std::to_string(gameptr->get_nb_balls());}
+
     void on_draw(const crptr& cr, int width, int height);
-    Game* gameptr;
+    void save_game(const std::string& file_name);
+    void reset_game(const std::filesystem::path& file_name);
     
 private:
    
-    
+    Game* gameptr;
 
     // DrawingArea signal handler:
 

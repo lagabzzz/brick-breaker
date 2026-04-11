@@ -3,7 +3,6 @@
 
 #include <array>
 #include <gtkmm.h>
-#include <string>
 #include "graphic.h"
 
 class My_window : public Gtk::Window

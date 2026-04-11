@@ -1,4 +1,4 @@
-#include <filesystem>
+
 #include <iostream>
 #include "constants.h"
 //#include "graphic_gui.h"
@@ -44,6 +44,7 @@ My_window::My_window(Game* gameptr)
     set_key_controller();
     set_mouse_controller();
     set_infos();
+    update_infos();
     set_drawing();
     // TODO: set the game
 }
@@ -200,8 +201,8 @@ void My_window::dialog_response(int response, Gtk::FileChooserDialog *dialog)
         if (file_name != "")
         {
             cout << "open file " << file_name << endl; // TODO: set game from a file
-            game_graph.gameptr->reset();
-            game_graph.gameptr->section_de_lecture(file_name.string().c_str());
+            game_graph.reset_game(file_name);
+            
 			//update_grid();
     		drawing.queue_draw();
             dialog->hide();
@@ -211,6 +212,7 @@ void My_window::dialog_response(int response, Gtk::FileChooserDialog *dialog)
         if (file_name != "")
         {
             cout << "save file " << file_name << endl; // TODO: save the game
+            game_graph.save_game(file_name);
             dialog->hide();
         }
         break;
@@ -247,10 +249,10 @@ void My_window::set_infos()
 void My_window::update_infos()
 // TODO: update the different counters
 {
-    for (auto &value : info_value)
-    {
-        value.set_text("0");
-    }
+    info_value[0].set_text(game_graph.get_score());
+    info_value[1].set_text(game_graph.get_lives());
+    info_value[2].set_text(game_graph.get_nb_bricks());
+    info_value[3].set_text(game_graph.get_nb_balls());
 }
 
 void My_window::set_drawing()

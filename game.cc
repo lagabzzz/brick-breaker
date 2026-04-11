@@ -214,3 +214,28 @@ void Game::reset(){
     bricks.shrink_to_fit();
     balls.shrink_to_fit();
 }
+
+void Game::save_game(const std::string& file_name){
+    std::fstream file(file_name);
+    if(file.is_open()){
+
+        file << score << "\n";
+        file << lives << "\n";
+        file << paddle.get_x() <<" "<<paddle.get_y()<<" "<<paddle.get_rayon() << "\n";
+        file << nb_bricks << "\n";
+
+        for(const auto& br : bricks){
+            file << br->brick_type() <<" "<<br->get_x() <<" "<<br->get_y()<<" "
+            <<br->get_size() <<" ";
+            if(br->brick_type()==B_RAINBOW){
+                file<<br->get_hit_pts()<<"\n";
+            }
+        }
+
+        file << nb_balls << "\n";
+        for(const auto& ba : balls){
+            file << ba->get_x() <<" "<<ba->get_y()<<" "<<ba->get_rayon() <<" ";
+            file <<ba->get_dx() <<" "<<ba->get_dy() << "\n";
+        }
+    }
+}
