@@ -12,10 +12,6 @@ bool Tools::test_range(int val,int lim_min,int lim_max){
     return ((lim_min <= val) && (val <= lim_max));
 }
 
-void Tools::error_message(string message){
-    cout << message << endl;
-}  
-
 double Tools::norme(double x,double y){
     return sqrt(x*x+y*y);
 }

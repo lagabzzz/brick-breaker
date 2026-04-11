@@ -18,11 +18,7 @@ public:
     
     Brick(Square brick,int hit_points = 1)
     :brick(brick),hit_points(hit_points)
-    {
-        test_val(); 
-        test_arene();
-        test_hit_pt();
-    }
+    {}
     
     double get_x() const { return brick.centre.x; }
     double get_y() const { return brick.centre.y; }
@@ -31,12 +27,12 @@ public:
     int get_hit_pts() const {return hit_points;}
     virtual ~Brick() = default;
     virtual int brick_type() = 0;
-    void test_hit_pt();
+    bool test_hit_pt();
+    bool test_val();
+    bool test_arene();
 
 protected:
     Square brick;
-    void test_val();
-    void test_arene();
     int hit_points;
 };
 

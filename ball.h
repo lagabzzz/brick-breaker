@@ -18,13 +18,15 @@ public:
     double get_x() const { return ball.centre.x; }
     double get_y() const { return ball.centre.y; }
     double get_rayon() const { return ball.rayon; }
-
+    double get_dx() const { return dx; }
+    double get_dy() const { return dy; }
+    bool include_arene();
+    bool test_norme();
 private:
     Circle ball; 
     double dx; 
     double dy;
-    void include_arene();
-    void test_norme();
+    
 };
 
 #endif // BALL_H

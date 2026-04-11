@@ -5,16 +5,23 @@ const Circle& Paddle::get_paddle() const{
     return paddle;
 }
 
-void Paddle::inclusion_arene(){
+bool Paddle::inclusion_arene(){
 
-    if (!Tools::test_range(paddle.centre.x,paddle.rayon, 100.0-paddle.rayon,false)){
+    bool testx (Tools::test_range(paddle.centre.x,paddle.rayon,
+                                  arena_size-paddle.rayon,false));
+    
+    bool testy (Tools::test_range(paddle.centre.y,-paddle.rayon,0,false));
 
-        Tools::error_message(message::paddle_outside(paddle.centre.x, paddle.centre.y));
-    }
+      if((testx and testy)==false){
 
-    if ((paddle.centre.y >= 0.0) or (paddle.centre.y + paddle.rayon <= 0.0)){
-        Tools::error_message(message::paddle_outside(paddle.centre.x, paddle.centre.y)); 
+        return true;
+
+    }else{
+
+        return false;
     }
 }
+
+  
 
 

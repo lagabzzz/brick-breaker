@@ -6,8 +6,10 @@ void Graphic::on_draw(const crptr& cr, int width, int height){
 
 		int side = std::min(width, height);
         draw_contour(cr,side);
-        draw_bricks(cr,side);
-        draw_ball(cr,side);
+        if(gameptr != nullptr){
+            draw_bricks(cr,side);
+            draw_ball(cr,side);
+        }
 	}
 }
 
