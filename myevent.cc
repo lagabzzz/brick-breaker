@@ -6,10 +6,22 @@ MyEvent::MyEvent(Game* game_ptr):
     m_Main_Box(Gtk::Orientation::HORIZONTAL, 0),
     m_Panel_Box(Gtk::Orientation::VERTICAL, 2),
     m_Buttons_Box(Gtk::Orientation::VERTICAL, 2),
-    m_Panel_Frame(),
+	m_Panel1_Frame(),
+	m_Panel2_Frame("infos:"),
+
     m_Button_Exit("Exit"),
     m_Button_Open("Open"),
     m_Button_Save("Save"),
+
+    m_Grid(),
+	m_lbl_sc_ti("score:"),
+	m_lbl_sc_da("0"),
+	m_lbl_li_ti("lives:"),
+	m_lbl_li_da("0"),
+	m_lbl_br_ti("bricks:"),
+	m_lbl_br_da("0"),
+	m_lbl_ba_ti("balls:"),
+	m_lbl_ba_da("0"),
     game_graph(game_ptr)
 {
 	// init layout
@@ -18,13 +30,17 @@ MyEvent::MyEvent(Game* game_ptr):
 
 	m_Main_Box.append(m_Panel_Box);
 	m_Main_Box.append(m_Area);
-	m_Panel_Frame.set_child(m_Buttons_Box);
-	m_Panel_Box.append(m_Panel_Frame);
+	m_Panel1_Frame.set_child(m_Buttons_Box);
+	m_Panel_Box.append(m_Panel1_Frame);
 	m_Buttons_Box.append(m_Button_Exit);
 	m_Buttons_Box.append(m_Button_Open);
 	m_Buttons_Box.append(m_Button_Save);
-	
 
+	m_Panel2_Frame.set_child(m_Grid);
+	m_Panel_Box.append(m_Panel2_Frame);
+
+	set_grid();
+	update_grid();
 	// init buttons signal handlers
 	m_Button_Exit.signal_clicked().connect(
 		sigc::mem_fun(*this, &MyEvent::on_button_clicked_exit));
@@ -47,6 +63,36 @@ void MyEvent::clear(){
 
 	game_graph.draw = false;
 	m_Area.queue_draw();
+}
+
+void MyEvent::set_grid(){
+
+	m_Grid.set_column_spacing(20);
+	//m_Grid.set_margin_start(15);
+	m_Grid.set_margin_end(5);
+
+	m_Grid.attach(m_lbl_sc_ti,0,0);
+	m_Grid.attach(m_lbl_sc_da,1,0);
+	m_Grid.attach(m_lbl_li_ti,0,1);
+	m_Grid.attach(m_lbl_li_da,1,1);
+	m_Grid.attach(m_lbl_br_ti,0,2);
+	m_Grid.attach(m_lbl_br_da,1,2);
+	m_Grid.attach(m_lbl_ba_ti,0,3);
+	m_Grid.attach(m_lbl_ba_da,1,3);
+
+	m_lbl_sc_da.set_hexpand(true);
+	m_lbl_sc_da.set_halign(Gtk::Align::END);
+	m_lbl_li_da.set_halign(Gtk::Align::END);
+	m_lbl_br_da.set_halign(Gtk::Align::END);
+	m_lbl_ba_da.set_halign(Gtk::Align::END);
+}
+
+void MyEvent::update_grid(){
+
+	m_lbl_sc_da.set_text(game_graph.get_score_str());
+	m_lbl_li_da.set_text(game_graph.get_lives_str());
+	m_lbl_br_da.set_text(game_graph.get_nb_bricks_str());
+	m_lbl_ba_da.set_text(game_graph.get_nb_balls_str());
 }
 
 void MyEvent::on_button_clicked_exit(){

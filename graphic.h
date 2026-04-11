@@ -28,6 +28,10 @@ public:
     :draw(true),
     gameptr(gameptr){}
 
+    std::string get_score_str(){return std::to_string(gameptr->get_score());}
+    std::string get_lives_str(){return std::to_string(gameptr->get_lives());}
+    std::string get_nb_bricks_str(){return std::to_string(gameptr->get_nb_bricks());}
+    std::string get_nb_balls_str(){return std::to_string(gameptr->get_nb_balls());}
     bool draw ; // current drawing state
     void on_draw(const crptr& cr, int width, int height);
 
