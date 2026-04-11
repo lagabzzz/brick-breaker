@@ -206,3 +206,11 @@ void Game::test_collisions(){
         }
     }
 }
+
+void Game::reset(){
+
+    bricks.clear();
+    balls.clear();
+    bricks.shrink_to_fit();
+    balls.shrink_to_fit();
+}

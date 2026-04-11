@@ -43,6 +43,7 @@ public:
     int get_nb_bricks() const {return nb_bricks;}
     int get_nb_balls() const {return nb_balls;}
     bool get_error() const {return error;}
+    void reset();
     
 private:
 
