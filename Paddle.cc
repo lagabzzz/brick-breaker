@@ -22,6 +22,10 @@ bool Paddle::inclusion_arene(){
     }
 }
 
+void Paddle::set_paddle_x(double x)
+{
+    paddle.centre.x = x;
+}
   
 
 

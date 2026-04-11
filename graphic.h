@@ -34,10 +34,11 @@ public:
     std::string get_nb_balls_str(){return std::to_string(gameptr->get_nb_balls());}
     bool draw ; // current drawing state
     void on_draw(const crptr& cr, int width, int height);
-
+    Game* gameptr;
+    
 private:
    
-    Game* gameptr;
+    
 
     // DrawingArea signal handler:
 

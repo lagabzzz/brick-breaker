@@ -5,10 +5,12 @@ void Game::error_message(string message){
     cout << message << endl;
     set_true();
 }  
-void Game::section_de_lecture(char* test){
+void Game::section_de_lecture(const char* test){
 
     ifstream fichier(test);
-    if(fichier.fail()) exit(0); //sort si le fichier s'ouvre pas
+    if(fichier.fail()){
+        set_true();    
+    } 
     string line;
     
     Type_lecture etat = SCORE;
@@ -203,4 +205,12 @@ void Game::test_collisions(){
             }
         }
     }
+}
+
+void Game::reset(){
+
+    bricks.clear();
+    balls.clear();
+    bricks.shrink_to_fit();
+    balls.shrink_to_fit();
 }

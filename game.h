@@ -35,7 +35,7 @@ class Game {
 public:
     Game(bool error=false):error(error){}
 
-    void section_de_lecture(char* test);
+    void section_de_lecture(const char* test);
     Brick* get_brick(int i) const {return bricks[i].get();}
     Ball* get_ball(int i) const {return balls[i].get();}
     int get_score() const {return score;}
@@ -43,6 +43,7 @@ public:
     int get_nb_bricks() const {return nb_bricks;}
     int get_nb_balls() const {return nb_balls;}
     bool get_error() const {return error;}
+    void reset();
     
 private:
 

@@ -200,6 +200,10 @@ void My_window::dialog_response(int response, Gtk::FileChooserDialog *dialog)
         if (file_name != "")
         {
             cout << "open file " << file_name << endl; // TODO: set game from a file
+            game_graph.gameptr->reset();
+            game_graph.gameptr->section_de_lecture(file_name.string().c_str());
+			//update_grid();
+    		drawing.queue_draw();
             dialog->hide();
         }
         break;
