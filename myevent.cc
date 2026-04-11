@@ -51,6 +51,8 @@ MyEvent::MyEvent(Game* game_ptr):
 	m_Button_Save.signal_clicked().connect(
 		sigc::mem_fun(*this, &MyEvent::on_button_clicked_save));
 
+	m_Panel_Box.set_hexpand(false);
+	m_Panel_Box.set_size_request(200,-1);
 	// init drawing sub-window parameters
 	m_Area.set_content_width(area_side);
 	m_Area.set_content_height(area_side);
