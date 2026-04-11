@@ -2,6 +2,7 @@
 #define TOOLS_H
 
 #include "message.h"
+#include "constants.h"
 #include <iostream>
 #include <cmath>
 
@@ -57,7 +58,5 @@ namespace Tools {
     bool intersects(const Square& s2,const Circle& c1); //surcharge commutativité
 
 }
-
-
 
 #endif // TOOLS_H

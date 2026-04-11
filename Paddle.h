@@ -9,13 +9,15 @@ public:
     Paddle()=default;
     Paddle(double x, double y, double rayon)
     :paddle(x,y,rayon)
-    {inclusion_arene();}
+    {}
 
+    double get_x() const { return paddle.centre.x; }
+    double get_y() const { return paddle.centre.y; }
     const Circle& get_paddle() const;
+    bool inclusion_arene();
 
 private:
     Circle paddle;
-    void inclusion_arene();
 };
 
 #endif

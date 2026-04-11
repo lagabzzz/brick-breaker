@@ -33,6 +33,7 @@ enum Type_lecture{
 class Game {
 
 public:
+    Game(bool error=false):error(error){}
 
     void section_de_lecture(char* test);
     Brick* get_brick(int i) const {return bricks[i].get();}
@@ -41,8 +42,8 @@ public:
     int get_lives() const {return lives;}
     int get_nb_bricks() const {return nb_bricks;}
     int get_nb_balls() const {return nb_balls;}
+    bool get_error() const {return error;}
     
-
 private:
 
     LesBriques bricks;
@@ -53,6 +54,10 @@ private:
     int nb_bricks;
     int nb_balls;
     int count_lecture;
+    bool error;
+    void set_true(){error=true;}
+    void error_message(std::string message);
+
     void test_collisions();
 
     void lecture_score(const std::string& line);
