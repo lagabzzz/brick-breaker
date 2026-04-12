@@ -70,7 +70,7 @@ bool Tools::intersects(const Square& s2,const Circle& c1){
     return Tools::intersects(c1,s2);
 }
 
-void Graphic::draw_square(const crptr& cr, const int side, const Square& sq)
+void Tools::draw_square(const crptr& cr, const int side, const Square& sq)
 {
 
     double new_size(side*sq.size/100);
@@ -81,7 +81,7 @@ void Graphic::draw_square(const crptr& cr, const int side, const Square& sq)
     cr->fill();
 }
 
-void Graphic::draw_disk(const crptr& cr, const int side,const Circle& ci,bool is_ball){
+void Tools::draw_disk(const crptr& cr, const int side,const Circle& ci,bool is_ball){
    
     double new_size(side*ci.rayon/100);
     double new_x(side*ci.centre.x/100);
