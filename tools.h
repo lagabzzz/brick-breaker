@@ -5,6 +5,7 @@
 #include "constants.h"
 #include <iostream>
 #include <cmath>
+#include "graphic.h"
 
 constexpr double epsil_zero = 0.125;
 
@@ -56,7 +57,10 @@ namespace Tools {
     bool intersects(const Circle& c1,const Circle& c2);
     bool intersects(const Circle& c1,const Square& s2);
     bool intersects(const Square& s2,const Circle& c1); //surcharge commutativité
+    
+    void draw_square(const crptr& cr, const int side,const Square& sq);   
 
+    void draw_disk(const crptr& cr, const int side,const Circle& sq, bool is_ball);
 }
 
 #endif // TOOLS_H
