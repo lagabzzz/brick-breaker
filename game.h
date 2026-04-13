@@ -1,4 +1,6 @@
-#pragma once
+#ifndef GAME_H
+#define GAME_H
+
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -43,6 +45,7 @@ public:
     int get_nb_bricks() const {return nb_bricks;}
     int get_nb_balls() const {return nb_balls;}
     bool get_error() const {return error;}
+    void spawn_ball(double x, double y);
     void reset();
     
 private:
@@ -72,3 +75,4 @@ private:
     void lecture_ball(const std::string& line);
 };
 
+#endif
