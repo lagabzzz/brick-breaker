@@ -101,6 +101,15 @@ void Graphic::draw_split(const crptr& cr, const int side,const Square& sq
 
 
 
+void Graphic::save_game(const std::string& file_name){
+    gameptr->save_game(file_name);
+}
+
+void Graphic::reset_game(const std::filesystem::path& file_name){
+
+    gameptr->reset();
+    gameptr->section_de_lecture(file_name.string().c_str());
+}
 
 void Graphic::set_color(const crptr& cr,int color){
 

@@ -3,9 +3,24 @@
 
 #include <array>
 #include <gtkmm.h>
-#include <string>
 #include "graphic.h"
 #include "game.h"
+
+enum Response
+{
+    CANCEL,
+    OPEN_FILE,
+    SAVE_FILE
+};
+enum Buttons
+{
+    EXIT,
+    OPEN,
+    SAVE,
+    RESTART,
+    START,
+    STEP
+};
 
 enum Response
 {

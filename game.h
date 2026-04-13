@@ -47,6 +47,7 @@ public:
     bool get_error() const {return error;}
     void spawn_ball(double x, double y);
     void reset();
+    void save_game(const std::string& file_name);
     
 private:
 

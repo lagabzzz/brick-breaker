@@ -5,6 +5,8 @@
 #include <gtkmm.h>
 #include <iostream>
 #include <cairomm/context.h>
+#include <string>
+#include <filesystem>
 
 using crptr = Cairo::RefPtr<Cairo::Context>;
 

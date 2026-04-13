@@ -13,6 +13,7 @@ public:
 
     double get_x() const { return paddle.centre.x; }
     double get_y() const { return paddle.centre.y; }
+    double get_rayon() const { return paddle.rayon; }
     void set_paddle_x(double x);
     const Circle& get_paddle() const;
     bool inclusion_arene();
