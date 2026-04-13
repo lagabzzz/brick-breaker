@@ -5,10 +5,26 @@
 #include <gtkmm.h>
 #include "graphic.h"
 
+enum Response
+{
+    CANCEL,
+    OPEN_FILE,
+    SAVE_FILE
+};
+enum Buttons
+{
+    EXIT,
+    OPEN,
+    SAVE,
+    RESTART,
+    START,
+    STEP
+};
+
 class My_window : public Gtk::Window
 {
 public:
-    My_window(Game* game);
+  
 
 private:
     Gtk::Box main_box, panel_box, command_box;
@@ -20,7 +36,7 @@ private:
     std::array<Gtk::Label, 4> info_text, info_value;
     Gtk::DrawingArea drawing;
 
-	Graphic game_graph;
+	
 	
     void set_commands();
 

@@ -99,26 +99,7 @@ void Graphic::draw_split(const crptr& cr, const int side,const Square& sq
     }
 }
 
-void Graphic::draw_square(const crptr& cr, const int side, const Square& sq)
-{
 
-    double new_size(side*sq.size/100);
-    double new_x(side*sq.centre.x/100-new_size/2);
-    double new_y(side*(1-sq.centre.y/100)-new_size/2);
-
-    cr->rectangle(new_x,new_y,new_size,new_size);
-    cr->fill();
-}
-
-void Graphic::draw_disk(const crptr& cr, const int side,const Circle& ci){
-   
-    double new_size(side*ci.rayon/100);
-    double new_x(side*ci.centre.x/100);
-    double new_y(side*(1-ci.centre.y/100));
-
-    cr->arc(new_x,new_y,new_size,0.0,2*M_PI);
-    cr->fill();
-}
 
 void Graphic::save_game(const std::string& file_name){
     gameptr->save_game(file_name);

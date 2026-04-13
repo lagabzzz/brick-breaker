@@ -6,21 +6,7 @@
 
 using namespace std;
 
-enum Response
-{
-    CANCEL,
-    OPEN_FILE,
-    SAVE_FILE
-};
-enum Buttons
-{
-    EXIT,
-    OPEN,
-    SAVE,
-    RESTART,
-    START,
-    STEP
-};
+
 
 constexpr unsigned drawing_size(500);
 
@@ -134,13 +120,13 @@ bool My_window::key_pressed(guint keyval, guint keycode, Gdk::ModifierType state
     switch (keyval)
     {
     case '1':
-        // TODO: make a single update
+        
         return true;
     case 's':
-        // TODO: pause or unpause the game
+        
         return true;
     case 'r':
-        // TODO: reset the game from the last read file
+        
         return true;
     default:
         break;
@@ -279,11 +265,11 @@ void My_window::set_mouse_controller()
 }
 void My_window::on_drawing_left_click(int n_press, double x, double y)
 {
-    cout << __func__ << endl; // TODO
+    
 }
 void My_window::on_drawing_move(double x, double y)
 {
-    cout << __func__ << endl; // TODO
+    
 }
 
 
