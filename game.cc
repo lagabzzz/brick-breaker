@@ -230,8 +230,9 @@ void Game::save_game(const std::string& file_name){
             file << br->brick_type() <<" "<<br->get_x() <<" "<<br->get_y()<<" "
             <<br->get_size() <<" ";
             if(br->brick_type()==B_RAINBOW){
-                file<<br->get_hit_pts()<<"\n";
+                file<<br->get_hit_pts();
             }
+            file << "\n";
         }
 
         file << nb_balls << "\n";
