@@ -38,7 +38,7 @@ My_window::My_window(string file_name)
           Gtk::Label("0")
       }),
       game(),
-      game_graph(&game)
+      filename(file_name),
 {
     set_title("Brick Breaker");
     set_child(main_box);
@@ -103,8 +103,10 @@ void My_window::save_clicked()
 }
 void My_window::restart_clicked()
 {
-    cout << __func__ << endl; // TODO: reset the game from the last read file
+    game.reset_game();
+    game.section_de_lecture(filename);
 }
+
 void My_window::start_clicked()
 {
     cout << __func__ << endl;
@@ -201,32 +203,35 @@ void My_window::dialog_response(int response, Gtk::FileChooserDialog *dialog)
     if (dialog->get_file())
     {
         file_name = dialog->get_file()->get_path();
+        
         if (file_name.extension() != ".txt")
         {
             file_name = "";
         }
+        filename = file_name;
     }
     switch (response)
     {
     case CANCEL:
         dialog->hide();
         break;
+
     case OPEN_FILE:
-        if (file_name != "")
-        {
-            cout << "open file " << file_name << endl; // TODO: set game from a file
-            game_graph.reset_game(file_name);
+        
+        cout << "open file " << file_name << endl; // TODO: set game from a file
+        game.reset();
+        game.section_de_lecture(file_name);
             
-			//update_grid();
-    		drawing.queue_draw();
-            dialog->hide();
-        }
+		//update_grid();
+    	drawing.queue_draw();
+        dialog->hide();
         break;
+
     case SAVE_FILE:
         if (file_name != "")
         {
             cout << "save file " << file_name << endl; // TODO: save the game
-            game_graph.save_game(file_name);
+            game.save_game(file_name);
             dialog->hide();
         }
         break;
@@ -263,10 +268,10 @@ void My_window::set_infos()
 void My_window::update_infos()
 // TODO: update the different counters
 {
-    info_value[0].set_text(game_graph.get_score());
-    info_value[1].set_text(game_graph.get_lives());
-    info_value[2].set_text(game_graph.get_nb_bricks());
-    info_value[3].set_text(game_graph.get_nb_balls());
+    info_value[0].set_text(game.get_score());
+    info_value[1].set_text(game.get_lives());
+    info_value[2].set_text(game.get_nb_bricks());
+    info_value[3].set_text(game.get_nb_balls());
 }
 
 void My_window::set_drawing()
@@ -274,22 +279,19 @@ void My_window::set_drawing()
     drawing.set_content_width(drawing_size);
     drawing.set_content_height(drawing_size);
     drawing.set_expand();
-    drawing.set_draw_func(sigc::mem_fun(game_graph, &Graphic::on_draw));
+    //drawing.set_draw_func(sigc::mem_fun(game_graph, &Graphic::on_draw));
 }
-void My_window::on_draw(const crptr& cr, int width, int height){
-    if(game.get_error){
+void My_window::on_draw(const Cairo::RefPtr<Cairo::Context> &cr, int width, int height){
+    //setcontext()
+    int side = min(width, height);
+    if(game.get_error()){
 
-        
-    }
-	if(draw){
-
-		int side = std::min(width, height);
-        draw_contour(cr,side);
-        if(gameptr != nullptr){
-            draw_bricks(cr,side);
-            draw_ball(cr,side);
-        }
-	}
+        Tools::clear_board();
+        return;
+    }	
+    game.draw_contour(side); 
+    game.draw_bricks(side);
+    game.draw_ball(side);
 }
 
 void My_window::set_mouse_controller()
@@ -311,7 +313,7 @@ void My_window::on_drawing_left_click(int n_press, double x, double y)
     double norm_x = (x / drawing_size) * 100.0;
     double norm_y = (y / drawing_size) * 100.0;
 
-    game_graph.gameptr->//spawn_ball(norm_x, norm_y);
+    game.spawn_ball(norm_x, norm_y);
 
     update_infos();
     drawing.queue_draw();
@@ -320,7 +322,7 @@ void My_window::on_drawing_move(double x, double y)
 { 
     double norm_x = (x / drawing_size) * 100.0;
 
-    game_graph.gameptr->set_paddle_x(norm_x);
+    game.set_paddle_x(norm_x);
 
     drawing.queue_draw();
 }
