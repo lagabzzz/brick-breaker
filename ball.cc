@@ -27,3 +27,8 @@ bool Ball::test_norme(){
     }
 }
 
+void Ball::draw_ball(){
+
+    Tools::draw_disk(ball,true);
+}
+

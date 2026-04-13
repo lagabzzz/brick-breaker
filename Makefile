@@ -3,8 +3,9 @@
 OUT = project
 CC = g++
 CFLAGS = -Wall -std=c++17
-LINKING = `pkg-config --cflags gtkmm-4.0`
-LDLIBS = `pkg-config --libs gtkmm-4.0`
+PKGS     := gtkmm-4.0
+LINKING  := $(shell pkg-config --cflags $(PKGS))
+LDLIBS   := $(shell pkg-config --libs $(PKGS))
 OFILES = project.o game.o paddle.o brick.o ball.o message.o tools.o graphic.o gui.o
 HFILES = game.h paddle.h brick.h ball.h tools.h constants.h message.h graphic.h gui.h
 
@@ -14,19 +15,19 @@ message.o: message.cc message.h
 	$(CC) $(CFLAGS) -c $< -o $@
 
 tools.o: tools.cc tools.h message.h
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) $(LINKING) -c $< -o $@
 
 ball.o: ball.cc ball.h tools.h constants.h message.h
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) $(LINKING) -c $< -o $@
 
 brick.o: brick.cc brick.h tools.h constants.h message.h
-	$(CC) $(CFLAGS) -c $< -o $@ 
+	$(CC) $(CFLAGS) $(LINKING) -c $< -o $@ 
 
 paddle.o: paddle.cc paddle.h tools.h constants.h message.h
-	$(CC) $(CFLAGS) -c $< -o $@ 	
+	$(CC) $(CFLAGS) $(LINKING) -c $< -o $@ 	
 
 game.o: game.cc paddle.h brick.h ball.h tools.h constants.h message.h
-	$(CC) $(CFLAGS) -c $< -o $@ 	
+	$(CC) $(CFLAGS) $(LINKING) -c $< -o $@ 	
 
 graphic.o: graphic.cc graphic.h
 	$(CC) $(CFLAGS) $(LINKING) -c $< -o $@

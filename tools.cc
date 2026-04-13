@@ -70,29 +70,13 @@ bool Tools::intersects(const Square& s2,const Circle& c1){
     return Tools::intersects(c1,s2);
 }
 
-void Tools::draw_square(const crptr& cr, const int side, const Square& sq)
+void Tools::draw_square(const Square& sq,int const hit_pts)
 {
 
-    double new_size(side*sq.size/100);
-    double new_x(side*sq.centre.x/100-new_size/2);
-    double new_y(side*(1-sq.centre.y/100)-new_size/2);
-
-    cr->rectangle(new_x,new_y,new_size,new_size);
-    cr->fill();
+    Graphic::draw_square(sq.centre.x,sq.centre.y,sq.size,hit_pts);
 }
 
-void Tools::draw_disk(const crptr& cr, const int side,const Circle& ci,bool is_ball){
+void Tools::draw_disk(const Circle& ci,bool is_ball){
    
-    double new_size(side*ci.rayon/100);
-    double new_x(side*ci.centre.x/100);
-    double new_y(side*(1-ci.centre.y/100));
-
-    cr->arc(new_x,new_y,new_size,0.0,2*M_PI);
-    if (is_ball){
-        cr->fill();
-    }
-    else{
-        cr->stroke();
-    }
-   
+    Graphic::draw_disk(ci.centre.x,ci.centre.y,ci.rayon,is_ball);
 }

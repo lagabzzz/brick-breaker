@@ -26,6 +26,10 @@ void Paddle::set_paddle_x(double x)
 {
     paddle.centre.x = x;
 }
-  
+
+void Paddle::draw_paddle(){
+
+    Tools::draw_disk(paddle,false);
+}
 
 

@@ -3,24 +3,8 @@
 
 #include <array>
 #include <gtkmm.h>
-#include "graphic.h"
 #include "game.h"
 
-enum Response
-{
-    CANCEL,
-    OPEN_FILE,
-    SAVE_FILE
-};
-enum Buttons
-{
-    EXIT,
-    OPEN,
-    SAVE,
-    RESTART,
-    START,
-    STEP
-};
 
 enum Response
 {
@@ -42,15 +26,15 @@ class My_window : public Gtk::Window
 {
 public:
 
-    My_window(std::string file_name);
+    My_window(std::string file_name = "");
 
 private:
 
     Game game;
-    Graphic game_graph;
+    std::string filename;
+    bool loop_activated;
     Gtk::Box main_box, panel_box, command_box;
     Gtk::Grid info_grid;
-    bool loop_activated;
     sigc::connection loop_conn;
     std::array<Gtk::Button, 6> buttons;
     Gtk::Frame info_frame;
@@ -88,4 +72,3 @@ private:
 };
 
 #endif
-
