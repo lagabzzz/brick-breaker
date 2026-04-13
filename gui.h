@@ -6,21 +6,6 @@
 #include "graphic.h"
 #include "game.h"
 
-enum Response
-{
-    CANCEL,
-    OPEN_FILE,
-    SAVE_FILE
-};
-enum Buttons
-{
-    EXIT,
-    OPEN,
-    SAVE,
-    RESTART,
-    START,
-    STEP
-};
 
 enum Response
 {
@@ -47,7 +32,7 @@ public:
 private:
 
     Game game;
-    Graphic game_graph;
+    std::string filename = "";
     Gtk::Box main_box, panel_box, command_box;
     Gtk::Grid info_grid;
     bool loop_activated;
