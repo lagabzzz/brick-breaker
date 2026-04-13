@@ -274,6 +274,21 @@ void My_window::set_drawing()
     drawing.set_expand();
     drawing.set_draw_func(sigc::mem_fun(game_graph, &Graphic::on_draw));
 }
+void My_window::on_draw(const crptr& cr, int width, int height){
+    if(game.get_error){
+
+        
+    }
+	if(draw){
+
+		int side = std::min(width, height);
+        draw_contour(cr,side);
+        if(gameptr != nullptr){
+            draw_bricks(cr,side);
+            draw_ball(cr,side);
+        }
+	}
+}
 
 void My_window::set_mouse_controller()
 {
