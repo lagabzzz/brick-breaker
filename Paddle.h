@@ -17,6 +17,8 @@ public:
     void set_paddle_x(double x);
     const Circle& get_paddle() const;
     bool inclusion_arene();
+    void draw_paddle();
+
 
 private:
     Circle paddle;

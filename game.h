@@ -46,8 +46,12 @@ public:
     int get_nb_balls() const {return nb_balls;}
     bool get_error() const {return error;}
     void spawn_ball(double x, double y);
+    void set_paddle_x(double x);
     void reset();
     void save_game(const std::string& file_name);
+    void draw_bricks();
+    void draw_balls();
+    void draw_paddle();
     
 private:
 

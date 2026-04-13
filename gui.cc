@@ -1,7 +1,7 @@
-
 #include <iostream>
+#include <filesystem>
 #include "constants.h"
-//#include "graphic_gui.h"
+#include "graphic_gui.h"
 #include "gui.h"
 
 using namespace std;
@@ -11,35 +11,36 @@ using namespace std;
 constexpr unsigned drawing_size(500);
 
 My_window::My_window(string file_name)
-    : Gtk::Window(),
-      main_box(Gtk::Orientation::HORIZONTAL),
-      panel_box(Gtk::Orientation::VERTICAL),
-      command_box(Gtk::Orientation::VERTICAL),
-      loop_activated(false),
-      buttons({
-          Gtk::Button("exit"),
-          Gtk::Button("open"),
-          Gtk::Button("save"),
-          Gtk::Button("restart"),
-          Gtk::Button("start"),
-          Gtk::Button("step")
-      }),
-      info_frame("Infos :"),
-      info_text({
-          Gtk::Label("score:"),
-          Gtk::Label("lives:"),
-          Gtk::Label("bricks:"),
-          Gtk::Label("balls:")
-      }),
-      info_value({
-          Gtk::Label("0"),
-          Gtk::Label("0"),
-          Gtk::Label("0"),
-          Gtk::Label("0")
-      }),
-      game(),
-      filename(file_name),
+    :Gtk::Window(),
+    game(),
+    filename(file_name),
+    loop_activated(false),
+    main_box(Gtk::Orientation::HORIZONTAL),
+    panel_box(Gtk::Orientation::VERTICAL),
+    command_box(Gtk::Orientation::VERTICAL),
+    buttons({
+        Gtk::Button("exit"),
+        Gtk::Button("open"),
+        Gtk::Button("save"),
+        Gtk::Button("restart"),
+        Gtk::Button("start"),
+        Gtk::Button("step")
+    }),
+    info_frame("Infos :"),
+    info_text({
+        Gtk::Label("score:"),
+        Gtk::Label("lives:"),
+        Gtk::Label("bricks:"),
+        Gtk::Label("balls:")
+    }),
+    info_value({
+        Gtk::Label("0"),
+        Gtk::Label("0"),
+        Gtk::Label("0"),
+        Gtk::Label("0")
+    })
 {
+    game.section_de_lecture(file_name.c_str());
     set_title("Brick Breaker");
     set_child(main_box);
 
@@ -55,8 +56,6 @@ My_window::My_window(string file_name)
     set_infos();
     update_infos();
     set_drawing();
-
-    game.section_de_lecture(file_name.c_str());
 
     update_infos();
     drawing.queue_draw();
@@ -103,8 +102,8 @@ void My_window::save_clicked()
 }
 void My_window::restart_clicked()
 {
-    game.reset_game();
-    game.section_de_lecture(filename);
+    game.reset();
+    game.section_de_lecture(filename.c_str());
 }
 
 void My_window::start_clicked()
@@ -218,9 +217,9 @@ void My_window::dialog_response(int response, Gtk::FileChooserDialog *dialog)
 
     case OPEN_FILE:
         
-        cout << "open file " << file_name << endl; // TODO: set game from a file
+        //cout << "open file " << file_name << endl; TODO: set game from a file
         game.reset();
-        game.section_de_lecture(file_name);
+        game.section_de_lecture(file_name.c_str());
             
 		//update_grid();
     	drawing.queue_draw();
@@ -268,10 +267,10 @@ void My_window::set_infos()
 void My_window::update_infos()
 // TODO: update the different counters
 {
-    info_value[0].set_text(game.get_score());
-    info_value[1].set_text(game.get_lives());
-    info_value[2].set_text(game.get_nb_bricks());
-    info_value[3].set_text(game.get_nb_balls());
+    info_value[0].set_text(std::to_string(game.get_score()));
+    info_value[1].set_text(std::to_string(game.get_lives()));
+    info_value[2].set_text(std::to_string(game.get_nb_bricks()));
+    info_value[3].set_text(std::to_string(game.get_nb_balls()));
 }
 
 void My_window::set_drawing()
@@ -279,19 +278,21 @@ void My_window::set_drawing()
     drawing.set_content_width(drawing_size);
     drawing.set_content_height(drawing_size);
     drawing.set_expand();
-    //drawing.set_draw_func(sigc::mem_fun(game_graph, &Graphic::on_draw));
+    drawing.set_draw_func(sigc::mem_fun(*this, &My_window::on_draw));
 }
-void My_window::on_draw(const Cairo::RefPtr<Cairo::Context> &cr, int width, int height){
-    //setcontext()
-    int side = min(width, height);
-    if(game.get_error()){
 
-        Tools::clear_board();
-        return;
-    }	
-    game.draw_contour(side); 
-    game.draw_bricks(side);
-    game.draw_ball(side);
+void My_window::on_draw(const Cairo::RefPtr<Cairo::Context>& cr, int width,int height){
+    int side = min(width, height);
+    //if(game.get_error()){
+
+        //Tools::clear_board();
+        //return;
+    //}	
+    graphic_set_context(cr,side);
+    Graphic::draw_contour(); 
+    game.draw_bricks();
+    game.draw_balls();
+    game.draw_paddle();
 }
 
 void My_window::set_mouse_controller()
@@ -320,11 +321,9 @@ void My_window::on_drawing_left_click(int n_press, double x, double y)
 }
 void My_window::on_drawing_move(double x, double y)
 { 
-    double norm_x = (x / drawing_size) * 100.0;
+    //double norm_x = (x / drawing_size) * 100.0;
 
-    game.set_paddle_x(norm_x);
+    game.set_paddle_x(x);
 
     drawing.queue_draw();
 }
-
-

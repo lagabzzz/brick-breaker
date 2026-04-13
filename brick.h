@@ -19,17 +19,17 @@ public:
     Brick(Square brick,int hit_points = 1)
     :brick(brick),hit_points(hit_points)
     {}
-    
+    virtual ~Brick() = default;
     double get_x() const { return brick.centre.x; }
     double get_y() const { return brick.centre.y; }
     double get_size() const { return brick.size; }
     const Square& get_brick() const {return brick;}
     int get_hit_pts() const {return hit_points;}
-    virtual ~Brick() = default;
     virtual int brick_type() = 0;
     bool test_hit_pt();
     bool test_val();
     bool test_arene();
+    virtual void draw_brick() = 0;
 
 protected:
     Square brick;
@@ -44,6 +44,7 @@ public:
     {}
 
     int brick_type() override {return B_RAINBOW;}
+    void draw_brick() override;
 
 private:
     
@@ -55,7 +56,7 @@ public:
     Ball_brick(Square brick)
     :Brick(brick){}
     int brick_type() override {return B_BALL;}
-
+    void draw_brick() override;
 private:
 };
 
@@ -68,6 +69,9 @@ public:
 
     int brick_type() override {return B_SPLIT;}
     void find_hit_pts();
+
+    void draw_split(const Square& sq,const int hit_pts,int count);
+    void draw_brick() override;
 
 private:
 };

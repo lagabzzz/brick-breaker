@@ -22,6 +22,8 @@ public:
     double get_dy() const { return dy; }
     bool include_arene();
     bool test_norme();
+    void draw_ball();
+
 private:
     Circle ball; 
     double dx; 

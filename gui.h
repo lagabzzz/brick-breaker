@@ -3,7 +3,6 @@
 
 #include <array>
 #include <gtkmm.h>
-#include "graphic.h"
 #include "game.h"
 
 
@@ -27,15 +26,15 @@ class My_window : public Gtk::Window
 {
 public:
 
-    My_window(std::string file_name);
+    My_window(std::string file_name = "");
 
 private:
 
     Game game;
-    std::string filename = "";
+    std::string filename;
+    bool loop_activated;
     Gtk::Box main_box, panel_box, command_box;
     Gtk::Grid info_grid;
-    bool loop_activated;
     sigc::connection loop_conn;
     std::array<Gtk::Button, 6> buttons;
     Gtk::Frame info_frame;
@@ -73,4 +72,3 @@ private:
 };
 
 #endif
-

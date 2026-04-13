@@ -206,7 +206,7 @@ void Game::test_collisions(){
         }
     }
 }
-void spawn_ball(){
+void Game::spawn_ball(double x,double y){
     //appel de la fonction pour dessiner la balle i+1 du vector
 }
 void Game::reset(){
@@ -240,4 +240,30 @@ void Game::save_game(const std::string& file_name){
             file <<ba->get_dx() <<" "<<ba->get_dy() << "\n";
         }
     }
+}
+
+void Game::draw_bricks(){
+
+    for(int i(0);i < nb_bricks;i++){
+        
+        bricks[i]->draw_brick();
+    }
+}
+
+void Game::draw_balls(){
+
+    for(int i(0);i < nb_balls;i++){
+        
+        balls[i]->draw_ball();
+    }
+}
+
+void Game::draw_paddle(){
+        
+    paddle.draw_paddle();    
+}
+
+void Game::set_paddle_x(double x){
+
+    paddle.set_paddle_x(x);
 }
