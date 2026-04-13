@@ -206,7 +206,9 @@ void Game::test_collisions(){
         }
     }
 }
-
+void spawn_ball(){
+    //appel de la fonction pour dessiner la balle i+1 du vector
+}
 void Game::reset(){
 
     bricks.clear();

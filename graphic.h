@@ -25,16 +25,12 @@ enum Color{
 class Graphic : public Gtk::DrawingArea {
 
 public:
-    Graphic(Game* gameptr = nullptr)
-    :draw(true),
-    gameptr(gameptr){}
-
- 
+   
     bool draw ; // current drawing state
-
+    void on_draw(const crptr& cr, int width, int height);
     
 private:
-   
+    
 
     // DrawingArea signal handler:
 
@@ -50,6 +46,7 @@ private:
     void draw_split(const crptr& cr, const int side,const Square& sq
                                                 ,const int hit_pts ,const int count);
 
+    
     
     void set_color(const crptr& cr,int color);                                                            
 };

@@ -4,6 +4,23 @@
 #include <array>
 #include <gtkmm.h>
 #include "graphic.h"
+#include "game.h"
+
+enum Response
+{
+    CANCEL,
+    OPEN_FILE,
+    SAVE_FILE
+};
+enum Buttons
+{
+    EXIT,
+    OPEN,
+    SAVE,
+    RESTART,
+    START,
+    STEP
+};
 
 enum Response
 {
@@ -24,9 +41,13 @@ enum Buttons
 class My_window : public Gtk::Window
 {
 public:
-  
+
+    My_window(std::string file_name);
 
 private:
+
+    Game game;
+    Graphic game_graph;
     Gtk::Box main_box, panel_box, command_box;
     Gtk::Grid info_grid;
     bool loop_activated;

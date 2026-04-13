@@ -10,19 +10,42 @@ using namespace std;
 
 constexpr unsigned drawing_size(500);
 
-My_window::My_window(Game* gameptr)
-    : main_box(Gtk::Orientation::HORIZONTAL), panel_box(Gtk::Orientation::VERTICAL),
-      command_box(Gtk::Orientation::VERTICAL), loop_activated(false),
-      buttons({Gtk::Button("exit"), Gtk::Button("open"), Gtk::Button("save"),
-               Gtk::Button("restart"), Gtk::Button("start"), Gtk::Button("step")}),
-      info_frame("Infos :"), info_text({Gtk::Label("score:"), Gtk::Label("lives:"),
-                                        Gtk::Label("bricks:"), Gtk::Label("balls:")}),
-	game_graph(gameptr)
+My_window::My_window(string file_name)
+    : Gtk::Window(),
+      main_box(Gtk::Orientation::HORIZONTAL),
+      panel_box(Gtk::Orientation::VERTICAL),
+      command_box(Gtk::Orientation::VERTICAL),
+      loop_activated(false),
+      buttons({
+          Gtk::Button("exit"),
+          Gtk::Button("open"),
+          Gtk::Button("save"),
+          Gtk::Button("restart"),
+          Gtk::Button("start"),
+          Gtk::Button("step")
+      }),
+      info_frame("Infos :"),
+      info_text({
+          Gtk::Label("score:"),
+          Gtk::Label("lives:"),
+          Gtk::Label("bricks:"),
+          Gtk::Label("balls:")
+      }),
+      info_value({
+          Gtk::Label("0"),
+          Gtk::Label("0"),
+          Gtk::Label("0"),
+          Gtk::Label("0")
+      }),
+      game(),
+      game_graph(&game)
 {
     set_title("Brick Breaker");
     set_child(main_box);
+
     main_box.append(panel_box);
     main_box.append(drawing);
+
     panel_box.append(command_box);
     panel_box.append(info_frame);
 
@@ -32,8 +55,13 @@ My_window::My_window(Game* gameptr)
     set_infos();
     update_infos();
     set_drawing();
-    // TODO: set the game
+
+    game.section_de_lecture(file_name.c_str());
+
+    update_infos();
+    drawing.queue_draw();
 }
+
 void My_window::set_commands()
 {
     for (auto &button : buttons)
@@ -120,13 +148,13 @@ bool My_window::key_pressed(guint keyval, guint keycode, Gdk::ModifierType state
     switch (keyval)
     {
     case '1':
-        
+        step_clicked();
         return true;
     case 's':
-        
+        start_clicked();
         return true;
     case 'r':
-        
+        restart_clicked();
         return true;
     default:
         break;
@@ -265,11 +293,21 @@ void My_window::set_mouse_controller()
 }
 void My_window::on_drawing_left_click(int n_press, double x, double y)
 {
-    
+    double norm_x = (x / drawing_size) * 100.0;
+    double norm_y = (y / drawing_size) * 100.0;
+
+    game_graph.gameptr->//spawn_ball(norm_x, norm_y);
+
+    update_infos();
+    drawing.queue_draw();
 }
 void My_window::on_drawing_move(double x, double y)
-{
-    
+{ 
+    double norm_x = (x / drawing_size) * 100.0;
+
+    game_graph.gameptr->set_paddle_x(norm_x);
+
+    drawing.queue_draw();
 }
 
 
