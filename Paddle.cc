@@ -22,7 +22,7 @@ bool Paddle::inclusion_arene(){
     }
 }
 
-void Paddle::set_paddle_x(double x)
+void Paddle::set_paddle_x()
 {   
     double centre_y = paddle.centre.y;
     double offset = sqrt(paddle.rayon * paddle.rayon - centre_y*centre_y);
@@ -30,17 +30,31 @@ void Paddle::set_paddle_x(double x)
     double min_x = offset;
     double max_x = 100 - offset;
 
-    if(x <= min_x){
+    if(follow_mouse <= min_x){
         paddle.centre.x = min_x;
     } 
-    else if(x >= max_x){
+    else if(follow_mouse >= max_x){
         paddle.centre.x = max_x;
     } 
     else{
-        paddle.centre.x = x;
-    }
+
+        double delta = follow_mouse - paddle.centre.x;
+        double max_step = delta_norm_max * dt;
+        if (delta > max_step){
+            delta = max_step;
+        }    
+        else if (delta < -max_step){
+            delta = -max_step;
+
+        }
+        paddle.centre.x += delta;
+        }
 }
    
+void Paddle::set_follow_mouse(double x){
+
+    follow_mouse = x;
+}
 
 void Paddle::draw_paddle(){
 

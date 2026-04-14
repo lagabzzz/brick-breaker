@@ -244,7 +244,7 @@ bool My_window::loop()
 {
     if (loop_activated)
     {
-        //game.update();
+        game.update();
         update_infos();
         drawing.queue_draw();
         return true;
@@ -330,11 +330,10 @@ void My_window::on_drawing_move(double x, double y)
     if(!loop_activated) return; 
     double norm_x = (x / drawing_size) * 100.0;
     double norm_y = (y / drawing_size) * 100.0;
-    if (norm_y >= 100.0 - 1.5*game.get_paddle_radius()){
-        
-        game.set_paddle_x(norm_x);
-        drawing.queue_draw();
+    //if (norm_y >= 100.0 - 1.5*game.get_paddle_radius()){ 
+    game.set_follow_mouse(norm_x);
+    
 
-    }
+    //}
     
 }

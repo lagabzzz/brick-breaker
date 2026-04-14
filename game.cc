@@ -271,12 +271,18 @@ void Game::draw_paddle(){
     paddle.draw_paddle();    
 }
 
-void Game::set_paddle_x(double x){
 
-    paddle.set_paddle_x(x);
+void Game::set_follow_mouse(double x){
+
+    paddle.set_follow_mouse(x);
 }
 
 double Game::get_paddle_radius(){
 
    return paddle.get_rayon();
+}
+ 
+void Game::update(){
+
+    paddle.set_paddle_x();
 }

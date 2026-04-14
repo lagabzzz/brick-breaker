@@ -32,6 +32,7 @@ private:
 
     Game game;
     std::string filename;
+    double last_mouse_x;
     bool loop_activated;
     Gtk::Box main_box, panel_box, command_box;
     Gtk::Grid info_grid;
