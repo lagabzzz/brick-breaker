@@ -19,6 +19,7 @@ namespace Graphic {
     
     
     void draw_contour();
+    void clear_board();
     void draw_square(const double x,const double y,const double size,const int hit_pts);
 
     void draw_disk(const double x,const double y,const double rayon, bool is_ball);

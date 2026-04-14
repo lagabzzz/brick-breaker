@@ -2,6 +2,8 @@
 #define PADDLE_H
 
 #include "tools.h"
+#include <cmath>
+
 
 class Paddle{
     
