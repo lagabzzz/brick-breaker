@@ -23,8 +23,17 @@ bool Paddle::inclusion_arene(){
 }
 
 void Paddle::set_paddle_x(double x)
-{
-    paddle.centre.x = x;
+{   
+    if(x <= paddle.rayon){
+        paddle.centre.x = paddle.rayon;
+    }
+    else if(x >= 100 - paddle.rayon){
+        paddle.centre.x = 100.0-paddle.rayon;
+    }
+    else{
+        paddle.centre.x = x;
+    }
+   
 }
 
 void Paddle::draw_paddle(){

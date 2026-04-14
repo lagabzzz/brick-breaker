@@ -77,7 +77,9 @@ void Game::section_de_lecture(const char* test){
     }  
     test_collisions(); 
  
-    cout << message::success() << endl; 
+    if (!error) {
+        cout << message::success() << endl; 
+    }
 }
 
 
@@ -267,4 +269,9 @@ void Game::draw_paddle(){
 void Game::set_paddle_x(double x){
 
     paddle.set_paddle_x(x);
+}
+
+double Game::get_paddle_radius(){
+
+   return paddle.get_rayon();
 }
