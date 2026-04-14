@@ -217,6 +217,11 @@ void Game::reset(){
     balls.clear();
     bricks.shrink_to_fit();
     balls.shrink_to_fit();
+    score = 0;
+    lives = 0;
+    nb_balls= 0;
+    nb_bricks= 0;
+    error = false;
 }
 
 void Game::save_game(const std::string& file_name){

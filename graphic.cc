@@ -23,7 +23,11 @@ void Graphic::draw_contour(){
     (*ptcr)->stroke();
 }
 
+void Graphic::clear_board(){
 
+    (*ptcr)->set_source_rgb(1.0, 1.0, 1.0);
+    (*ptcr)->paint();
+}
 void Graphic::draw_square(const double x,const double y,const double size,const int hit_pts)
 {
 

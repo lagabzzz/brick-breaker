@@ -104,6 +104,7 @@ void My_window::restart_clicked()
 {
     game.reset();
     game.section_de_lecture(filename.c_str());
+    drawing.queue_draw();
 }
 
 void My_window::start_clicked()
@@ -243,7 +244,9 @@ bool My_window::loop()
 {
     if (loop_activated)
     {
-        // TODO: update the game and the interface
+        //game.update();
+        update_infos();
+        drawing.queue_draw();
         return true;
     }
     return false;
@@ -282,13 +285,15 @@ void My_window::set_drawing()
 }
 
 void My_window::on_draw(const Cairo::RefPtr<Cairo::Context>& cr, int width,int height){
-    int side = min(width, height);
-    //if(game.get_error()){
 
-        //Tools::clear_board();
-        //return;
-    //}	
+    int side = min(width, height);
     graphic_set_context(cr,side);
+    if(game.get_error()){
+        game.reset();
+        Graphic::clear_board();
+        return;
+    }	
+   
     Graphic::draw_contour(); 
     game.draw_bricks();
     game.draw_balls();
@@ -311,16 +316,18 @@ void My_window::set_mouse_controller()
 }
 void My_window::on_drawing_left_click(int n_press, double x, double y)
 {
-    double norm_x = (x / drawing_size) * 100.0;
-    double norm_y = (y / drawing_size) * 100.0;
+    if(!loop_activated) return;
+    //double norm_x = (x / drawing_size) * 100.0;
+    //double norm_y = (y / drawing_size) * 100.0;
 
-    game.spawn_ball(norm_x, norm_y);
+    //game.spawn_ball(norm_x, norm_y);
 
     update_infos();
     drawing.queue_draw();
 }
 void My_window::on_drawing_move(double x, double y)
-{ 
+{
+    if(!loop_activated) return; 
     double norm_x = (x / drawing_size) * 100.0;
     double norm_y = (y / drawing_size) * 100.0;
     if (norm_y >= 100.0 - 1.5*game.get_paddle_radius()){
