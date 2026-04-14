@@ -52,6 +52,7 @@ public:
     void draw_bricks();
     void draw_balls();
     void draw_paddle();
+    double get_paddle_radius();
     
 private:
 
