@@ -23,33 +23,21 @@ bool Paddle::inclusion_arene(){
 }
 
 void Paddle::set_paddle_x()
-{   
+{      
     double centre_y = paddle.centre.y;
-    double offset = sqrt(paddle.rayon * paddle.rayon - centre_y*centre_y);
+    double offset = sqrt(paddle.rayon * paddle.rayon - centre_y * centre_y);
 
     double min_x = offset;
     double max_x = 100 - offset;
+    double target = std::clamp(follow_mouse, min_x, max_x);
 
-    if(follow_mouse <= min_x){
-        paddle.centre.x = min_x;
-    } 
-    else if(follow_mouse >= max_x){
-        paddle.centre.x = max_x;
-    } 
-    else{
+    double delta = target - paddle.centre.x;
 
-        double delta = follow_mouse - paddle.centre.x;
-        double max_step = delta_norm_max * dt;
-        if (delta > max_step){
-            delta = max_step;
-        }    
-        else if (delta < -max_step){
-            delta = -max_step;
-
-        }
-        paddle.centre.x += delta;
-        }
+    delta = std::clamp(delta, -delta_norm_max, delta_norm_max);
+    paddle.centre.x += delta;
+    paddle.centre.x = std::clamp(paddle.centre.x, min_x, max_x);
 }
+
    
 void Paddle::set_follow_mouse(double x){
 
@@ -60,5 +48,4 @@ void Paddle::draw_paddle(){
 
     Tools::draw_disk(paddle,false);
 }
-
 

@@ -3,6 +3,7 @@
 
 #include "tools.h"
 #include <cmath>
+#include <algorithm>
 
 
 class Paddle{
