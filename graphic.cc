@@ -31,11 +31,13 @@ void Graphic::clear_board(){
 void Graphic::draw_square(const double x,const double y,const double size,const int hit_pts)
 {
 
-    double new_size(side*size/100);
-    double new_x(side*x/100-new_size/2);
-    double new_y(side*(1-y/100)-new_size/2);
+    //double new_size(side*size/100);
+    //double new_x(side*x/100-new_size/2);
+    double new_x(x-size/2);
+    //double new_y(side*(1-y/100)-new_size/2);
+    double new_y(y-size/2);
     set_color(hit_pts);
-    (*ptcr)->rectangle(new_x,new_y,new_size,new_size);
+    (*ptcr)->rectangle(new_x,new_y,size,size);
     (*ptcr)->fill();
 }
 
