@@ -5,6 +5,6 @@
 #include "graphic.h"
 #include "graphic_gui.h"
 
-void graphic_set_context(const Cairo::RefPtr<Cairo::Context> &cr,int l_side);
+void graphic_set_context(const Cairo::RefPtr<Cairo::Context> &cr);
 
 #endif

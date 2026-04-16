@@ -40,6 +40,9 @@ private:
     Gtk::Frame info_frame;
     std::array<Gtk::Label, 4> info_text, info_value;
     Gtk::DrawingArea drawing;
+    int m_width;
+    int m_height;
+    int m_side;
 
 	
 	
