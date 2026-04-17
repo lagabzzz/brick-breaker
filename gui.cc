@@ -41,6 +41,9 @@ My_window::My_window(string file_name)
     })
 {
     game.section_de_lecture(file_name.c_str());
+    if (game.get_error()){
+        game.reset();
+    }
     set_title("Brick Breaker");
     set_child(main_box);
 
@@ -244,7 +247,7 @@ bool My_window::loop()
 {
     if (loop_activated)
     {
-        //game.update();
+        game.update();
         update_infos();
         drawing.queue_draw();
         return true;
@@ -293,7 +296,6 @@ void My_window::on_draw(const Cairo::RefPtr<Cairo::Context>& cr, int width,int h
     cr->scale(m_side / (arena_size), -m_side / (arena_size));
     
     if(game.get_error()){
-        game.reset();
         Graphic::clear_board();
         return;
     }	
@@ -339,6 +341,6 @@ void My_window::on_drawing_move(double x, double y)
         game.set_paddle_x(norm_x);
         drawing.queue_draw();
 
-    }
+    //}
     
 }
