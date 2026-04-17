@@ -40,7 +40,7 @@ void Split_brick::find_hit_pts(){
 
     int new_pts(hit_points);
     double new_size((get_size()-split_brick_gap)/2);
-    while(new_size > brick_size_min){
+    while(new_size >= brick_size_min){
         new_size = (new_size-split_brick_gap)/2;
         new_pts++;
     }

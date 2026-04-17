@@ -335,12 +335,11 @@ void My_window::on_drawing_move(double x, double y)
 {
     if(!loop_activated) return; 
     double norm_x = ((x-(m_width-m_side)/2) / m_side) * arena_size;
-    double norm_y = (y / m_side) * arena_size;
-    if (norm_y >= 100.0 - 1.5*game.get_paddle_radius()){
+    //double norm_y = (y / m_side) * arena_size;
+    //if (norm_y >= 100.0 - 1.5*game.get_paddle_radius()){
         
-        game.set_paddle_x(norm_x);
-        drawing.queue_draw();
+    game.set_follow_mouse(norm_x);
 
-    }
+    //}
     
 }
