@@ -23,10 +23,10 @@ ball.o: ball.cc ball.h tools.h constants.h message.h
 brick.o: brick.cc brick.h tools.h constants.h message.h
 	$(CC) $(CFLAGS) $(LINKING) -c $< -o $@ 
 
-paddle.o: paddle.cc Paddle.h tools.h constants.h message.h
+paddle.o: paddle.cc paddle.h tools.h constants.h message.h
 	$(CC) $(CFLAGS) $(LINKING) -c $< -o $@ 	
 
-game.o: game.cc Paddle.h brick.h ball.h tools.h constants.h message.h
+game.o: game.cc paddle.h brick.h ball.h tools.h constants.h message.h
 	$(CC) $(CFLAGS) $(LINKING) -c $< -o $@ 	
 
 graphic.o: graphic.cc graphic.h
