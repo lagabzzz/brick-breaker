@@ -282,15 +282,30 @@ double Game::get_paddle_radius(){
 }
  
 void Game::update(){
-    int future_x = clamp(paddle.get_follow_mouse(),-(paddle.get_x() + delta_norm_max),
-                         (paddle.get_x()+delta_norm_max) );
+    double future_x = clamp(paddle.get_follow_mouse(),(paddle.get_x()-delta_norm_max),
+                           (paddle.get_x()+delta_norm_max) );
     for(int i(0);i < nb_bricks;i++){
 
         Paddle next_paddle(future_x,paddle.get_y(),paddle.get_rayon());
         if (Tools::intersects(next_paddle.get_paddle(), bricks[i]->get_brick())){
-            
+            double correct_x = x_correction(bricks[i]->get_brick(), future_x);
+            paddle.set_paddle_x(correct_x);
             return;
         }
     }
     paddle.set_paddle_x();
+}
+
+double Game::x_correction(const Square& brick, double future_x){
+    
+    double radius_squared = paddle.get_rayon()*paddle.get_rayon();
+    double dy = (paddle.get_y()- (brick.centre.y-brick.size/2));
+    double offset = sqrt(radius_squared - dy * dy);
+    if (future_x > paddle.get_x()){
+        return brick.centre.x- brick.size/2 - offset;
+
+    }
+    else{
+        return brick.centre.x + brick.size/2 + offset;
+    }
 }

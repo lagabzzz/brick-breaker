@@ -139,7 +139,10 @@ void My_window::start_clicked()
 }
 void My_window::step_clicked()
 {
-    cout << __func__ << endl; // TODO: make a single update
+    cout << __func__ << endl;
+    game.update();
+    update_infos();
+    drawing.queue_draw();
 }
 void My_window::set_key_controller()
 {
@@ -333,7 +336,7 @@ void My_window::on_drawing_left_click(int n_press, double x, double y)
 }
 void My_window::on_drawing_move(double x, double y)
 {
-    if(!loop_activated) return; 
+    
     double norm_x = ((x-(m_width-m_side)/2) / m_side) * arena_size;
     //double norm_y = (y / m_side) * arena_size;
     //if (norm_y >= 100.0 - 1.5*game.get_paddle_radius()){
