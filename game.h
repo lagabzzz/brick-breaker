@@ -8,6 +8,7 @@
 #include <string>
 #include <vector>
 #include <memory>
+#include <cmath>
 #include "ball.h"
 #include "brick.h"
 #include "paddle.h"
@@ -54,7 +55,7 @@ public:
     void draw_paddle();
     double get_paddle_radius();
     void update();
-    
+    double x_correction(const Square& brick, double futur_x);
     
 private:
 
