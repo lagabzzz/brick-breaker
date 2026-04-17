@@ -14,7 +14,7 @@ void Game::section_de_lecture(const char* test){
     string line;
     
     Type_lecture etat = SCORE;
-
+    if (error) error = false;
     count_lecture = 0;
     while (getline(fichier,line)){
         if (line.empty() or line[0] == '#'){
@@ -221,7 +221,6 @@ void Game::reset(){
     lives = 0;
     nb_balls= 0;
     nb_bricks= 0;
-    error = false;
 }
 
 void Game::save_game(const std::string& file_name){

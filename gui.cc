@@ -41,6 +41,9 @@ My_window::My_window(string file_name)
     })
 {
     game.section_de_lecture(file_name.c_str());
+    if (game.get_error()){
+        game.reset();
+    }
     set_title("Brick Breaker");
     set_child(main_box);
 
@@ -289,7 +292,6 @@ void My_window::on_draw(const Cairo::RefPtr<Cairo::Context>& cr, int width,int h
     int side = min(width, height);
     graphic_set_context(cr,side);
     if(game.get_error()){
-        game.reset();
         Graphic::clear_board();
         return;
     }	
