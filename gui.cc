@@ -224,11 +224,11 @@ void My_window::dialog_response(int response, Gtk::FileChooserDialog *dialog)
 
     case OPEN_FILE:
         
-        //cout << "open file " << file_name << endl; TODO: set game from a file
+        cout << "open file " << file_name << endl; 
         game.reset();
         game.section_de_lecture(file_name.c_str());
             
-		//update_grid();
+		update_infos();
     	drawing.queue_draw();
         dialog->hide();
         break;
@@ -236,7 +236,7 @@ void My_window::dialog_response(int response, Gtk::FileChooserDialog *dialog)
     case SAVE_FILE:
         if (file_name != "")
         {
-            cout << "save file " << file_name << endl; // TODO: save the game
+            cout << "save file " << file_name << endl; 
             game.save_game(file_name);
             dialog->hide();
         }
