@@ -288,9 +288,13 @@ void My_window::set_drawing()
 }
 
 void My_window::on_draw(const Cairo::RefPtr<Cairo::Context>& cr, int width,int height){
-
-    int side = min(width, height);
-    graphic_set_context(cr,side);
+    m_width = width;
+    m_height = height;
+    m_side = min(width, height);
+    graphic_set_context(cr);
+    cr->translate((width - m_side) / 2, (height + m_side) / 2);
+    cr->scale(m_side / (arena_size), -m_side / (arena_size));
+    
     if(game.get_error()){
         Graphic::clear_board();
         return;
@@ -330,11 +334,12 @@ void My_window::on_drawing_left_click(int n_press, double x, double y)
 void My_window::on_drawing_move(double x, double y)
 {
     if(!loop_activated) return; 
-    double norm_x = (x / drawing_size) * 100.0;
-    double norm_y = (y / drawing_size) * 100.0;
-    //if (norm_y >= 100.0 - 1.5*game.get_paddle_radius()){ 
-    game.set_follow_mouse(norm_x);
-    
+    double norm_x = ((x-(m_width-m_side)/2) / m_side) * arena_size;
+    double norm_y = (y / m_side) * arena_size;
+    if (norm_y >= 100.0 - 1.5*game.get_paddle_radius()){
+        
+        game.set_paddle_x(norm_x);
+        drawing.queue_draw();
 
     //}
     

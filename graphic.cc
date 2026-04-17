@@ -2,23 +2,21 @@
 #include "graphic_gui.h"
 
 static const Cairo::RefPtr<Cairo::Context> *ptcr(nullptr);
-static int side(50);
 
 // graphic_gui.h
-void graphic_set_context(const Cairo::RefPtr<Cairo::Context> &cr,int l_side)
+void graphic_set_context(const Cairo::RefPtr<Cairo::Context> &cr)
 {
     ptcr = &cr;
-    side = l_side;
 }
 
 void Graphic::draw_contour(){
   
-    (*ptcr)->set_line_width(3.0);
+    (*ptcr)->set_line_width(arena_size/200);
     (*ptcr)->set_source_rgb(0.5, 0.5, 0.5);
     (*ptcr)->move_to(0, 0);
-    (*ptcr)->line_to(side, 0);
-    (*ptcr)->line_to(side,side);
-    (*ptcr)->line_to(0, side);
+    (*ptcr)->line_to(arena_size, 0);
+    (*ptcr)->line_to(arena_size,arena_size);
+    (*ptcr)->line_to(0, arena_size);
     (*ptcr)->line_to(0, 0);
     (*ptcr)->stroke();
 }
@@ -31,22 +29,17 @@ void Graphic::clear_board(){
 void Graphic::draw_square(const double x,const double y,const double size,const int hit_pts)
 {
 
-    double new_size(side*size/100);
-    double new_x(side*x/100-new_size/2);
-    double new_y(side*(1-y/100)-new_size/2);
+    double new_x(x-size/2);
+    double new_y(y-size/2);
     set_color(hit_pts);
-    (*ptcr)->rectangle(new_x,new_y,new_size,new_size);
+    (*ptcr)->rectangle(new_x,new_y,size,size);
     (*ptcr)->fill();
 }
 
 void Graphic::draw_disk(const double x,const double y,const double rayon,bool is_ball){
 
-    double new_size(side*rayon/100);
-    double new_x(side*x/100);
-    double new_y(side*(1-y/100));
-
     set_color(NOIR);
-    (*ptcr)->arc(new_x,new_y,new_size,0.0,2*M_PI);
+    (*ptcr)->arc(x,y,rayon,0.0,2*M_PI);
     if (is_ball){
         (*ptcr)->fill();
     }
