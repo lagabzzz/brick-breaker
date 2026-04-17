@@ -55,6 +55,7 @@ public:
     double get_paddle_radius();
     void update();
     
+    
 private:
 
     LesBriques bricks;

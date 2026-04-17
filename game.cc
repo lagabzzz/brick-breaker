@@ -282,6 +282,15 @@ double Game::get_paddle_radius(){
 }
  
 void Game::update(){
+    int future_x = clamp(paddle.get_follow_mouse(),-(paddle.get_x() + delta_norm_max),
+                         (paddle.get_x()+delta_norm_max) );
+    for(int i(0);i < nb_bricks;i++){
 
+        Paddle next_paddle(future_x,paddle.get_y(),paddle.get_rayon());
+        if (Tools::intersects(next_paddle.get_paddle(), bricks[i]->get_brick())){
+            
+            return;
+        }
+    }
     paddle.set_paddle_x();
 }
