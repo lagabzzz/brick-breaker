@@ -341,6 +341,6 @@ void My_window::on_drawing_move(double x, double y)
         game.set_paddle_x(norm_x);
         drawing.queue_draw();
 
-    //}
+    }
     
 }
