@@ -35,7 +35,7 @@ void Paddle::set_paddle_x()
 
     delta = std::clamp(delta, -delta_norm_max, delta_norm_max);
     paddle.centre.x += delta;
-    paddle.centre.x = std::clamp(paddle.centre.x, min_x, max_x);
+    
 }
 
    
