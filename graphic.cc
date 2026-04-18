@@ -39,11 +39,13 @@ void Graphic::draw_square(const double x,const double y,const double size,const 
 void Graphic::draw_disk(const double x,const double y,const double rayon,bool is_ball){
 
     set_color(NOIR);
-    (*ptcr)->arc(x,y,rayon,0.0,2*M_PI);
+    
     if (is_ball){
+        (*ptcr)->arc(x,y,rayon,0.0,2*M_PI);
         (*ptcr)->fill();
     }
     else{
+        (*ptcr)->arc(x,y,rayon,-std::asin(y/rayon),M_PI+std::asin(y/rayon));
         (*ptcr)->stroke();
     }
 }

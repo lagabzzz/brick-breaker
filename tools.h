@@ -4,7 +4,6 @@
 #include "message.h"
 #include "constants.h"
 #include <iostream>
-#include <cmath>
 #include "graphic.h"
 
 constexpr double epsil_zero = 0.125;

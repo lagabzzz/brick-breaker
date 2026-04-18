@@ -2,6 +2,7 @@
 #define GTKMM_EXAMPLE_GRAPHIC_H
 #include <iostream>
 #include "constants.h"
+#include <cmath>
 
 enum Color{
 
