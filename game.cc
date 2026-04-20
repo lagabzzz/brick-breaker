@@ -9,7 +9,8 @@ void Game::section_de_lecture(const char* test){
 
     ifstream fichier(test);
     if(fichier.fail()){
-        set_true();    
+        set_true();
+        return;    
     } 
     string line;
     
