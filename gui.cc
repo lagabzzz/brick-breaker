@@ -107,6 +107,7 @@ void My_window::restart_clicked()
 {
     game.reset();
     game.section_de_lecture(filename.c_str());
+    update_infos();
     drawing.queue_draw();
 }
 
@@ -227,7 +228,9 @@ void My_window::dialog_response(int response, Gtk::FileChooserDialog *dialog)
         cout << "open file " << file_name << endl; 
         game.reset();
         game.section_de_lecture(file_name.c_str());
-            
+        if (game.get_error()){
+            game.reset();
+        }   
 		update_infos();
     	drawing.queue_draw();
         dialog->hide();
