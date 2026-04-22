@@ -154,15 +154,18 @@ void My_window::set_key_controller()
 }
 bool My_window::key_pressed(guint keyval, guint keycode, Gdk::ModifierType state)
 {
+    
     switch (keyval)
     {
     case '1':
+        if (loop_activated) return false;
         step_clicked();
         return true;
     case 's':
         start_clicked();
         return true;
     case 'r':
+        if (loop_activated) return false;
         restart_clicked();
         return true;
     default:
