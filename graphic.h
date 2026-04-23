@@ -4,16 +4,18 @@
 #include "constants.h"
 #include <cmath>
 
-enum Color{
-
-    NOIR,
-    ROUGE,
+enum Color
+{
+    BLACK,
+    RED,
     ORANGE,
-    JAUNE,
-    VERT,
+    YELLOW,
+    GREEN,
     CYAN,
-    BLEU,
-    VIOLET
+    BLUE,
+    PURPLE,
+    GREY,
+    WHITE,
 };
 
 namespace Graphic {
@@ -26,7 +28,7 @@ namespace Graphic {
 
     void draw_disk(const double x,const double y,const double rayon, bool is_ball);
 
-    void set_color(int color);                                                            
+    void set_color(int color);                                                    
 };
 
 #endif // GTKMM_EXAMPLE_GRAPHIC_H

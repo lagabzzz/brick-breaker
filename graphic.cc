@@ -38,7 +38,7 @@ void Graphic::draw_square(const double x,const double y,const double size,const 
 
 void Graphic::draw_disk(const double x,const double y,const double rayon,bool is_ball){
 
-    set_color(NOIR);
+    set_color(BLACK);
     
     if (is_ball){
         (*ptcr)->arc(x,y,rayon,0.0,2*M_PI);
@@ -51,25 +51,48 @@ void Graphic::draw_disk(const double x,const double y,const double rayon,bool is
 }
 
 
-void Graphic::set_color(int color){
+void Graphic::set_color(int color)
+{
+    double r(0.), g(0.), b(0.);
 
-    switch(color){
-        
-        case NOIR:
-            (*ptcr)->set_source_rgb(0.0, 0.0, 0.0); break;
-        case ROUGE:
-            (*ptcr)->set_source_rgb(1.0, 0.0, 0.0); break;
-        case ORANGE:
-            (*ptcr)->set_source_rgb(1.0, 0.65, 0.0); break;
-        case JAUNE:
-            (*ptcr)->set_source_rgb(1.0, 1.0, 0.0); break;
-        case VERT:
-            (*ptcr)->set_source_rgb(0.0, 1.0, 0.0); break;
-        case CYAN:
-            (*ptcr)->set_source_rgb(0.0, 1.0, 1.0); break;
-        case BLEU:
-            (*ptcr)->set_source_rgb(0.0, 0.0, 1.0); break;
-        case VIOLET:
-            (*ptcr)->set_source_rgb(0.5, 0.0, 0.5); break;
+    switch (color)
+    {
+    case RED:
+        r = 1.0;
+        break;
+    case ORANGE:
+        r = 1.0;
+        g = 0.5;
+        break;
+    case YELLOW:
+        r = 1.0;
+        g = 1.0;
+        break;
+    case GREEN:
+        g = 1.0;
+        break;
+    case CYAN:
+        g = 1.0;
+        b = 1.0;
+        break;
+    case BLUE:
+        b = 1.0;
+        break;
+    case PURPLE:
+        r = 0.5;
+        b = 1.0;
+        break;
+    case BLACK:
+        r = g = b = 0.0;
+        break;
+    case GREY:
+        r = g = b = 0.5;
+        break;
+    case WHITE:
+        r = g = b = 1.0;
+        break;
+    default:
+        break;
     }
+    (*ptcr)->set_source_rgb(r, g, b);
 }
