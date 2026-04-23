@@ -227,13 +227,10 @@ void My_window::dialog_response(int response, Gtk::FileChooserDialog *dialog)
         break;
 
     case OPEN_FILE:
-        
         cout << "open file " << file_name << endl; 
         game.reset();
         game.section_de_lecture(file_name.c_str());
-        if (game.get_error()){
-            game.reset();
-        }   
+        if (game.get_error()){game.reset();}  
 		update_infos();
     	drawing.queue_draw();
         dialog->hide();

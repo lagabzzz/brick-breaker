@@ -175,7 +175,6 @@ void Game::test_collisions(){
             }
         }
     }
-
     for(int i(0); i < nb_balls; ++i){
 
         if(Tools::intersects(balls[i]->get_ball(),paddle.get_paddle())){
@@ -188,7 +187,6 @@ void Game::test_collisions(){
             error_message(message::invalid_delta(balls[i]->get_dx()
                                                         ,balls[i]->get_dy()));
         }
-
         for(int j(i+1); j < nb_balls; ++j){
 
             if(Tools::intersects(balls[i]->get_ball(),balls[j]->get_ball())){
@@ -197,7 +195,6 @@ void Game::test_collisions(){
             }
         }
     }
-
     for(int i(0); i < nb_bricks; ++i){
 
         for(int j(0); j < nb_balls; ++j){ //test brick ball
@@ -210,7 +207,7 @@ void Game::test_collisions(){
     }
 }
 void Game::spawn_ball(double x,double y){
-    //appel de la fonction pour dessiner la balle i+1 du vector
+    //appel de la fonction pour dessiner et generer la balle 
 }
 void Game::reset(){
 
