@@ -11,34 +11,15 @@ using namespace std;
 constexpr unsigned drawing_size(500);
 
 My_window::My_window(string file_name)
-    :Gtk::Window(),
-    game(),
-    filename(file_name),
-    loop_activated(false),
-    main_box(Gtk::Orientation::HORIZONTAL),
-    panel_box(Gtk::Orientation::VERTICAL),
+    :Gtk::Window(), game(),filename(file_name),loop_activated(false),
+    main_box(Gtk::Orientation::HORIZONTAL),panel_box(Gtk::Orientation::VERTICAL),
     command_box(Gtk::Orientation::VERTICAL),
-    buttons({
-        Gtk::Button("exit"),
-        Gtk::Button("open"),
-        Gtk::Button("save"),
-        Gtk::Button("restart"),
-        Gtk::Button("start"),
-        Gtk::Button("step")
-    }),
+    buttons({Gtk::Button("exit"),Gtk::Button("open"),Gtk::Button("save"),
+             Gtk::Button("restart"),Gtk::Button("start"),Gtk::Button("step")}),
     info_frame("Infos :"),
-    info_text({
-        Gtk::Label("score:"),
-        Gtk::Label("lives:"),
-        Gtk::Label("bricks:"),
-        Gtk::Label("balls:")
-    }),
-    info_value({
-        Gtk::Label("0"),
-        Gtk::Label("0"),
-        Gtk::Label("0"),
-        Gtk::Label("0")
-    })
+    info_text({Gtk::Label("score:"),Gtk::Label("lives:"),Gtk::Label("bricks:"),
+               Gtk::Label("balls:")}),
+    info_value({Gtk::Label("0"),Gtk::Label("0"),Gtk::Label("0"),Gtk::Label("0")})
 {
     game.section_de_lecture(file_name.c_str());
     if (game.get_error()){

@@ -12,8 +12,8 @@ void Game::section_de_lecture(const char* test){
         set_true();
         return;    
     } 
+
     string line;
-    
     Type_lecture etat = SCORE;
     if (error) error = false;
     count_lecture = 0;
