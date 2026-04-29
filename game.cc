@@ -301,7 +301,6 @@ double Game::x_correction(const Square& brick, double future_x){
     double offset = sqrt(radius_squared - dy * dy);
     if (future_x > paddle.get_x()){
         return brick.centre.x- brick.size/2 - offset;
-
     }
     else{
         return brick.centre.x + brick.size/2 + offset;
