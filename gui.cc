@@ -39,9 +39,8 @@ My_window::My_window(string file_name)
     set_mouse_controller();
     set_infos();
     update_infos();
+    sensitive_buttons();
     set_drawing();
-
-    update_infos();
     drawing.queue_draw();
 }
 
@@ -89,6 +88,7 @@ void My_window::restart_clicked()
     game.reset();
     game.section_de_lecture(filename.c_str());
     update_infos();
+    sensitive_buttons();
     drawing.queue_draw();
 }
 
@@ -213,6 +213,7 @@ void My_window::dialog_response(int response, Gtk::FileChooserDialog *dialog)
         game.section_de_lecture(file_name.c_str());
         if (game.get_error()){game.reset();}  
 		update_infos();
+        sensitive_buttons();
     	drawing.queue_draw();
         dialog->hide();
         break;
@@ -258,7 +259,6 @@ void My_window::set_infos()
 }
 
 void My_window::update_infos()
-// TODO: update the different counters
 {
     info_value[0].set_text(std::to_string(game.get_score()));
     info_value[1].set_text(std::to_string(game.get_lives()));
@@ -329,4 +329,31 @@ void My_window::on_drawing_move(double x, double y)
 
     //}
     
+}
+
+void My_window::sensitive_buttons()
+{
+    bool has_file = (filename != "");
+    bool error = game.get_error();
+
+    if (!has_file)
+    {
+        buttons[EXIT].set_sensitive(true);
+        buttons[OPEN].set_sensitive(true);
+        buttons[SAVE].set_sensitive(false);
+        buttons[RESTART].set_sensitive(false);
+        buttons[START].set_sensitive(false);
+        buttons[STEP].set_sensitive(false);
+        return;
+    }
+    if (error)
+    {
+        buttons[EXIT].set_sensitive(true);
+        buttons[OPEN].set_sensitive(true);
+        buttons[SAVE].set_sensitive(false);
+        buttons[RESTART].set_sensitive(true);
+        buttons[START].set_sensitive(false);
+        buttons[STEP].set_sensitive(false);
+        return;
+    }
 }

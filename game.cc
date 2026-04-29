@@ -12,10 +12,8 @@ void Game::section_de_lecture(const char* test){
         set_true();
         return;    
     } 
-
     string line;
     Type_lecture etat = SCORE;
-    if (error) error = false;
     count_lecture = 0;
     while (getline(fichier,line)){
         if (line.empty() or line[0] == '#'){
@@ -150,10 +148,8 @@ void Game::lecture_ball(const string& line){
 
 
 void Game::test_collisions(){
-    
     if(paddle.inclusion_arene()){
-        error_message(message::paddle_outside(paddle.get_x()
-                                                    ,paddle.get_y()));
+        error_message(message::paddle_outside(paddle.get_x(),paddle.get_y()));
     }
     for(int i(0); i < nb_bricks; ++i){
 

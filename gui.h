@@ -73,6 +73,7 @@ private:
     void set_mouse_controller();
     void on_drawing_left_click(int n_press, double x, double y);
     void on_drawing_move(double x, double y);
+    void sensitive_buttons();
 };
 
 #endif
