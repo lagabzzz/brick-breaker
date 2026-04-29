@@ -53,10 +53,11 @@ namespace Tools {
     double distance(const Point& p1,const Point& p2);
     Point point_proche(const Point& ci,const Point& sq,double sq_size);
     bool intersects(const Square& s1,const Square& s2);
-    bool intersects(const Circle& c1,const Circle& c2);
-    bool intersects(const Circle& c1,const Square& s2);
-    bool intersects(const Square& s2,const Circle& c1); //surcharge commutativité
-    
+    bool intersects(const Circle& c1,const Circle& c2,bool with_epsil=true);
+    bool intersects(const Circle& c1,const Square& s2,bool with_epsil=true);
+    //surcharge commutativité
+    bool intersects(const Square& s2,const Circle& c1,bool with_epsil=true);
+     
     void draw_square(const Square& sq,const int hit_pts);
     void draw_disk(const Circle& sq, bool is_ball);
 }

@@ -1,7 +1,8 @@
 #include "tools.h"
 using namespace std;
 
-bool Tools:: test_range(double val, double lim_min,double lim_max, bool with_epsil){
+bool Tools:: test_range(double val, double lim_min,double lim_max,bool with_epsil){
+
     double epsil = (with_epsil)? epsil_zero:0;
 
     return ((lim_min+epsil <= val) and (val <= lim_max-epsil));
@@ -51,23 +52,22 @@ bool Tools::intersects(const Square& s1,const Square& s2){
             (abs(s1.centre.y -s2.centre.y) < min_dist));
 }
 
-bool Tools::intersects(const Circle& c1,const Circle& c2){
+bool Tools::intersects(const Circle& c1,const Circle& c2,bool with_epsil){
 
     double dist = Tools::distance(c1.centre, c2.centre);
-    return (dist <=(c1.rayon+c2.rayon));
+    return test_range(dist,-epsil_zero,c1.rayon+c2.rayon,with_epsil);
 }
 
-bool Tools::intersects(const Circle& ci,const Square& sq){
+bool Tools::intersects(const Circle& ci,const Square& sq,bool with_epsil){
 
 
    Point pt_proche = point_proche(ci.centre,sq.centre,sq.size);
 
-
-   return (distance(pt_proche,ci.centre) <= ci.rayon);
+    return test_range(distance(pt_proche,ci.centre),-epsil_zero,ci.rayon,with_epsil);
 }
 
-bool Tools::intersects(const Square& s2,const Circle& c1){
-    return Tools::intersects(c1,s2);
+bool Tools::intersects(const Square& s2,const Circle& c1,bool with_epsil){
+    return Tools::intersects(c1,s2,with_epsil);
 }
 
 void Tools::draw_square(const Square& sq,int const hit_pts)

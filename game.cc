@@ -153,7 +153,7 @@ void Game::test_collisions(){
     }
     for(int i(0); i < nb_bricks; ++i){
 
-        if(Tools::intersects(bricks[i]->get_brick(),paddle.get_paddle())){
+        if(Tools::intersects(bricks[i]->get_brick(),paddle.get_paddle(),false)){
             error_message(message::collision_paddle_brick(i));
         }
         if(bricks[i]->test_arene()){
@@ -173,7 +173,7 @@ void Game::test_collisions(){
     }
     for(int i(0); i < nb_balls; ++i){
 
-        if(Tools::intersects(balls[i]->get_ball(),paddle.get_paddle())){
+        if(Tools::intersects(balls[i]->get_ball(),paddle.get_paddle(),false)){
             error_message(message::collision_paddle_ball(i));
         }
         if(balls[i]->include_arene()){
@@ -185,7 +185,7 @@ void Game::test_collisions(){
         }
         for(int j(i+1); j < nb_balls; ++j){
 
-            if(Tools::intersects(balls[i]->get_ball(),balls[j]->get_ball())){
+            if(Tools::intersects(balls[i]->get_ball(),balls[j]->get_ball(),false)){
                 
                 error_message(message::collision_balls(i,j));
             }
@@ -195,7 +195,7 @@ void Game::test_collisions(){
 
         for(int j(0); j < nb_balls; ++j){ //test brick ball
 
-            if(Tools::intersects(bricks[i]->get_brick(),balls[j]->get_ball())){
+            if(Tools::intersects(bricks[i]->get_brick(),balls[j]->get_ball()),false){
                 
                 error_message(message::collision_ball_brick(j,i));
             }
@@ -297,7 +297,6 @@ double Game::x_correction(const Square& brick, double future_x){
     double offset = sqrt(radius_squared - dy * dy);
     if (future_x > paddle.get_x()){
         return brick.centre.x- brick.size/2 - offset;
-
     }
     else{
         return brick.centre.x + brick.size/2 + offset;
