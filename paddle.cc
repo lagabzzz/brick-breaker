@@ -7,6 +7,7 @@ const Circle& Paddle::get_paddle() const{
 
 bool Paddle::inclusion_arene(){
     double centre_y = paddle.centre.y;
+    if (centre_y > 0) return true;
     double offset = paddle.rayon * paddle.rayon - centre_y * centre_y;
     if (offset < 0) return true;
     offset = sqrt(offset);
