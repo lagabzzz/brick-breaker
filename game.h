@@ -1,3 +1,8 @@
+//game
+//C++17
+//Jean-Michel Vellozzi
+//Gabriel Plewinski
+
 #ifndef GAME_H
 #define GAME_H
 

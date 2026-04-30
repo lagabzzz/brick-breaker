@@ -1,4 +1,7 @@
-
+//ball
+//C++17
+//Jean-Michel Vellozzi
+//Gabriel Plewinski
 #ifndef BALL_H
 #define BALL_H
 #include "constants.h"

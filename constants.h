@@ -1,3 +1,7 @@
+//constants
+//C++17
+//Jean-Michel Vellozzi
+//Gabriel Plewinski
 #ifndef CONSTANTS_H
 #define CONSTANTS_H
 

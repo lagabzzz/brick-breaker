@@ -1,3 +1,8 @@
+//graphic
+//C++17
+//Jean-Michel Vellozzi
+//Gabriel Plewinski
+
 #ifndef GTKMM_EXAMPLE_GRAPHIC_H
 #define GTKMM_EXAMPLE_GRAPHIC_H
 #include <iostream>

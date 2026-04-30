@@ -197,7 +197,7 @@ void Game::test_collisions(){
         for(int j(0); j < nb_balls; ++j){ //test brick ball
 
             if(Tools::intersects(bricks[i]->get_brick(),balls[j]->get_ball()),false){
-                
+                //std::cout<<<<std::endl;
                 error_message(message::collision_ball_brick(j,i));
             }
         }
@@ -273,7 +273,7 @@ void Game::set_follow_mouse(double x){
 
 double Game::get_paddle_radius(){
 
-   return paddle.get_rayon();
+    return paddle.get_rayon();
 }
  
 void Game::update(){
