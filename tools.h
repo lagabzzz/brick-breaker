@@ -1,3 +1,8 @@
+//tools
+//Rendu 2
+//Jean-Michel Vellozzi
+//Gabriel Plewinski
+
 #ifndef TOOLS_H
 #define TOOLS_H
 

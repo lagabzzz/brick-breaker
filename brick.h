@@ -1,5 +1,5 @@
-//bRICK
-//C++17
+//Brick
+//rendu 2
 //Jean-Michel Vellozzi
 //Gabriel Plewinski
 

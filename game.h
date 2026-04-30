@@ -1,5 +1,5 @@
 //game
-//C++17
+//Rendu 2
 //Jean-Michel Vellozzi
 //Gabriel Plewinski
 

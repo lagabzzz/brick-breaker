@@ -1,4 +1,5 @@
 //paddle
+//Rendu 2
 //Jean-Michel Vellozzi
 //Gabriel Plewinski
 
