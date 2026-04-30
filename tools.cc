@@ -61,7 +61,7 @@ bool Tools::intersects(const Circle& c1,const Circle& c2,bool with_epsil){
 bool Tools::intersects(const Circle& ci,const Square& sq,bool with_epsil){
 
 
-   Point pt_proche = point_proche(ci.centre,sq.centre,sq.size);
+    Point pt_proche = point_proche(ci.centre,sq.centre,sq.size);
 
     return test_range(distance(pt_proche,ci.centre),-epsil_zero,ci.rayon,with_epsil);
 }

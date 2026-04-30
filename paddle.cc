@@ -17,7 +17,7 @@ bool Paddle::inclusion_arene(){
     
     bool testy ((centre_y + paddle.rayon) > 0.0);
 
-      if((testx and testy)==false){
+    if((testx and testy)==false){
 
         return true;
 

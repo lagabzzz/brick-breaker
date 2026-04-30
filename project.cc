@@ -1,3 +1,7 @@
+//project
+//Rendu 2
+//Jean-Michel Vellozzi
+//Gabriel Plewinski
 
 #include <gtkmm/application.h>
 #include <gtkmm/window.h>

@@ -1,3 +1,8 @@
+//bRICK
+//C++17
+//Jean-Michel Vellozzi
+//Gabriel Plewinski
+
 #ifndef BRICK_H
 #define BRICK_H
 

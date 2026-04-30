@@ -1,3 +1,8 @@
+//graphic_gui
+//C++17
+//Jean-Michel Vellozzi
+//Gabriel Plewinski
+
 #ifndef GRAPHIC_GUI_H
 #define GRAPHIC_GUI_H
 

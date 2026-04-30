@@ -1,3 +1,7 @@
+//paddle
+//Jean-Michel Vellozzi
+//Gabriel Plewinski
+
 #ifndef PADDLE_H
 #define PADDLE_H
 
