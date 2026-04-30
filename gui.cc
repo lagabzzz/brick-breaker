@@ -87,6 +87,7 @@ void My_window::restart_clicked()
 {
     game.reset();
     game.section_de_lecture(filename.c_str());
+    if(game.get_error()) game.reset();
     update_infos();
     sensitive_buttons();
     drawing.queue_draw();
