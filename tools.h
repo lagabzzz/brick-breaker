@@ -1,12 +1,12 @@
 #ifndef TOOLS_H
 #define TOOLS_H
 
-#include "message.h"
-#include "constants.h"
 #include <iostream>
 #include "graphic.h"
+#include "message.h"
+#include "constants.h"
 
-constexpr double epsil_zero = 0.125;
+constexpr double EPSIL_ZERO = 0.125;
 
 struct Point {
   
