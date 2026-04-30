@@ -13,6 +13,7 @@ void Game::section_de_lecture(const char* test){
         return;    
     } 
     string line;
+    if(error) error = false;
     Type_lecture etat = SCORE;
     count_lecture = 0;
     while (getline(fichier,line)){

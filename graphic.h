@@ -1,8 +1,8 @@
 #ifndef GTKMM_EXAMPLE_GRAPHIC_H
 #define GTKMM_EXAMPLE_GRAPHIC_H
 #include <iostream>
-#include "constants.h"
 #include <cmath>
+#include "constants.h"
 
 enum Color
 {

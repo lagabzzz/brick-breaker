@@ -208,7 +208,7 @@ void My_window::dialog_response(int response, Gtk::FileChooserDialog *dialog)
         break;
 
     case OPEN_FILE:
-        cout << "open file " << file_name << endl; 
+        cout << "open file " << filename << endl; 
         game.reset();
         game.section_de_lecture(file_name.c_str());
         if (game.get_error()){game.reset();}  
@@ -346,7 +346,7 @@ void My_window::sensitive_buttons()
         buttons[STEP].set_sensitive(false);
         return;
     }
-    if (error)
+    else if (error)
     {
         buttons[EXIT].set_sensitive(true);
         buttons[OPEN].set_sensitive(true);
@@ -354,6 +354,15 @@ void My_window::sensitive_buttons()
         buttons[RESTART].set_sensitive(true);
         buttons[START].set_sensitive(false);
         buttons[STEP].set_sensitive(false);
+        return;
+    }
+    else {
+        buttons[EXIT].set_sensitive(true);
+        buttons[OPEN].set_sensitive(true);
+        buttons[SAVE].set_sensitive(true);
+        buttons[RESTART].set_sensitive(true);
+        buttons[START].set_sensitive(true);
+        buttons[STEP].set_sensitive(true);
         return;
     }
 }

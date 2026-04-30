@@ -3,9 +3,9 @@ using namespace std;
 
 bool Tools:: test_range(double val, double lim_min,double lim_max,bool with_epsil){
 
-    double epsil = (with_epsil)? epsil_zero:0;
+    double epsil = (with_epsil)? EPSIL_ZERO:0;
 
-    return ((lim_min+epsil <= val) and (val <= lim_max-epsil));
+    return ((lim_min+epsil <= val) and (val <= lim_max));
 }
 
 bool Tools::test_range(int val,int lim_min,int lim_max){
@@ -55,7 +55,7 @@ bool Tools::intersects(const Square& s1,const Square& s2){
 bool Tools::intersects(const Circle& c1,const Circle& c2,bool with_epsil){
 
     double dist = Tools::distance(c1.centre, c2.centre);
-    return test_range(dist,-epsil_zero,c1.rayon+c2.rayon,with_epsil);
+    return test_range(dist,-EPSIL_ZERO,c1.rayon+c2.rayon,with_epsil);
 }
 
 bool Tools::intersects(const Circle& ci,const Square& sq,bool with_epsil){
@@ -63,7 +63,7 @@ bool Tools::intersects(const Circle& ci,const Square& sq,bool with_epsil){
 
    Point pt_proche = point_proche(ci.centre,sq.centre,sq.size);
 
-    return test_range(distance(pt_proche,ci.centre),-epsil_zero,ci.rayon,with_epsil);
+    return test_range(distance(pt_proche,ci.centre),-EPSIL_ZERO,ci.rayon,with_epsil);
 }
 
 bool Tools::intersects(const Square& s2,const Circle& c1,bool with_epsil){

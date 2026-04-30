@@ -1,10 +1,9 @@
 #ifndef PADDLE_H
 #define PADDLE_H
 
-#include "tools.h"
 #include <cmath>
 #include <algorithm>
-
+#include "tools.h"
 
 class Paddle{
     
