@@ -88,7 +88,6 @@ private:
 
     void lecture_ball(const std::string& line);
 
-    void coll_ball_brick(const Circle&,const Square&);
 };
 
 #endif

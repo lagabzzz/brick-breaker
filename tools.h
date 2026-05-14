@@ -22,6 +22,9 @@ struct Point {
 
     double x;
     double y;
+    
+    const Point operator+(const Point& pt);
+    const Point operator-(const Point& pt);
 };
 
 struct Circle {

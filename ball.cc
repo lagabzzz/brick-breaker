@@ -45,7 +45,7 @@ void Ball::last_pos(){
 }
 
 void Ball::coll_ball_arene(){
-    
+
     if(include_arene()==true){
 
         last_pos();
@@ -58,6 +58,31 @@ void Ball::coll_ball_arene(){
             dy *= -1;
         }
         future_pos();
+        count++;
     }
+}
+
+bool Ball::coll_brick(const Square& sq){
+
+    if(Tools::intersects(ball,sq)){
+        Point pt_proche(std::clamp(ball.centre.x,sq.centre.x-sq.size/2,sq.centre.x+sq.size/2),
+                    std::clamp(ball.centre.y,sq.centre.y-sq.size/2,sq.centre.y+sq.size/2));
+
+        Point diff(ball.centre-sq.centre);
+        Point diff_borne(pt_proche-ball.centre);
+
+        Point dir_nom(diff-diff_borne);
+        double alpha(std::atan(dir_nom.x/dir_nom.y));
+        double delta(Tools::norme(dx,dy));
+
+        dx -= 2*delta*std::cos(alpha);
+        dy -= 2*delta*std::sin(alpha);
+
+        future_pos();
+        return true;
+    }else{
+        return false;
+    }
+
 }
 

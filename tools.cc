@@ -1,4 +1,17 @@
 #include "tools.h"
+
+const Point Point::operator+(const Point& pt){
+
+    Point new_pt(x+pt.x,y+pt.y);
+    return new_pt;
+}
+
+const Point Point::operator-(const Point& pt){
+
+    Point new_pt(x-pt.x,y-pt.y);
+    return new_pt;
+}
+
 using namespace std;
 
 bool Tools:: test_range(double val, double lim_min,double lim_max,bool with_epsil){

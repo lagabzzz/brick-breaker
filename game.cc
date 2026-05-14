@@ -1,6 +1,8 @@
 #include "game.h"
 using namespace std;
 
+int Ball::count = 0;
+
 void Game::error_message(string message){
     cout << message << endl;
     set_true();
@@ -302,12 +304,17 @@ void Game::update(){
             balls[i] = std::move(balls.back());
             balls.pop_back();
             nb_balls--;
-        }else{
-            balls[i]->future_pos();
-            balls[i]->coll_ball_arene();
-            
+            i--;
+            continue;
         }
-        
+        balls[i]->future_pos();
+        balls[i]->coll_ball_arene();
+
+        for(int j(0); j<nb_bricks; j++){
+            if(balls[i]->coll_brick(bricks[j]->get_brick())){
+                
+            }
+        }
     }
 }
 
