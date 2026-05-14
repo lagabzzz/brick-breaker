@@ -203,8 +203,14 @@ void Game::test_collisions(){
         }
     }
 }
-void Game::spawn_ball(double x,double y){
-    //appel de la fonction pour dessiner et generer la balle 
+void Game::spawn_ball(){
+    //appel de la fonction pour dessiner et generer la balle
+    double new_y(paddle.get_y()+paddle.get_rayon()+EPSIL_ZERO);//pas sur du epsil_zero
+    
+    balls.push_back(unique_ptr<Ball> (new Ball(paddle.get_x(),new_y,new_ball_radius,0,
+                                      new_ball_delta_norm)));
+    nb_balls++;
+    lives--;
 }
 void Game::reset(){
 
@@ -289,6 +295,20 @@ void Game::update(){
         }
     }
     paddle.set_paddle_x();
+
+    for(int i(0); i<nb_balls; i++){
+
+        if(balls[i]->get_y() < 0){
+            balls[i] = std::move(balls.back());
+            balls.pop_back();
+            nb_balls--;
+        }else{
+            balls[i]->future_pos();
+            balls[i]->coll_ball_arene();
+            
+        }
+        
+    }
 }
 
 double Game::x_correction(const Square& brick, double future_x){

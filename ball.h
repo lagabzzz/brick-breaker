@@ -14,8 +14,8 @@ public:
     Ball(double x, double y, double rayon, double dx, double dy)
     :ball(x, y, rayon), dx(dx), dy(dy)
     {
-        include_arene();
-        test_norme();
+        //include_arene();
+        //test_norme();
     }
 
     const Circle& get_ball() const{return ball;};
@@ -27,6 +27,9 @@ public:
     bool include_arene();
     bool test_norme();
     void draw_ball();
+    void future_pos();
+    void last_pos();
+    void coll_ball_arene();
 
 private:
     Circle ball; 
