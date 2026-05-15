@@ -65,20 +65,34 @@ void Ball::coll_ball_arene(){
 bool Ball::coll_brick(const Square& sq){
 
     if(Tools::intersects(ball,sq)){
+
+        last_pos();
         Point pt_proche(std::clamp(ball.centre.x,sq.centre.x-sq.size/2,sq.centre.x+sq.size/2),
                     std::clamp(ball.centre.y,sq.centre.y-sq.size/2,sq.centre.y+sq.size/2));
 
         Point diff(ball.centre-sq.centre);
-        Point diff_borne(pt_proche-ball.centre);
+        Point diff_borne(pt_proche-sq.centre);
 
         Point dir_nom(diff-diff_borne);
-        double alpha(std::atan(dir_nom.x/dir_nom.y));
-        double delta(Tools::norme(dx,dy));
 
-        dx -= 2*delta*std::cos(alpha);
-        dy -= 2*delta*std::sin(alpha);
+        double delta_nom(Tools::norme(dir_nom.x,dir_nom.y));
+
+        if(delta_nom>EPSIL_ZERO){
+            std::cout<<Tools::norme(dx,dy)<<std::endl;
+            dir_nom.x /= delta_nom;
+            dir_nom.y /= delta_nom;
+
+            //double delta(Tools::norme(dx,dy));
+            double prod_scal(dx*dir_nom.x + dy*dir_nom.y);
+            //std::cout<<dir_nom.x<<", "<<dir_nom.y<<std::endl;
+            
+            dx -= 2*prod_scal*dir_nom.x;
+            dy -= 2*prod_scal*dir_nom.y;
+            std::cout<<Tools::norme(dx,dy)<<std::endl;
+        }
 
         future_pos();
+
         return true;
     }else{
         return false;

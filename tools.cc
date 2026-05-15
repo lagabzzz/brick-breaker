@@ -1,12 +1,12 @@
 #include "tools.h"
 
-const Point Point::operator+(const Point& pt){
+Point Point::operator+(const Point& pt) const{
 
     Point new_pt(x+pt.x,y+pt.y);
     return new_pt;
 }
 
-const Point Point::operator-(const Point& pt){
+Point Point::operator-(const Point& pt) const{
 
     Point new_pt(x-pt.x,y-pt.y);
     return new_pt;

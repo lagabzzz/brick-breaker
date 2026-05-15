@@ -23,8 +23,8 @@ struct Point {
     double x;
     double y;
     
-    const Point operator+(const Point& pt);
-    const Point operator-(const Point& pt);
+    Point operator+(const Point& pt) const;
+    Point operator-(const Point& pt) const;
 };
 
 struct Circle {
