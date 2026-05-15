@@ -35,7 +35,7 @@ public:
     int get_count(){return count;}
     void set_count(){count=0;}
 
-    bool coll_brick(const Square& sq);
+    void coll_brick(const Square& sq);
 
 private:
     static int count;

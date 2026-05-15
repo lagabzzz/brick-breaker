@@ -309,10 +309,19 @@ void Game::update(){
         }
         balls[i]->future_pos();
         balls[i]->coll_ball_arene();
+        balls[i]->coll_ball_arene();//au cas ou on est vers le coin
 
         for(int j(0); j<nb_bricks; j++){
-            if(balls[i]->coll_brick(bricks[j]->get_brick())){
-                
+            if(Tools::intersects(balls[i]->get_ball(),bricks[j]->get_brick())){
+                balls[i]->coll_brick(bricks[j]->get_brick());
+                bricks[j]->got_hit();
+
+                if(bricks[j]->get_hit_pts() <= 0){
+                    bricks[j] = std::move(bricks.back());
+                    bricks.pop_back();
+                    nb_bricks--;
+                    j--;
+                }    
             }
         }
     }

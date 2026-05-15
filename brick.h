@@ -35,6 +35,7 @@ public:
     bool test_val();
     bool test_arene();
     virtual void draw_brick() = 0;
+    void got_hit(){hit_points--;}
 
 protected:
     Square brick;
