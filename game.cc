@@ -1,6 +1,8 @@
 #include "game.h"
 using namespace std;
 
+int Ball::count = 0;
+
 void Game::error_message(string message){
     cout << message << endl;
     set_true();
@@ -203,8 +205,14 @@ void Game::test_collisions(){
         }
     }
 }
-void Game::spawn_ball(double x,double y){
-    //appel de la fonction pour dessiner et generer la balle 
+void Game::spawn_ball(){
+    //appel de la fonction pour dessiner et generer la balle
+    double new_y(paddle.get_y()+paddle.get_rayon()+EPSIL_ZERO);//pas sur du epsil_zero
+    
+    balls.push_back(unique_ptr<Ball> (new Ball(paddle.get_x(),new_y,new_ball_radius,0,
+                                      new_ball_delta_norm)));
+    nb_balls++;
+    lives--;
 }
 void Game::reset(){
 
@@ -289,6 +297,34 @@ void Game::update(){
         }
     }
     paddle.set_paddle_x();
+
+    for(int i(0); i<nb_balls; i++){
+
+        if(balls[i]->get_y() < 0){
+            balls[i] = std::move(balls.back());
+            balls.pop_back();
+            nb_balls--;
+            i--;
+            continue;
+        }
+        balls[i]->future_pos();
+        balls[i]->coll_ball_arene();
+        balls[i]->coll_ball_arene();//au cas ou on est vers le coin
+
+        for(int j(0); j<nb_bricks; j++){
+            if(Tools::intersects(balls[i]->get_ball(),bricks[j]->get_brick())){
+                balls[i]->coll_brick(bricks[j]->get_brick());
+                bricks[j]->got_hit();
+
+                if(bricks[j]->get_hit_pts() <= 0){
+                    bricks[j] = std::move(bricks.back());
+                    bricks.pop_back();
+                    nb_bricks--;
+                    j--;
+                }    
+            }
+        }
+    }
 }
 
 double Game::x_correction(const Square& brick, double future_x){

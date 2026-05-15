@@ -5,6 +5,8 @@
 
 #ifndef BALL_H
 #define BALL_H
+
+#include <algorithm>
 #include "constants.h"
 #include "tools.h"
 
@@ -14,8 +16,8 @@ public:
     Ball(double x, double y, double rayon, double dx, double dy)
     :ball(x, y, rayon), dx(dx), dy(dy)
     {
-        include_arene();
-        test_norme();
+        //include_arene();
+        //test_norme();
     }
 
     const Circle& get_ball() const{return ball;};
@@ -27,8 +29,16 @@ public:
     bool include_arene();
     bool test_norme();
     void draw_ball();
+    void future_pos();
+    void last_pos();
+    void coll_ball_arene();
+    int get_count(){return count;}
+    void set_count(){count=0;}
+
+    void coll_brick(const Square& sq);
 
 private:
+    static int count;
     Circle ball; 
     double dx; 
     double dy;
