@@ -62,6 +62,35 @@ void Ball::coll_ball_arene(){
     }
 }
 
+ void Ball::coll_ball(Ball& other){
+    last_pos();
+    other.last_pos();
+    double diff_x = ball.centre.x - other.get_ball().centre.x;
+    double diff_y = ball.centre.y - other.get_ball().centre.y;
+    Point diff(diff_x, diff_y);
+    normalize(diff);
+
+    double other_dx = other.get_dx();
+    double other_dy = other.get_dy();
+    double vnA = dx*diff.x + dy*diff.y;
+    double vnB = other_dx * diff.x + other_dy * diff.y;
+    double other_r_sq = other.get_ball().rayon * other.get_ball().rayon;
+    double r_sq = ball.rayon * ball.rayon;
+    double impulseA = (-vnA + vnB) * (2*other_r_sq)/(other_r_sq + r_sq);
+    double impulseB = (-vnB + vnA) * (2*r_sq)/(other_r_sq + r_sq);
+
+    dx += diff.x * impulseA;
+    dy += diff.y * impulseA;
+    other.set_dx(other_dx - diff.x*impulseB); 
+    other.set_dy(other_dy - diff.y*impulseB); 
+    Point deltaA(dx, dy);
+    Point deltaB(other_dx, other_dy);
+    
+    clamp_deltas(deltaA, deltaB, other);
+    future_pos();
+    other.future_pos();
+ }
+
 void Ball::coll_brick(const Square& sq){
 
     last_pos();
@@ -95,3 +124,28 @@ void Ball::coll_brick(const Square& sq){
 
 }
 
+void Ball::normalize(Point& pt){
+    double norm = sqrt(pt.x*pt.x + pt.y*pt.y);
+    if (norm != 0){
+        pt.x /= norm;
+        pt.y /= norm;
+    }
+}
+
+void Ball::clamp_deltas(Point& ptA, Point ptB, Ball& other){
+
+    double deltaA_norm = sqrt(ptA.x*ptA.x + ptA.y*ptA.y);
+    double deltaB_norm = sqrt(ptB.x*ptB.x + ptB.y*ptB.y);
+
+    if (deltaA_norm > delta_norm_max){
+        normalize(ptA);
+        dx = ptA.x*delta_norm_max;
+        dy = ptA.y * delta_norm_max;
+    }
+    if (deltaB_norm > delta_norm_max){
+        normalize(ptB);
+        other.set_dx(ptB.x * delta_norm_max);  
+        other.set_dy(ptB.y * delta_norm_max);
+    }
+
+}

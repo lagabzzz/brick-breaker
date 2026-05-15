@@ -26,6 +26,8 @@ public:
     double get_rayon() const { return ball.rayon; }
     double get_dx() const { return dx; }
     double get_dy() const { return dy; }
+    void set_dx(double x){ dx = x; }
+    void set_dy(double y){ dy = y; }
     bool include_arene();
     bool test_norme();
     void draw_ball();
@@ -34,15 +36,16 @@ public:
     void coll_ball_arene();
     int get_rebond(){return rebond;}
     void set_rebond_to_zero(){rebond=0;}
-
+    void coll_ball(Ball& other);
     void coll_brick(const Square& sq);
-
+ 
 private:
     int rebond = 0;
     Circle ball; 
     double dx; 
     double dy;
-    
+    void normalize(Point& pt);
+    void clamp_deltas(Point& ptA, Point ptB, Ball& other);
 };
 
 #endif // BALL_H

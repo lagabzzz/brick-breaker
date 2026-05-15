@@ -1,7 +1,7 @@
 #include "game.h"
 using namespace std;
 
-int Ball::count = 0;
+//int Ball::count = 0;
 
 void Game::error_message(string message){
     cout << message << endl;
@@ -298,7 +298,8 @@ void Game::update(){
     }
     paddle.set_paddle_x();
 
-    for(int i(0); i<nb_balls; i++){
+    
+    for (unsigned int i(0); i < balls.size(); i++){
 
         if(balls[i]->get_y() < 0){
             balls[i] = std::move(balls.back());
@@ -307,10 +308,19 @@ void Game::update(){
             i--;
             continue;
         }
-        balls[i]->future_pos();
-        balls[i]->coll_ball_arene();
-        balls[i]->coll_ball_arene();//au cas ou on est vers le coin
+    }
+    for (auto& b : balls) {
+        b->future_pos();
+        b->coll_ball_arene();
+        b->coll_ball_arene(); // double-check coin
+    }
 
+    for(unsigned int i(0); i<balls.size(); i++){
+        for(unsigned int j(i+1); j < balls.size(); j++){
+            if(Tools::intersects(balls[i]->get_ball(), balls[j]->get_ball())){
+                balls[i]->coll_ball(*balls[j]);
+            } 
+        }
         for(int j(0); j<nb_bricks; j++){
             if(Tools::intersects(balls[i]->get_ball(),bricks[j]->get_brick())){
                 balls[i]->coll_brick(bricks[j]->get_brick());
