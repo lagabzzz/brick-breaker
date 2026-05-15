@@ -32,13 +32,13 @@ public:
     void future_pos();
     void last_pos();
     void coll_ball_arene();
-    int get_count(){return count;}
-    void set_count(){count=0;}
+    int get_rebond(){return rebond;}
+    void set_rebond_to_zero(){rebond=0;}
 
     void coll_brick(const Square& sq);
 
 private:
-    static int count;
+    int rebond = 0;
     Circle ball; 
     double dx; 
     double dy;

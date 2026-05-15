@@ -58,7 +58,7 @@ void Ball::coll_ball_arene(){
             dy *= -1;
         }
         future_pos();
-        count++;
+        rebond++;
     }
 }
 
@@ -87,7 +87,7 @@ void Ball::coll_brick(const Square& sq){
         dx -= 2*prod_scal*dir_nom.x;
         dy -= 2*prod_scal*dir_nom.y;
         std::cout<<Tools::norme(dx,dy)<<std::endl;
-        count++;
+        rebond++;
     }
 
     future_pos();
