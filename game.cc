@@ -332,6 +332,7 @@ void Game::collisions_ball(){
                 break;
             }
             for(unsigned int j(i+1); j < balls.size(); j++){
+                
                 balls[i]->coll_ball(*balls[j]);
                 if(balls[i]->get_rebond()>5){
                     balls[i]->set_rebond_to_zero();

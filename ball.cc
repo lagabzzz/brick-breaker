@@ -69,8 +69,9 @@ void Ball::coll_ball_arene(){
 }
 
  void Ball::coll_ball(Ball& other){
+    other.future_pos();
     if(Tools::intersects(ball, other.get_ball())){
-        last_pos();
+        //last_pos();
         other.last_pos();
         std::cout<<Tools::norme(dx,dy)<<std::endl;
         double diff_x = ball.centre.x - other.get_ball().centre.x;
@@ -99,6 +100,8 @@ void Ball::coll_ball_arene(){
         future_pos();
         other.future_pos();
         rebond++;
+    }else{
+        other.last_pos();
     }
  }
 
