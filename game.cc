@@ -309,17 +309,25 @@ void Game::update(){
             continue;
         }
     }
-    for (auto& b : balls) {
+    """for (auto& b : balls) {
         b->future_pos();
         b->coll_ball_arene();
         b->coll_ball_arene(); // double-check coin
-    }
+    }"""
 
     for(unsigned int i(0); i<balls.size(); i++){
+
+        balls[i]->future_pos();
+        balls[i]->coll_ball_arene();
+        balls[i]->coll_ball_arene();
+
         for(unsigned int j(i+1); j < balls.size(); j++){
+            balls[j]->future_pos();
             if(Tools::intersects(balls[i]->get_ball(), balls[j]->get_ball())){
                 balls[i]->coll_ball(*balls[j]);
-            } 
+            }else{
+                balls[j]->last_pos();
+            }
         }
         for(int j(0); j<nb_bricks; j++){
             if(Tools::intersects(balls[i]->get_ball(),bricks[j]->get_brick())){
