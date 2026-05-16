@@ -30,6 +30,7 @@ public:
     double get_size() const { return brick.size; }
     const Square& get_brick() const {return brick;}
     int get_hit_pts() const {return hit_points;}
+    void set_hit_pts_zero(){hit_points=0;}
     virtual int brick_type() = 0;
     bool test_hit_pt();
     bool test_val();
