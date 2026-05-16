@@ -298,45 +298,7 @@ void Game::update(){
     }
     paddle.set_paddle_x();
 
-    
-    for (unsigned int i(0); i < balls.size(); i++){
-
-        if(balls[i]->get_y() < 0){
-            balls[i] = std::move(balls.back());
-            balls.pop_back();
-            nb_balls--;
-            i--;
-            continue;
-        }
-    }
-
-    for(unsigned int i(0); i<balls.size(); i++){
-
-        balls[i]->future_pos();
-        balls[i]->coll_ball_arene();
-        balls[i]->coll_ball_arene();
-
-        for(unsigned int j(i+1); j < balls.size(); j++){
-            balls[j]->future_pos();
-            if(Tools::intersects(balls[i]->get_ball(), balls[j]->get_ball())){
-                balls[i]->coll_ball(*balls[j]);
-            }else{
-                balls[j]->last_pos();
-            }
-        }
-        for(unsigned j(0); j<bricks.size(); j++){
-            if(Tools::intersects(balls[i]->get_ball(),bricks[j]->get_brick())){
-                
-                brick_got_hit(*bricks[j],j,i);
-                balls[i]->coll_brick(bricks[j]->get_brick());
-                
-                std::cout<<"ha"<<std::endl;
-                if(bricks[j]->get_hit_pts() <= 0){
-                    destr_brick(j);
-                }  
-            }
-        }
-    }
+    collisions_ball();
 }
 
 double Game::x_correction(const Square& brick, double future_x){
@@ -350,6 +312,55 @@ double Game::x_correction(const Square& brick, double future_x){
     else{
         return brick.centre.x + brick.size/2 + offset;
     }
+}
+
+void Game::collisions_ball(){
+    for(unsigned int i(0); i<balls.size(); i++){
+        balls[i]->set_initial_pos();
+        if(balls[i]->get_y() < 0){
+                destr_ball(i);
+                continue;
+            }
+        balls[i]->in_coll = true;
+        while(balls[i]->in_coll==true){
+            balls[i]->in_coll = false;
+            balls[i]->future_pos();
+            balls[i]->coll_ball_arene();
+            if(balls[i]->get_rebond()>5){
+                balls[i]->set_rebond_to_zero();
+                balls[i]->back_initial_pos();
+                break;
+            }
+            for(unsigned int j(i+1); j < balls.size(); j++){
+                balls[i]->coll_ball(*balls[j]);
+                if(balls[i]->get_rebond()>5){
+                    balls[i]->set_rebond_to_zero();
+                    balls[i]->back_initial_pos();
+                    break;
+                }
+            }
+            for(unsigned j(0); j<bricks.size(); j++){
+                if(Tools::intersects(balls[i]->get_ball(),bricks[j]->get_brick())){ 
+                    brick_got_hit(*bricks[j],j,i);
+                    balls[i]->coll_brick(bricks[j]->get_brick());
+                    if(bricks[j]->get_hit_pts() <= 0) destr_brick(j);
+                    if(balls[i]->get_rebond()>5){
+                        balls[i]->set_rebond_to_zero();
+                        balls[i]->back_initial_pos();
+                        break;
+                    }
+                }
+            }
+        }
+    }
+}
+
+void Game::destr_ball(unsigned &i){
+
+    balls[i] = std::move(balls.back());
+    balls.pop_back();
+    nb_balls--;
+    i--;
 }
 
 void Game::destr_brick(unsigned &j){
