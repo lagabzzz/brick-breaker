@@ -19,7 +19,7 @@ public:
         //include_arene();
         //test_norme();
     }
-
+    bool in_coll = false;
     const Circle& get_ball() const{return ball;};
     double get_x() const { return ball.centre.x; }
     double get_y() const { return ball.centre.y; }
@@ -38,6 +38,8 @@ public:
     void set_rebond_to_zero(){rebond=0;}
     void coll_ball(Ball& other);
     void coll_brick(const Square& sq);
+    void set_initial_pos();
+    void back_initial_pos();
  
 private:
     int rebond = 0;
@@ -45,7 +47,8 @@ private:
     double dx; 
     double dy;
     void normalize(Point& pt);
-    void clamp_deltas(Point& ptA, Point ptB, Ball& other);
+    void clamp_deltas(Point& ptA, Point& ptB, Ball& other);
+    std::array<double,4> initial_pos = {ball.centre.x,ball.centre.y,dx,dy};
 };
 
 #endif // BALL_H

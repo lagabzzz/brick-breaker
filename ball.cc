@@ -49,7 +49,7 @@ void Ball::coll_ball_arene(){
     if(include_arene()==true){
 
         last_pos();
-        cout<<Tools::norme(dx,dy)<<endl;
+        //cout<<Tools::norme(dx,dy)<<endl;
 
         double paroi_proche_x = std::min(ball.centre.x,100-ball.centre.x);
 
@@ -64,37 +64,42 @@ void Ball::coll_ball_arene(){
         
         future_pos();
         rebond++;
-        cout<<Tools::norme(dx,dy)<<endl;
+        //cout<<Tools::norme(dx,dy)<<endl;
     }
 }
 
  void Ball::coll_ball(Ball& other){
-    last_pos();
-    other.last_pos();
-    double diff_x = ball.centre.x - other.get_ball().centre.x;
-    double diff_y = ball.centre.y - other.get_ball().centre.y;
-    Point diff(diff_x, diff_y);
-    normalize(diff);
+    if(Tools::intersects(ball, other.get_ball())){
+        last_pos();
+        other.last_pos();
+        std::cout<<Tools::norme(dx,dy)<<std::endl;
+        double diff_x = ball.centre.x - other.get_ball().centre.x;
+        double diff_y = ball.centre.y - other.get_ball().centre.y;
+        Point diff(diff_x, diff_y);
+        normalize(diff);
 
-    double other_dx = other.get_dx();
-    double other_dy = other.get_dy();
-    double vnA = dx*diff.x + dy*diff.y;
-    double vnB = other_dx * diff.x + other_dy * diff.y;
-    double other_r_sq = other.get_ball().rayon * other.get_ball().rayon;
-    double r_sq = ball.rayon * ball.rayon;
-    double impulseA = (-vnA + vnB) * (2*other_r_sq)/(other_r_sq + r_sq);
-    double impulseB = (-vnB + vnA) * (2*r_sq)/(other_r_sq + r_sq);
+        double other_dx = other.get_dx();
+        double other_dy = other.get_dy();
+        double vnA = dx*diff.x + dy*diff.y;
+        double vnB = other_dx * diff.x + other_dy * diff.y;
+        double other_r_sq = other.get_ball().rayon * other.get_ball().rayon;
+        double r_sq = ball.rayon * ball.rayon;
+        double impulseA = (-vnA + vnB) * (2*other_r_sq)/(other_r_sq + r_sq);
+        double impulseB = (-vnB + vnA) * (2*r_sq)/(other_r_sq + r_sq);
 
-    dx += diff.x * impulseA;
-    dy += diff.y * impulseA;
-    other.set_dx(other_dx - diff.x*impulseB); 
-    other.set_dy(other_dy - diff.y*impulseB); 
-    Point deltaA(dx, dy);
-    Point deltaB(other_dx, other_dy);
-    
-    clamp_deltas(deltaA, deltaB, other);
-    future_pos();
-    other.future_pos();
+        dx += diff.x * impulseA;
+        dy += diff.y * impulseA;
+        other.set_dx(other_dx - diff.x*impulseB); 
+        other.set_dy(other_dy - diff.y*impulseB); 
+        Point deltaA(dx, dy);
+        Point deltaB(other_dx, other_dy);
+        
+        clamp_deltas(deltaA, deltaB, other);
+        std::cout<<Tools::norme(dx,dy)<<std::endl;
+        future_pos();
+        other.future_pos();
+        rebond++;
+    }
  }
 
 void Ball::coll_brick(const Square& sq){
@@ -111,17 +116,13 @@ void Ball::coll_brick(const Square& sq){
     double delta_nom(Tools::norme(dir_nom.x,dir_nom.y));
 
     if(delta_nom>EPSIL_ZERO){
-        std::cout<<Tools::norme(dx,dy)<<std::endl;
         dir_nom.x /= delta_nom;
         dir_nom.y /= delta_nom;
 
-        //double delta(Tools::norme(dx,dy));
         double prod_scal(dx*dir_nom.x + dy*dir_nom.y);
-        //std::cout<<dir_nom.x<<", "<<dir_nom.y<<std::endl;
         
         dx -= 2*prod_scal*dir_nom.x;
         dy -= 2*prod_scal*dir_nom.y;
-        std::cout<<Tools::norme(dx,dy)<<std::endl;
         rebond++;
     }
 
@@ -138,7 +139,7 @@ void Ball::normalize(Point& pt){
     }
 }
 
-void Ball::clamp_deltas(Point& ptA, Point ptB, Ball& other){
+void Ball::clamp_deltas(Point& ptA, Point& ptB, Ball& other){
 
     double deltaA_norm = sqrt(ptA.x*ptA.x + ptA.y*ptA.y);
     double deltaB_norm = sqrt(ptB.x*ptB.x + ptB.y*ptB.y);
@@ -154,4 +155,19 @@ void Ball::clamp_deltas(Point& ptA, Point ptB, Ball& other){
         other.set_dy(ptB.y * delta_norm_max);
     }
 
+}
+
+void Ball::set_initial_pos(){
+
+    initial_pos[0]=ball.centre.x;
+    initial_pos[1]=ball.centre.y;
+    initial_pos[2]=dx;
+    initial_pos[3]=dy;
+}
+
+void Ball::back_initial_pos(){
+    ball.centre.x=initial_pos[0];
+    ball.centre.y=initial_pos[1];
+    dx=initial_pos[2];
+    dy=initial_pos[3];
 }

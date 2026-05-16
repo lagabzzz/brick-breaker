@@ -88,6 +88,10 @@ private:
 
     void lecture_ball(const std::string& line);
 
+    void destr_ball(unsigned &i);
+
+    void collisions_ball();
+
     void destr_brick(unsigned &j);
 
     void brick_got_hit(Brick & br,unsigned &j,int i);
