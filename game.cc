@@ -380,7 +380,8 @@ void Game::brick_got_hit(Brick & br,unsigned &j,int i){
             break;
 
         case B_SPLIT:
-        Square sq(br.get_brick());
+        
+            Square sq(br.get_brick());
             double new_size((sq.size-split_brick_gap)/2);
             double delta_p((new_size+split_brick_gap)/2);
 
