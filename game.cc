@@ -309,11 +309,6 @@ void Game::update(){
             continue;
         }
     }
-    """for (auto& b : balls) {
-        b->future_pos();
-        b->coll_ball_arene();
-        b->coll_ball_arene(); // double-check coin
-    }"""
 
     for(unsigned int i(0); i<balls.size(); i++){
 
@@ -329,17 +324,16 @@ void Game::update(){
                 balls[j]->last_pos();
             }
         }
-        for(int j(0); j<nb_bricks; j++){
+        for(unsigned j(0); j<bricks.size(); j++){
             if(Tools::intersects(balls[i]->get_ball(),bricks[j]->get_brick())){
+                
+                brick_got_hit(*bricks[j],j,i);
                 balls[i]->coll_brick(bricks[j]->get_brick());
-                bricks[j]->got_hit();
-
+                
+                std::cout<<"ha"<<std::endl;
                 if(bricks[j]->get_hit_pts() <= 0){
-                    bricks[j] = std::move(bricks.back());
-                    bricks.pop_back();
-                    nb_bricks--;
-                    j--;
-                }    
+                    destr_brick(j);
+                }  
             }
         }
     }
@@ -355,5 +349,55 @@ double Game::x_correction(const Square& brick, double future_x){
     }
     else{
         return brick.centre.x + brick.size/2 + offset;
+    }
+}
+
+void Game::destr_brick(unsigned &j){
+
+    bricks[j] = std::move(bricks.back());
+    bricks.pop_back();
+    nb_bricks--;
+    j--;
+}
+
+void Game::brick_got_hit(Brick & br,unsigned &j,int i){
+
+    br.got_hit();
+
+    switch(br.brick_type()){
+
+        case B_RAINBOW:
+            break;
+
+        case B_BALL:
+            {
+            Ball new_b(bricks[j]->get_x(),bricks[j]->get_y(),new_ball_radius,
+                                          balls[i]->get_dx(),balls[i]->get_dy());
+        
+            balls.push_back(unique_ptr<Ball> (new Ball(new_b)));
+            nb_balls++;
+            }
+            break;
+
+        case B_SPLIT:
+        Square sq(br.get_brick());
+            double new_size((sq.size-split_brick_gap)/2);
+            double delta_p((new_size+split_brick_gap)/2);
+
+            if(new_size >= brick_size_min){
+                Square s1(sq.centre.x-delta_p,sq.centre.y+delta_p,new_size);
+                Square s2(sq.centre.x+delta_p,sq.centre.y+delta_p,new_size);
+                Square s3(sq.centre.x+delta_p,sq.centre.y-delta_p,new_size);
+                Square s4(sq.centre.x-delta_p,sq.centre.y-delta_p,new_size);
+
+                bricks.push_back(unique_ptr<Brick> (new Split_brick(s1)));
+                bricks.push_back(unique_ptr<Brick> (new Split_brick(s2)));
+                bricks.push_back(unique_ptr<Brick> (new Split_brick(s3)));
+                bricks.push_back(unique_ptr<Brick> (new Split_brick(s4)));
+
+                nb_bricks += 4;
+            }
+            br.set_hit_pts_zero();
+            break;
     }
 }

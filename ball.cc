@@ -49,16 +49,22 @@ void Ball::coll_ball_arene(){
     if(include_arene()==true){
 
         last_pos();
+        cout<<Tools::norme(dx,dy)<<endl;
+
         double paroi_proche_x = std::min(ball.centre.x,100-ball.centre.x);
 
-        ((100-ball.centre.y)>paroi_proche_x)?(dx *= -1):(dy *= -1);
+        
 
         if((100-ball.centre.y)==paroi_proche_x){
             dx *= -1;
             dy *= -1;
+        }else{
+            ((100-ball.centre.y)>paroi_proche_x)?(dx *= -1):(dy *= -1);
         }
+        
         future_pos();
         rebond++;
+        cout<<Tools::norme(dx,dy)<<endl;
     }
 }
 
